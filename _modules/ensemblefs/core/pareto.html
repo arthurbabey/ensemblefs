@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ensemblefs.core.pareto &mdash; ensemblefs 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ensemblefs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_reference.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ensemblefs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ensemblefs.core.pareto</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ensemblefs.core.pareto</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="ParetoAnalysis">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">ParetoAnalysis</span><span class="p">:</span>
+<div class="viewcode-block" id="ParetoAnalysis.__init__">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">group_names</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the ParetoAnalysis with the provided dataset and group names.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (list of lists): A two-dimensional list where each sub-list represents</span>
+<span class="sd">                                  the metrics for a group.</span>
+<span class="sd">            group_names (list of str): Names corresponding to each group in the data.</span>
+
+<span class="sd">        Attributes:</span>
+<span class="sd">            num_groups (int): The number of groups in the dataset.</span>
+<span class="sd">            num_metrics (int): The number of metrics per group.</span>
+<span class="sd">            is_dominated_freq (list of int): List tracking how often each group is dominated.</span>
+<span class="sd">            dominated_freq (list of int): List tracking how often each group dominates others.</span>
+<span class="sd">            results (list of lists): Stores results including group names, dominate count,</span>
+<span class="sd">                                     is dominated count, and a scalar score calculated</span>
+<span class="sd">                                     from dominate and is dominated counts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_groups</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_dominated_freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dominated_freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_names</span> <span class="o">=</span> <span class="n">group_names</span>
+        <span class="c1"># 4 columns: group_id, dominate_freq, is_dominated_freq, scalar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_groups</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="ParetoAnalysis.group_dominate_count">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count">[docs]</a>
+    <span class="k">def</span> <span class="nf">group_dominate_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate how many groups the specified group dominates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            group_index (int): The index of the group in the data list.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The count of groups that the specified group dominates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span>
+        <span class="n">dominate_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">other_group_index</span><span class="p">,</span> <span class="n">other_group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other_group_index</span> <span class="o">!=</span> <span class="n">group_index</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
+                    <span class="n">group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">other_group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">metric_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span><span class="p">)</span>
+                <span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="n">group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">other_group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">metric_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span><span class="p">)</span>
+                <span class="p">):</span>
+                    <span class="n">dominate_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">dominate_count</span></div>
+
+
+<div class="viewcode-block" id="ParetoAnalysis.group_isdominated_count">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count">[docs]</a>
+    <span class="k">def</span> <span class="nf">group_isdominated_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate how many groups dominate the specified group.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            group_index (int): The index of the group in the data list.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The count of groups that dominate the specified group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span>
+        <span class="n">is_dominated_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">other_group_index</span><span class="p">,</span> <span class="n">other_group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other_group_index</span> <span class="o">!=</span> <span class="n">group_index</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
+                    <span class="n">group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">other_group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">metric_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span><span class="p">)</span>
+                <span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="n">group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">other_group</span><span class="p">[</span><span class="n">metric_index</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">metric_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_metrics</span><span class="p">)</span>
+                <span class="p">):</span>
+                    <span class="n">is_dominated_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">is_dominated_count</span></div>
+
+
+<div class="viewcode-block" id="ParetoAnalysis.compute_dominance">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_dominance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the dominance scores for all groups in the dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">group_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_groups</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_names</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_dominate_count</span><span class="p">(</span><span class="n">group_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_isdominated_count</span><span class="p">(</span><span class="n">group_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">group_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ParetoAnalysis.get_results">
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.get_results">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the sorted results based on the scalar dominance score.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of lists: Sorted results including group names, dominate count, is dominated count,</span>
+<span class="sd">                           and scalar dominance score, sorted by scalar score in descending order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_dominance</span><span class="p">()</span>
+        <span class="n">sorted_results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sorted_results</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arthur Babey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

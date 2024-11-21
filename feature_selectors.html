@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Selectors Module &mdash; ensemblefs 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Feature Selection Pipeline" href="feature_selection_pipeline.html" />
+    <link rel="prev" title="Mergers Module" href="mergers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ensemblefs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">Mergers Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Feature Selectors Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.task"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.select_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.compute_scores()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.task"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.kwargs"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.name"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.task"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.kwargs"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.name"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.__init__"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.select_features"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.task"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.kwargs"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.name"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.__init__"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.select_features"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector"><code class="docutils literal notranslate"><span class="pre">SVMSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.task"><code class="docutils literal notranslate"><span class="pre">SVMSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">SVMSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.kwargs"><code class="docutils literal notranslate"><span class="pre">SVMSelector.kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.name"><code class="docutils literal notranslate"><span class="pre">SVMSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.__init__"><code class="docutils literal notranslate"><span class="pre">SVMSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">SVMSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.select_features"><code class="docutils literal notranslate"><span class="pre">SVMSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.task"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.num_features_to_select"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.num_features_to_select</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.kwargs"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.kwargs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.name"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.select_features"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_pipeline.html">Feature Selection Pipeline</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ensemblefs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api_reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Feature Selectors Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/feature_selectors.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ensemblefs.feature_selectors.base_selector">
+<span id="feature-selectors-module"></span><h1>Feature Selectors Module<a class="headerlink" href="#module-ensemblefs.feature_selectors.base_selector" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.base_selector.</span></span><span class="sig-name descname"><span class="pre">FeatureSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/base_selector.html#FeatureSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for feature selection. This class provides the interface and common functionality for selecting features based on their scores.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.task" title="Link to this definition"></a></dt>
+<dd><p>Specifies the machine learning task, either ‘classification’ or ‘regression’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/base_selector.html#FeatureSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the FeatureSelector with the specified task and number of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em><em>, </em><em>optional</em>) – The machine learning task (“classification” or “regression”). Defaults to None.</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/base_selector.html#FeatureSelector.select_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.base_selector.FeatureSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/base_selector.html#FeatureSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the scores for each feature. This method must be implemented by subclasses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The scores for each feature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If the method is not implemented in a subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.feature_selectors.f_statistic_selector">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.f_statistic_selector.</span></span><span class="sig-name descname"><span class="pre">FStatisticSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/f_statistic_selector.html#FStatisticSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></p>
+<p>A feature selector using F-statistic scores for feature selection.
+This class extends the FeatureSelector base class and uses F-statistic scores to evaluate features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.task" title="Link to this definition"></a></dt>
+<dd><p>Specifies the machine learning task, either ‘classification’ or ‘regression’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Additional keyword arguments to pass to the scoring function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FStatistic'</span></em><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/f_statistic_selector.html#FStatisticSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the FStatisticSelector with the specified task, number of features, and additional parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em>) – The machine learning task (“classification” or “regression”). Defaults to “classification”.</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments that are passed to the scoring function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/f_statistic_selector.html#FStatisticSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the F-statistic scores for feature selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The F-statistic scores for each feature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is not ‘classification’ or ‘regression’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.feature_selectors.mutual_info_selector">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.mutual_info_selector.</span></span><span class="sig-name descname"><span class="pre">MutualInfoSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/mutual_info_selector.html#MutualInfoSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></p>
+<p>A feature selector using mutual information scores for feature selection.
+This class extends the FeatureSelector base class and uses mutual information to evaluate features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.task" title="Link to this definition"></a></dt>
+<dd><p>Specifies the machine learning task, either ‘classification’ or ‘regression’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Additional keyword arguments to pass to the mutual information function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MutualInfo'</span></em><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/mutual_info_selector.html#MutualInfoSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the MutualInfoSelector with the specified task, number of features, and additional parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em>) – The machine learning task (“classification” or “regression”). Defaults to “classification”.</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments that are passed to the mutual information function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/mutual_info_selector.html#MutualInfoSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the mutual information scores for feature selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mutual information scores for each feature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is not ‘classification’ or ‘regression’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.feature_selectors.random_forest_selector">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.random_forest_selector.</span></span><span class="sig-name descname"><span class="pre">RandomForestSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/random_forest_selector.html#RandomForestSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></p>
+<p>A feature selector for RandomForest models that extends the FeatureSelector base class.
+This class utilizes the built-in feature importance of RandomForest models to select the top features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.task" title="Link to this definition"></a></dt>
+<dd><p>Specifies the machine learning task, either ‘classification’ or ‘regression’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Additional keyword arguments to pass to the RandomForest model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RandomForest'</span></em><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/random_forest_selector.html#RandomForestSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the RandomForestFeatureSelector with the specified task, number of features, and additional parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em>) – The machine learning task (“classification” or “regression”).</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments that are passed to the RandomForest model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/random_forest_selector.html#RandomForestSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the feature importances using a RandomForest model tailored to the specified task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The feature importances derived from the RandomForest model, used as scores for feature selection.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is not ‘classification’ or ‘regression’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.feature_selectors.svm_selector">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.svm_selector.</span></span><span class="sig-name descname"><span class="pre">SVMSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/svm_selector.html#SVMSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></p>
+<p>A feature selector using SVM-based feature importance for feature selection.
+This class extends the FeatureSelector base class and uses SVM coefficients to evaluate features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.task" title="Link to this definition"></a></dt>
+<dd><p>Specifies the machine learning task, either ‘classification’ or ‘regression’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Additional keyword arguments to pass to the SVM model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SVM'</span></em><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/svm_selector.html#SVMSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the SVMFeatureSelector with the specified task, number of features, and additional parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em>) – The machine learning task (“classification” or “regression”). Defaults to “classification”.</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments that are passed to the SVM model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/svm_selector.html#SVMSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the feature importances using an SVM model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The feature importances derived from the SVM model coefficients.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is not ‘classification’ or ‘regression’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.svm_selector.SVMSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ensemblefs.feature_selectors.svm_selector.SVMSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.feature_selectors.xgboost_selector">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selectors.xgboost_selector.</span></span><span class="sig-name descname"><span class="pre">XGBoostSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/xgboost_selector.html#XGBoostSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.feature_selectors.base_selector.FeatureSelector" title="ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></p>
+<p>A feature selector for XGBoost models that extends the FeatureSelector class.
+This class is tailored to utilize XGBoost’s built-in feature importance to select features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.task" title="Link to this definition"></a></dt>
+<dd><p>The type of machine learning task (“classification” or “regression”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.num_features_to_select">
+<span class="sig-name descname"><span class="pre">num_features_to_select</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.num_features_to_select" title="Link to this definition"></a></dt>
+<dd><p>The number of top features to select based on importance.
+If None, a default selection logic can be applied based on a percentage of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Additional keyword arguments to pass to the XGBoost model constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'XGBoost'</span></em><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/xgboost_selector.html#XGBoostSelector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the XGBoostFeatureSelector with the specified task, number of features, and any additional parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<em>str</em>) – The machine learning task (“classification” or “regression”). Defaults to “classification”.</p></li>
+<li><p><strong>num_features_to_select</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. If None, selection defaults to 10% of features.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments that are passed to the XGBoost model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores">
+<span class="sig-name descname"><span class="pre">compute_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selectors/xgboost_selector.html#XGBoostSelector.compute_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes the feature importances using an XGBoost model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – The target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The feature importances derived from the XGBoost model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.select_features">
+<span class="sig-name descname"><span class="pre">select_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.select_features" title="Link to this definition"></a></dt>
+<dd><p>Selects the top features based on their computed scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>]</em>) – Target values (class labels for classification, real numbers for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the feature scores and the indices of the selected features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mergers.html" class="btn btn-neutral float-left" title="Mergers Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="feature_selection_pipeline.html" class="btn btn-neutral float-right" title="Feature Selection Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arthur Babey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

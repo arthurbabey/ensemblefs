@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core Module &mdash; ensemblefs 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mergers Module" href="mergers.html" />
+    <link rel="prev" title="API Reference" href="api_reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ensemblefs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Core Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor"><code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor.__init__"><code class="docutils literal notranslate"><span class="pre">DataProcessor.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor.preprocess_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor.preprocess_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._load_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor._load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata"><code class="docutils literal notranslate"><span class="pre">DataProcessor._merge_data_and_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._rename_target_column"><code class="docutils literal notranslate"><span class="pre">DataProcessor._rename_target_column()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._drop_columns"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_columns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._drop_missing_values"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_missing_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables"><code class="docutils literal notranslate"><span class="pre">DataProcessor._encode_categorical_variables()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor.get_label_mapping"><code class="docutils literal notranslate"><span class="pre">DataProcessor.get_label_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features"><code class="docutils literal notranslate"><span class="pre">DataProcessor._scale_numerical_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset"><code class="docutils literal notranslate"><span class="pre">DataProcessor._filtered_time_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor._fill_nan"><code class="docutils literal notranslate"><span class="pre">DataProcessor._fill_nan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.data_processor.DataProcessor.flatten_time"><code class="docutils literal notranslate"><span class="pre">DataProcessor.flatten_time()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.core.feature.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.__init__"><code class="docutils literal notranslate"><span class="pre">Feature.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.set_score"><code class="docutils literal notranslate"><span class="pre">Feature.set_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.set_selected"><code class="docutils literal notranslate"><span class="pre">Feature.set_selected()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.get_name"><code class="docutils literal notranslate"><span class="pre">Feature.get_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.get_score"><code class="docutils literal notranslate"><span class="pre">Feature.get_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.feature.Feature.get_selected"><code class="docutils literal notranslate"><span class="pre">Feature.get_selected()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.feature_selections"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.feature_selections</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.N"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.N</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.n"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.__init__"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.validate_inputs"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.validate_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.novovicova.StabilityNovovicova.compute_stability"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.compute_stability()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis.__init__"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_dominate_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_isdominated_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.compute_dominance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.core.pareto.ParetoAnalysis.get_results"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.get_results()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">Mergers Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html">Feature Selectors Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_pipeline.html">Feature Selection Pipeline</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ensemblefs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api_reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Core Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ensemblefs.core.data_processor">
+<span id="core-module"></span><h1>Core Module<a class="headerlink" href="#module-ensemblefs.core.data_processor" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.core.data_processor.</span></span><span class="sig-name descname"><span class="pre">DataProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">categorical_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'target'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">categorical_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'target'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the DataProcessor with specific parameters for preprocessing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>categorical_columns</strong> (<em>list</em><em> of </em><em>str</em>) – List of column names to treat as categorical.</p></li>
+<li><p><strong>columns_to_drop</strong> (<em>list</em><em> of </em><em>str</em>) – List of column names to drop from the dataset.</p></li>
+<li><p><strong>drop_missing_values</strong> (<em>bool</em>) – Flag to determine if missing values should be dropped.</p></li>
+<li><p><strong>merge_key</strong> (<em>str</em>) – Column name to use as a key when merging data with metadata.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – Flag to determine if numerical features should be normalized.</p></li>
+<li><p><strong>target_column</strong> (<em>str</em>) – Name of the target column in the dataset.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor.preprocess_data">
+<span class="sig-name descname"><span class="pre">preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor.preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor.preprocess_data" title="Link to this definition"></a></dt>
+<dd><p>Load and preprocess data from a CSV file or DataFrame, with optional metadata merging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em><em> or </em><em>DataFrame</em>) – Path to the CSV file or a pandas DataFrame.</p></li>
+<li><p><strong>index_col</strong> (<em>str</em><em>, </em><em>optional</em>) – Column to set as index. Defaults to None.</p></li>
+<li><p><strong>metadata</strong> (<em>str</em><em> or </em><em>DataFrame</em><em>, </em><em>optional</em>) – Path to the CSV file or DataFrame containing metadata. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The preprocessed data as a pandas DataFrame.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._load_data">
+<span class="sig-name descname"><span class="pre">_load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._load_data" title="Link to this definition"></a></dt>
+<dd><p>Helper method to load data and set the index if specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em><em> or </em><em>DataFrame</em>) – Path to the CSV file or a pandas DataFrame.</p></li>
+<li><p><strong>index_col</strong> (<em>str</em><em>, </em><em>optional</em>) – Column to set as index. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded pandas DataFrame with index set if specified.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata">
+<span class="sig-name descname"><span class="pre">_merge_data_and_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._merge_data_and_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata" title="Link to this definition"></a></dt>
+<dd><p>Merge the main data frame with metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> (<em>DataFrame</em>) – The main data DataFrame.</p></li>
+<li><p><strong>meta_df</strong> (<em>DataFrame</em>) – The metadata DataFrame.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The merged DataFrame.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._rename_target_column">
+<span class="sig-name descname"><span class="pre">_rename_target_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._rename_target_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._rename_target_column" title="Link to this definition"></a></dt>
+<dd><p>Rename the target column in the data frame to ‘target’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_df</strong> (<em>DataFrame</em>) – The data DataFrame to be modified.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DataFrame with the renamed target column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._drop_columns">
+<span class="sig-name descname"><span class="pre">_drop_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._drop_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._drop_columns" title="Link to this definition"></a></dt>
+<dd><p>Drop specified columns from the data frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_df</strong> (<em>DataFrame</em>) – The data DataFrame to be modified.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DataFrame with specified columns dropped.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._drop_missing_values">
+<span class="sig-name descname"><span class="pre">_drop_missing_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._drop_missing_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._drop_missing_values" title="Link to this definition"></a></dt>
+<dd><p>Drop missing values by dropping rows with NaNs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_df</strong> (<em>DataFrame</em>) – The data DataFrame with missing values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DataFrame with missing values dropped.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables">
+<span class="sig-name descname"><span class="pre">_encode_categorical_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._encode_categorical_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables" title="Link to this definition"></a></dt>
+<dd><p>Encode categorical variables using label encoding and store the mappings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_df</strong> (<em>DataFrame</em>) – The data DataFrame with categorical columns.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DataFrame with categorical variables encoded.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor.get_label_mapping">
+<span class="sig-name descname"><span class="pre">get_label_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor.get_label_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor.get_label_mapping" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the label encoding mapping for a specific column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>column_name</strong> (<em>str</em>) – The column for which to get the label encoding mapping.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary mapping original labels to encoded values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._scale_numerical_features">
+<span class="sig-name descname"><span class="pre">_scale_numerical_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._scale_numerical_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features" title="Link to this definition"></a></dt>
+<dd><p>Scale numerical features using standard scaling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_df</strong> (<em>DataFrame</em>) – The data DataFrame with numerical columns.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DataFrame with numerical features scaled.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset">
+<span class="sig-name descname"><span class="pre">_filtered_time_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_num_timepoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clone_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._filtered_time_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset" title="Link to this definition"></a></dt>
+<dd><p>Filter dataset to retain only clones with at least min_num_timepoints.</p>
+<p>Parameters:
+- data_df: DataFrame containing the dataset.
+- min_num_timepoints: Minimum number of time points required per clone.
+- clone_column: Column name for the clone identifier.</p>
+<p>Returns:
+- filtered_df: DataFrame with clones filtered based on time points.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor._fill_nan">
+<span class="sig-name descname"><span class="pre">_fill_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor._fill_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor._fill_nan" title="Link to this definition"></a></dt>
+<dd><p>Fill NaN values in the DataFrame based on the specified method.</p>
+<p>Parameters:
+- df: The DataFrame to fill NaN values in.
+- method: The strategy to use for filling NaNs. The “mean” method is implemented</p>
+<blockquote>
+<div><p>for both numeric (mean) and categorical (mode) columns.</p>
+</div></blockquote>
+<p>Returns:
+- df: The DataFrame with NaN values filled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.data_processor.DataProcessor.flatten_time">
+<span class="sig-name descname"><span class="pre">flatten_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clone_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_dependent_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_num_timepoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_nan_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/data_processor.html#DataProcessor.flatten_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.data_processor.DataProcessor.flatten_time" title="Link to this definition"></a></dt>
+<dd><p>Flatten dataset based on time-dependent columns, optionally filtering by minimum time points and filling NaNs.</p>
+<p>Parameters:
+- data_df: DataFrame containing the dataset.
+- clone_column: Column name for the clone identifier.
+- time_column: Column name for the time variable.
+- time_dependent_columns: List of columns that vary with time.
+- min_num_timepoints: Optional minimum number of time points per clone for filtering.
+- fill_nan_method: Method to fill NaN values. Defaults to “mean”.</p>
+<p>Returns:
+- flattened_df: DataFrame where time-dependent columns are pivoted and flattened by clone, with NaN values filled.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.core.feature">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.core.feature.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a new Feature object with a name, optional score, and selection status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the feature.</p></li>
+<li><p><strong>score</strong> (<em>float</em><em>, </em><em>optional</em>) – The score or importance of the feature. Defaults to None.</p></li>
+<li><p><strong>selected</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether the feature has been selected. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.set_score">
+<span class="sig-name descname"><span class="pre">set_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">score</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.set_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.set_score" title="Link to this definition"></a></dt>
+<dd><p>Set the score of the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>score</strong> (<em>float</em>) – The new score to assign to the feature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.set_selected">
+<span class="sig-name descname"><span class="pre">set_selected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.set_selected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.set_selected" title="Link to this definition"></a></dt>
+<dd><p>Set the selection status of the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>selected</strong> (<em>bool</em>) – The new selection status to assign to the feature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.get_name" title="Link to this definition"></a></dt>
+<dd><p>Get the name of the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the feature.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.get_score">
+<span class="sig-name descname"><span class="pre">get_score</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.get_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.get_score" title="Link to this definition"></a></dt>
+<dd><p>Get the score of the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The score of the feature.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.feature.Feature.get_selected">
+<span class="sig-name descname"><span class="pre">get_selected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/feature.html#Feature.get_selected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.feature.Feature.get_selected" title="Link to this definition"></a></dt>
+<dd><p>Get the selection status of the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The selection status of the feature.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.core.novovicova">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.core.novovicova.</span></span><span class="sig-name descname"><span class="pre">StabilityNovovicova</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_selections</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/novovicova.html#StabilityNovovicova"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to compute the stability of feature selection algorithms based on a measure
+proposed by Novovicová, Somol, and Pudil (2009). This stability measure quantifies
+the consistency of selected features across different subsets or resamplings of a dataset.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.feature_selections">
+<span class="sig-name descname"><span class="pre">feature_selections</span></span><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.feature_selections" title="Link to this definition"></a></dt>
+<dd><p>A list where each set contains the features selected
+in one dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.N">
+<span class="sig-name descname"><span class="pre">N</span></span><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.N" title="Link to this definition"></a></dt>
+<dd><p>Total number of feature occurrences across all datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.n">
+<span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.n" title="Link to this definition"></a></dt>
+<dd><p>Number of datasets or subsets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p>Novovicová, J., Somol, P., &amp; Pudil, P. (2009). “A New Measure of Feature Selection
+Algorithms’ Stability.” In 2009 IEEE International Conference on Data Mining Workshops.
+doi:10.1109/icdmw.2009.32.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">feature_selections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="go">        {1, 2, 3},</span>
+<span class="go">        {2, 3, 4, 5},</span>
+<span class="go">        {1, 2, 6}</span>
+<span class="go">    ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stability_calculator</span> <span class="o">=</span> <span class="n">StabilityNovovicova</span><span class="p">(</span><span class="n">feature_selections</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stability_calculator</span><span class="o">.</span><span class="n">compute_stability</span><span class="p">())</span>
+<span class="go"># Outputs the computed stability measure SH(S).</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_selections</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/novovicova.html#StabilityNovovicova.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the StabilityNovovicova class with a list of lists, each representing selected features in a dataset.
+Checks and converts the lists to sets to ensure uniqueness within each dataset for simplicity in calculations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feature_selections</strong> (<em>list</em><em> of </em><em>lists</em><em> or </em><em>sets</em>) – Each sublist or set represents features selected in one dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.validate_inputs">
+<span class="sig-name descname"><span class="pre">validate_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_selections</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/novovicova.html#StabilityNovovicova.validate_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.validate_inputs" title="Link to this definition"></a></dt>
+<dd><p>Validates the input feature selections for non-empty data, uniformity of data types, and consistent feature representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feature_selections</strong> (<em>list</em><em> of </em><em>lists</em><em> or </em><em>sets</em>) – Feature selections to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if all validations pass, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.novovicova.StabilityNovovicova.compute_stability">
+<span class="sig-name descname"><span class="pre">compute_stability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/novovicova.html#StabilityNovovicova.compute_stability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.novovicova.StabilityNovovicova.compute_stability" title="Link to this definition"></a></dt>
+<dd><p>Computes the stability SH(S) using the provided feature selections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The computed stability measure SH(S), ranging from 0 (no stability) to 1 (full stability).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If N or n are 0, which prevents calculation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ensemblefs.core.pareto">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.core.pareto.</span></span><span class="sig-name descname"><span class="pre">ParetoAnalysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the ParetoAnalysis with the provided dataset and group names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> of </em><em>lists</em>) – A two-dimensional list where each sub-list represents
+the metrics for a group.</p></li>
+<li><p><strong>group_names</strong> (<em>list</em><em> of </em><em>str</em>) – Names corresponding to each group in the data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.num_groups">
+<span class="sig-name descname"><span class="pre">num_groups</span></span><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.num_groups" title="Link to this definition"></a></dt>
+<dd><p>The number of groups in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.num_metrics">
+<span class="sig-name descname"><span class="pre">num_metrics</span></span><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.num_metrics" title="Link to this definition"></a></dt>
+<dd><p>The number of metrics per group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.is_dominated_freq">
+<span class="sig-name descname"><span class="pre">is_dominated_freq</span></span><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.is_dominated_freq" title="Link to this definition"></a></dt>
+<dd><p>List tracking how often each group is dominated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.dominated_freq">
+<span class="sig-name descname"><span class="pre">dominated_freq</span></span><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.dominated_freq" title="Link to this definition"></a></dt>
+<dd><p>List tracking how often each group dominates others.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.results">
+<span class="sig-name descname"><span class="pre">results</span></span><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.results" title="Link to this definition"></a></dt>
+<dd><p>Stores results including group names, dominate count,
+is dominated count, and a scalar score calculated
+from dominate and is dominated counts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count">
+<span class="sig-name descname"><span class="pre">group_dominate_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis.group_dominate_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count" title="Link to this definition"></a></dt>
+<dd><p>Calculate how many groups the specified group dominates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_index</strong> (<em>int</em>) – The index of the group in the data list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The count of groups that the specified group dominates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count">
+<span class="sig-name descname"><span class="pre">group_isdominated_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis.group_isdominated_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count" title="Link to this definition"></a></dt>
+<dd><p>Calculate how many groups dominate the specified group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_index</strong> (<em>int</em>) – The index of the group in the data list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The count of groups that dominate the specified group.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.compute_dominance">
+<span class="sig-name descname"><span class="pre">compute_dominance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis.compute_dominance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance" title="Link to this definition"></a></dt>
+<dd><p>Compute the dominance scores for all groups in the dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.core.pareto.ParetoAnalysis.get_results">
+<span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/core/pareto.html#ParetoAnalysis.get_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.core.pareto.ParetoAnalysis.get_results" title="Link to this definition"></a></dt>
+<dd><p>Get the sorted results based on the scalar dominance score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Sorted results including group names, dominate count, is dominated count,</dt><dd><p>and scalar dominance score, sorted by scalar score in descending order.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_reference.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mergers.html" class="btn btn-neutral float-right" title="Mergers Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arthur Babey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Selection Pipeline &mdash; ensemblefs 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Feature Selectors Module" href="feature_selectors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ensemblefs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">Mergers Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html">Feature Selectors Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Feature Selection Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._validate_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._generate_subgroup_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._replace_none()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._set_random_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._split_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._compute_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._compute_merging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._merge_group_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._compute_performance_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._compute_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._calculate_means()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._compute_pareto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._extract_repeat_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline._load_class()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ensemblefs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api_reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Feature Selection Pipeline</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/feature_selection_pipeline.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ensemblefs.feature_selection_pipeline">
+<span id="feature-selection-pipeline"></span><h1>Feature Selection Pipeline<a class="headerlink" href="#module-ensemblefs.feature_selection_pipeline" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selection_pipeline.</span></span><span class="sig-name descname"><span class="pre">FeatureSelectionPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes a FeatureSelectionPipeline object, which configures and executes
+a feature selection process using specified methods and strategies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset to process, which must include a ‘target’ column.</p></li>
+<li><p><strong>fs_methods</strong> (<em>list</em><em> of </em><em>classes</em><em> or </em><em>str</em>) – Feature selection methods to be used. Each entry
+can be either a class or a string that corresponds to a defined class name. These
+classes should implement a method for feature selection.</p></li>
+<li><p><strong>merging_strategy</strong> (<em>class</em><em> or </em><em>str</em>) – The strategy used to merge features selected by
+different methods. Can be either a class or a string corresponding to a defined class name.</p></li>
+<li><p><strong>num_repeats</strong> (<em>int</em>) – The number of times the feature selection process will be repeated.</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to select. Defaults to one-tenth of the
+number of features in ‘data’ if not provided.</p></li>
+<li><p><strong>metrics</strong> (<em>list</em><em> of </em><em>classes</em><em> or </em><em>str</em>) – Performance metrics to be used for evaluation. Each entry
+can be either a class or a string that corresponds to a defined class name. These classes
+should implement a method for computing the metric.</p></li>
+<li><p><strong>task</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of task (‘classification’ or ‘regression’). Defaults to
+‘classification’.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed for reproducibility. Defaults to None.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of jobs to compute the feature selection pipeline, -1 means using all processors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘task’ is neither ‘classification’ nor ‘regression’.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">FeatureSelectionPipeline</span><span class="p">(</span>
+<span class="go">    data=df,</span>
+<span class="go">    fs_methods=[&#39;RandomForestSelector&#39;, &#39;MutualInfoSelector&#39;],</span>
+<span class="go">    merging_strategy=&#39;BordaMerger&#39;,</span>
+<span class="go">    num_repeats=10,</span>
+<span class="go">    threshold=5,</span>
+<span class="go">    metrics=[&#39;loglloss&#39;, &#39;f1_score&#39;, &#39;accuracy&#39;],</span>
+<span class="go">    task=&#39;classification&#39;,</span>
+<span class="go">    random_state=42</span>
+<span class="go">    n_jobs=n_jobs</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_validate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._validate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">
+<span class="sig-name descname"><span class="pre">_generate_subgroup_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._generate_subgroup_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names" title="Link to this definition"></a></dt>
+<dd><p>Generates all unique combinations of feature selection method names with sizes
+ranging from min_group_size to the total number of methods.
+Generates combinations using: nCr = n! / (r! * (n - r)!)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>min_group_size</strong> (<em>int</em>) – Minimum size of each combination.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Combinations of method names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run" title="Link to this definition"></a></dt>
+<dd><p>Runs the entire feature selection and classification pipeline.</p>
+<p>This method iterates through the pipeline for the specified number of repeats, performing:
+- Data splitting
+- Feature computation and merging
+- Performance evaluation
+- Calculation of mean metrics per repeat
+- Pareto analysis to identify best performing groups and repeats</p>
+<p>Returns:
+- tuple: A tuple containing the merged features, the best repeat, and the best group name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none">
+<span class="sig-name descname"><span class="pre">_replace_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._replace_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed">
+<span class="sig-name descname"><span class="pre">_set_random_seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._set_random_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data">
+<span class="sig-name descname"><span class="pre">_split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset">
+<span class="sig-name descname"><span class="pre">_compute_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_subset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset" title="Link to this definition"></a></dt>
+<dd><p>Computes feature subset for each feature selection method per repeat.</p>
+<p>Parameters:
+- train_data (pandas.DataFrame): The training dataset.
+- idx (int): Index for the current iteration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging">
+<span class="sig-name descname"><span class="pre">_compute_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_merging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features">
+<span class="sig-name descname"><span class="pre">_merge_group_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._merge_group_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics">
+<span class="sig-name descname"><span class="pre">_compute_performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_performance_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics">
+<span class="sig-name descname"><span class="pre">_compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_dicts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_calculate_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dicts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._calculate_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means" title="Link to this definition"></a></dt>
+<dd><p>Calculate the mean of the metrics for each group_name,
+returning None for all metrics for group with no merged features i.e when  np.mean return np.nan</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_compute_pareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_pareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto" title="Link to this definition"></a></dt>
+<dd><p>Performs Pareto analysis to identify best-performing groups or repeats.</p>
+<p>Parameters:
+- groups (list of list): Group of data to perform the pareto analysis on.
+- names (list): Names of the scores for analysis.</p>
+<p>Returns:
+- str: Name of the best-performing group or repeat.</p>
+<p>Details:
+- Utilizes Pareto analysis to determine the best performing group or repeat.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_extract_repeat_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">result_dicts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._extract_repeat_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class">
+<span class="sig-name descname"><span class="pre">_load_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instantiate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._load_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="feature_selectors.html" class="btn btn-neutral float-left" title="Feature Selectors Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arthur Babey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
