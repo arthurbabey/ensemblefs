@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ensemblefs"
+version = "0.1.0"
+description = "Customizable Ensemble Feature Selection pipeline using Multi Objective Optimization"
+readme = "README.md"
+readme-content-type = "text/markdown"
+authors = [
+    { name = "Arthur Babey", email = "arthur.babey@heig-vd.ch" }
+]
+license = "MIT"
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn>=1.5.0",
+    "pyyaml",
+    "xgboost",
+    "ranky",
+    "scipy==1.11"
+]
+
+repository = "https://github.com/arthurbabey/ensemblefs"
+
+requires-python = ">=3.9"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+dev = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "build",
+    "pre-commit",
+    "pytest",
+]
+
+[project.scripts]
+efs-pipeline = "scripts.main:main"
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "ensemblefs/**",
+    "scripts/**",  # Include scripts folder
+    "README.md",
+    "LICENSE",
+]

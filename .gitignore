@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# PyInstaller
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+*.cover
+
+# Translations
+*.mo
+*.pot
+
+# Environment files
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Cache files
+.cache/
+
+# Data directories
+data/
+
+# Results directory
+results/
+
+# Documentation builds
+docs/_build/
+
+# Sphinx documentation
+docs/_build/
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
