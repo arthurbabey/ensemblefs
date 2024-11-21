@@ -13,7 +13,7 @@ To start using the **ensemblefs** package, you first need to import the main pip
 
 .. code-block:: python
 
-    from ensemblefs.feature_selection_pipeline import FeatureSelectionPipeline
+    from ensemblefs import FeatureSelectionPipeline
 
 Configuring the Pipeline
 ------------------------
@@ -45,15 +45,15 @@ Once configured, you can run the pipeline on your dataset to perform feature sel
 .. code-block:: python
 
     # Assuming 'X' and 'y' are your features and target variable respectively
-    optimal_features = pipeline.run_pipeline(X, y)
-    print("Selected features:", optimal_features)
+    best_features = pipeline.run_pipeline(X, y)
+    print("Selected features:", best_features)
 
 This example demonstrates the use of RandomForest and Mutual Information selectors with a Borda merger strategy, but you can easily substitute these with any other built-in selectors or custom ones derived from the provided base classes.
 
 Extendability
 -------------
 
-You can also extend the functionality by creating custom feature selectors and mergers. Inherit from the base classes found under `feature_selectors` and `merging_strategies` directories and implement the necessary methods as per your requirements.
+You can also extend the functionality by creating custom feature selectors,  mergers and metrics. Inherit from the base classes found under `feature_selectors` and `merging_strategies` or `base_metrics` directories and implement the necessary methods as per your requirements.
 
 .. code-block:: python
 

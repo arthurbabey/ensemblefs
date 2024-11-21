@@ -4,13 +4,8 @@ Installation
 How to Install ensemblefs
 ---------------------------------------
 
-You can install the **ensemblefs** package directly from PyPI using pip. Open your terminal and run the following command:
 
-.. code-block:: bash
-
-    pip install ensemblefs
-
-Alternatively, if you prefer to build the package from source, you can follow these steps. First, clone the repository and navigate to the project root directory:
+You can build and install the package from source, you can follow these steps. First, clone the repository and navigate to the project root directory:
 
 .. code-block:: bash
 
@@ -30,3 +25,9 @@ If you prefer to install the package in **editable** mode (allowing code changes
 .. code-block:: bash
 
     pip install -e .
+
+If you want to help in the development of the package and run the tests, you can install the package with the development dependencies:
+
+.. code-block:: bash
+
+    pip install -e .[dev]
