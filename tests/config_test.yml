@@ -20,8 +20,6 @@ pipeline:
   metrics:
     value:
     - f1_score
-    - accuracy
-    - recall_score
   task:
     value: classification
   num_features_to_select:

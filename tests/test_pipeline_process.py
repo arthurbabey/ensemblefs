@@ -40,6 +40,7 @@ def pipeline_instance(request):
         merging_strategy=merging_strategy,
         num_repeats=num_repeats,
         num_features_to_select=num_features_to_select,
+        metrics=["f1_score"],
         task=task,
         random_state=random_state,
         n_jobs=n_jobs,

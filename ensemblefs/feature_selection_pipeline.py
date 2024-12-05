@@ -253,7 +253,7 @@ class FeatureSelectionPipeline:
         for metric in self.metrics:
             m = metric.compute(X_train, y_train, X_test, y_test)
             metric_values.append(m)
-        return metric_values  # list of three averaged metrics, e.g : loglloss, f1_score, accuracy
+        return metric_values  # list of len(self.metrics) averaged metrics, e.g : loglloss, f1_score, accuracy
 
     def _compute_metrics(self, train_data, test_data, result_dicts, idx):
         for group_name in self.subgroup_names:
@@ -286,7 +286,7 @@ class FeatureSelectionPipeline:
                 if features_stability
                 else 0
             )
-            result_dicts[3][(idx, group_name)] = stability
+            result_dicts[len(results)][(idx, group_name)] = stability
 
         return result_dicts
 
