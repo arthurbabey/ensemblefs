@@ -73,6 +73,7 @@ def test_expected_features():
 
     # Run the pipeline
     selected_features, _, _ = pipeline.run()
+    print(len(selected_features))
 
     # Extract the informative feature names
     informative_features = set(
