@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ensemblefs.merging_strategies.base_merger &mdash; ensemblefs 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
@@ -71,12 +71,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.merging_strategies.base_merger</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core.feature</span> <span class="kn">import</span> <span class="n">Feature</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">Feature</span>
 
 
 <div class="viewcode-block" id="MergingStrategy">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy">[docs]</a>
-<span class="k">class</span> <span class="nc">MergingStrategy</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MergingStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for merging strategies. This class provides the interface and common functionality</span>
 <span class="sd">    for different merging strategies.</span>
@@ -87,7 +87,7 @@
 
 <div class="viewcode-block" id="MergingStrategy.__init__">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy_type</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy_type</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the MergingStrategy with the specified strategy type.</span>
 
@@ -99,7 +99,7 @@
 
 <div class="viewcode-block" id="MergingStrategy.merge">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.merge">[docs]</a>
-    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">k_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">k_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merges the input data according to the strategy. Must be implemented by subclasses.</span>
 
@@ -116,7 +116,7 @@
 
 <div class="viewcode-block" id="MergingStrategy.is_set_based">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_set_based">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_set_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_set_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if the strategy is set-based.</span>
 
@@ -128,7 +128,7 @@
 
 <div class="viewcode-block" id="MergingStrategy.is_rank_based">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_rank_based">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_rank_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_rank_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if the strategy is rank-based.</span>
 
@@ -140,7 +140,7 @@
 
 <div class="viewcode-block" id="MergingStrategy._validate_input">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy._validate_input">[docs]</a>
-    <span class="k">def</span> <span class="nf">_validate_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsets</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsets</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validates that the input subsets contain Feature objects.</span>
 

@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usage &mdash; ensemblefs 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -89,7 +89,7 @@
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
 <p>To start using the <strong>ensemblefs</strong> package, you first need to import the main pipeline class and configure it with the feature selection methods and merging strategy of your choice.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ensemblefs</span> <span class="kn">import</span> <span class="n">FeatureSelectionPipeline</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelectionPipeline</span>
 </pre></div>
 </div>
 </section>
@@ -97,10 +97,10 @@
 <h2>Configuring the Pipeline<a class="headerlink" href="#configuring-the-pipeline" title="Link to this heading"></a></h2>
 <p>The <cite>FeatureSelectionPipeline</cite> allows for flexible configuration with various built-in feature selection methods, as well as custom methods and merging strategies. Here’s an example of setting up a pipeline:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define your feature selectors</span>
-<span class="kn">from</span> <span class="nn">ensemblefs.feature_selectors</span> <span class="kn">import</span> <span class="n">RandomForestSelector</span><span class="p">,</span> <span class="n">MutualInfoSelector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.feature_selectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestSelector</span><span class="p">,</span> <span class="n">MutualInfoSelector</span>
 
 <span class="c1"># Import the merger strategy</span>
-<span class="kn">from</span> <span class="nn">ensemblefs.merging_strategies</span> <span class="kn">import</span> <span class="n">BordaMerger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.merging_strategies</span><span class="w"> </span><span class="kn">import</span> <span class="n">BordaMerger</span>
 
 <span class="c1"># Create an instance of the pipeline</span>
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">FeatureSelectionPipeline</span><span class="p">(</span>
@@ -126,10 +126,10 @@
 <section id="extendability">
 <h2>Extendability<a class="headerlink" href="#extendability" title="Link to this heading"></a></h2>
 <p>You can also extend the functionality by creating custom feature selectors,  mergers and metrics. Inherit from the base classes found under <cite>feature_selectors</cite> and <cite>merging_strategies</cite> or <cite>base_metrics</cite> directories and implement the necessary methods as per your requirements.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ensemblefs.feature_selectors.base_selector</span> <span class="kn">import</span> <span class="n">BaseSelector</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.feature_selectors.base_selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSelector</span>
 
-<span class="k">class</span> <span class="nc">CustomSelector</span><span class="p">(</span><span class="n">BaseSelector</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">select_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomSelector</span><span class="p">(</span><span class="n">BaseSelector</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="c1"># Implement your feature selection logic here</span>
         <span class="k">pass</span>
 </pre></div>

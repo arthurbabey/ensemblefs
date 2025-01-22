@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ensemblefs.core.data_processor &mdash; ensemblefs 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
@@ -71,16 +71,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.core.data_processor</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
 
 
 <div class="viewcode-block" id="DataProcessor">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor">[docs]</a>
-<span class="k">class</span> <span class="nc">DataProcessor</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataProcessor</span><span class="p">:</span>
 <div class="viewcode-block" id="DataProcessor.__init__">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">categorical_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">columns_to_drop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -110,7 +110,7 @@
 
 <div class="viewcode-block" id="DataProcessor.preprocess_data">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.preprocess_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">preprocess_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load and preprocess data from a CSV file or DataFrame, with optional metadata merging.</span>
 
@@ -146,7 +146,7 @@
 
 <div class="viewcode-block" id="DataProcessor._load_data">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._load_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper method to load data and set the index if specified.</span>
 
@@ -176,7 +176,7 @@
 
 <div class="viewcode-block" id="DataProcessor._merge_data_and_metadata">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata">[docs]</a>
-    <span class="k">def</span> <span class="nf">_merge_data_and_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_data_and_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merge the main data frame with metadata.</span>
 
@@ -192,7 +192,7 @@
 
 <div class="viewcode-block" id="DataProcessor._rename_target_column">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._rename_target_column">[docs]</a>
-    <span class="k">def</span> <span class="nf">_rename_target_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rename_target_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rename the target column in the data frame to &#39;target&#39;.</span>
 
@@ -209,7 +209,7 @@
 
 <div class="viewcode-block" id="DataProcessor._drop_columns">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._drop_columns">[docs]</a>
-    <span class="k">def</span> <span class="nf">_drop_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_drop_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Drop specified columns from the data frame.</span>
 
@@ -225,7 +225,7 @@
 
 <div class="viewcode-block" id="DataProcessor._drop_missing_values">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._drop_missing_values">[docs]</a>
-    <span class="k">def</span> <span class="nf">_drop_missing_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_drop_missing_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Drop missing values by dropping rows with NaNs.</span>
 
@@ -240,7 +240,7 @@
 
 <div class="viewcode-block" id="DataProcessor._encode_categorical_variables">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables">[docs]</a>
-    <span class="k">def</span> <span class="nf">_encode_categorical_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_encode_categorical_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Encode categorical variables using label encoding and store the mappings.</span>
 
@@ -268,7 +268,7 @@
 
 <div class="viewcode-block" id="DataProcessor.get_label_mapping">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.get_label_mapping">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_label_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_label_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve the label encoding mapping for a specific column.</span>
 
@@ -287,7 +287,7 @@
 
 <div class="viewcode-block" id="DataProcessor._scale_numerical_features">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features">[docs]</a>
-    <span class="k">def</span> <span class="nf">_scale_numerical_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scale_numerical_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Scale numerical features using standard scaling.</span>
 
@@ -314,7 +314,7 @@
 
 <div class="viewcode-block" id="DataProcessor._filtered_time_dataset">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset">[docs]</a>
-    <span class="k">def</span> <span class="nf">_filtered_time_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filtered_time_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filter dataset to retain only clones with at least min_num_timepoints.</span>
 
@@ -335,7 +335,7 @@
 
 <div class="viewcode-block" id="DataProcessor._fill_nan">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._fill_nan">[docs]</a>
-    <span class="k">def</span> <span class="nf">_fill_nan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_nan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fill NaN values in the DataFrame based on the specified method.</span>
 
@@ -365,7 +365,7 @@
 
 <div class="viewcode-block" id="DataProcessor.flatten_time">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.flatten_time">[docs]</a>
-    <span class="k">def</span> <span class="nf">flatten_time</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flatten_time</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_df</span><span class="p">,</span>
         <span class="n">clone_column</span><span class="p">,</span>

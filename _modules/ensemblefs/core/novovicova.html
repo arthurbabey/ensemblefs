@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ensemblefs.core.novovicova &mdash; ensemblefs 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
@@ -71,12 +71,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.core.novovicova</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 
 <div class="viewcode-block" id="StabilityNovovicova">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.novovicova.StabilityNovovicova">[docs]</a>
-<span class="k">class</span> <span class="nc">StabilityNovovicova</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StabilityNovovicova</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to compute the stability of feature selection algorithms based on a measure</span>
 <span class="sd">    proposed by Novovicová, Somol, and Pudil (2009). This stability measure quantifies</span>
@@ -107,7 +107,7 @@
 
 <div class="viewcode-block" id="StabilityNovovicova.__init__">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.novovicova.StabilityNovovicova.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_selections</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_selections</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the StabilityNovovicova class with a list of lists, each representing selected features in a dataset.</span>
 <span class="sd">        Checks and converts the lists to sets to ensure uniqueness within each dataset for simplicity in calculations.</span>
@@ -128,7 +128,7 @@
 
 <div class="viewcode-block" id="StabilityNovovicova.validate_inputs">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.novovicova.StabilityNovovicova.validate_inputs">[docs]</a>
-    <span class="k">def</span> <span class="nf">validate_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_selections</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_selections</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validates the input feature selections for non-empty data, uniformity of data types, and consistent feature representation.</span>
 
@@ -156,7 +156,7 @@
 
 <div class="viewcode-block" id="StabilityNovovicova.compute_stability">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.novovicova.StabilityNovovicova.compute_stability">[docs]</a>
-    <span class="k">def</span> <span class="nf">compute_stability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_stability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the stability SH(S) using the provided feature selections.</span>
 
