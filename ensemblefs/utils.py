@@ -126,8 +126,21 @@ def extract_params(cls, instance, params):
         dict: A dictionary of parameters (name-value pairs) for instantiating the class.
     """
     sig = inspect.signature(cls.__init__)
-    return {
+
+    # Extract explicitly defined parameters
+    extracted_params = {
         param: getattr(instance, param)
         for param in params
         if param in sig.parameters and hasattr(instance, param)
     }
+
+    # If **kwargs exists in the class signature, capture additional params
+    if any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
+        additional_params = {
+            param: getattr(instance, param)
+            for param in params
+            if param not in sig.parameters and hasattr(instance, param)
+        }
+        extracted_params.update(additional_params)
+
+    return extracted_params
