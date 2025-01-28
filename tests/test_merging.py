@@ -67,6 +67,22 @@ def test_empty_output(union_of_intersections):
     assert result == set()
 
 
+def test_merge_fill_full(union_of_intersections):
+    subsets = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    subsets = subset_to_Feature(subsets)
+    result = union_of_intersections.merge(subsets, num_features=9)
+    assert result == set([str(i) for i in range(1, 10)])
+
+
+def test_merge_fill(union_of_intersections):
+    subsets = [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+    subsets = subset_to_Feature(subsets)
+    result = union_of_intersections.merge(subsets, num_features=4)
+    for i in ["2", "3", "4"]:
+        assert i in result
+    assert len(result) == 4
+
+
 def test_borda_basic_functionality(borda_merger):
     subsets = [
         [Feature("A", 10), Feature("B", 8), Feature("C", 6)],

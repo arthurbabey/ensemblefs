@@ -65,7 +65,7 @@ class UnionOfIntersectionsMerger(MergingStrategy):
             ]
         )
         if num_features is None:
-            return list(core)
+            return set(core)
 
         # Step 4: Compute global feature scores (sum of normalized values)
         feature_score_map = defaultdict(float)
@@ -78,9 +78,9 @@ class UnionOfIntersectionsMerger(MergingStrategy):
         core_size = len(core_list)
 
         if core_size == num_features:
-            return core_list
+            return set(core_list)
         elif core_size > num_features:
-            return core_list[:num_features]
+            return set(core_list[:num_features])
         else:
             needed = num_features - core_size
             all_sorted = sorted(
@@ -89,4 +89,4 @@ class UnionOfIntersectionsMerger(MergingStrategy):
                 reverse=True,
             )
             extras = [f for f in all_sorted if f not in core][:needed]
-            return core_list + extras
+            return set(core_list + extras)
