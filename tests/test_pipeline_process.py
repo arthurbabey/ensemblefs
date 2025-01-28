@@ -54,12 +54,70 @@ def test_feature_selection_pipeline(pipeline_instance):
         best_features,
         best_repeat,
         best_group_name,
-    ) = pipeline_instance()  # or pipeline_instance.run()
+    ) = pipeline_instance()
     assert best_features is not None
     assert best_repeat is not None
     assert best_group_name is not None
 
-    # test best_features are in the data columns
+    # Test best_features are in the data columns
     assert all([feature in pipeline_instance.data.columns for feature in best_features])
     assert 0 <= int(best_repeat) <= pipeline_instance.num_repeats
     assert best_group_name in pipeline_instance.subgroup_names
+
+
+@pytest.mark.parametrize(
+    "merging_strategy", ["union_of_intersections_merger", "borda_merger"]
+)
+def test_pipeline_with_no_feature_selection(merging_strategy):
+    num_samples = 100
+    num_features = 5000
+    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
+    target_values = np.random.randint(0, 4, size=num_samples)
+
+    data = pd.DataFrame(
+        np.random.randn(num_samples, num_features), columns=feature_names
+    )
+    data["target"] = target_values
+
+    fs_methods = [
+        "f_statistic_selector",
+        "random_forest_selector",
+        "mutual_info_selector",
+    ]
+    num_repeats = 2
+    task = "classification"
+    random_state = 2024
+    num_features_to_select = None  # Explicitly set to None
+    n_jobs = 1
+
+    if merging_strategy == "borda_merger":
+        with pytest.raises(
+            ValueError,
+            match="num_features_to_select must be provided when using a merging strategy other than UnionOfIntersections",
+        ):
+            FeatureSelectionPipeline(
+                data=data,
+                fs_methods=fs_methods,
+                merging_strategy=merging_strategy,
+                num_repeats=num_repeats,
+                num_features_to_select=num_features_to_select,
+                metrics=["f1_score"],
+                task=task,
+                random_state=random_state,
+                n_jobs=n_jobs,
+            )
+    else:
+        pipeline = FeatureSelectionPipeline(
+            data=data,
+            fs_methods=fs_methods,
+            merging_strategy=merging_strategy,
+            num_repeats=num_repeats,
+            num_features_to_select=num_features_to_select,
+            metrics=["f1_score"],
+            task=task,
+            random_state=random_state,
+            n_jobs=n_jobs,
+        )
+        best_features, best_repeat, best_group_name = pipeline()
+        assert best_features is not None
+        assert len(best_features) > 0

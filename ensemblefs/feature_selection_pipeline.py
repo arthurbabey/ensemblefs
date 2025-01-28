@@ -65,11 +65,7 @@ class FeatureSelectionPipeline:
         self._validate_task(task)
         self.data = data
         self.num_repeats = num_repeats
-        self.num_features_to_select = (
-            num_features_to_select
-            if num_features_to_select is not None
-            else data.shape[1] // 10
-        )
+        self.num_features_to_select = num_features_to_select  # if None AND union_of_intersections_merger, then return only union of intersections
         self.task = task
         self.random_state = (
             random_state if random_state is not None else random.randint(0, 1000)
@@ -78,6 +74,13 @@ class FeatureSelectionPipeline:
         self.fs_methods = [self._load_class(m, instantiate=True) for m in fs_methods]
         self.metrics = [self._load_class(m, instantiate=True) for m in metrics]
         self.merging_strategy = self._load_class(merging_strategy, instantiate=True)
+        if (
+            self.num_features_to_select is None
+            and self.merging_strategy.is_rank_based()
+        ):  # check to avoid None and rank based merging strategy
+            raise ValueError(
+                "num_features_to_select must be provided when using a merging strategy other than UnionOfIntersections"
+            )
         self.min_group_size = min_group_size
         self.subgroup_names = self._generate_subgroup_names(
             min_group_size=self.min_group_size
