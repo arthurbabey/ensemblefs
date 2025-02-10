@@ -60,6 +60,14 @@ class_path_mapping = {
         "ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector",
         ["task", "num_features_to_select", "random_state", "n_jobs"],
     ),
+    "mrmr_selector": (
+        "ensemblefs.feature_selectors.mrmr_selector.MRMRSelector",
+        ["task", "num_features_to_select", "n_jobs"],
+    ),
+    "lasso_selector": (
+        "ensemblefs.feature_selectors.lasso_selector.LassoSelector",
+        ["task", "num_features_to_select", "random_state"],
+    ),
     "borda_merger": (
         "ensemblefs.merging_strategies.borda_merger.BordaMerger",
         [],

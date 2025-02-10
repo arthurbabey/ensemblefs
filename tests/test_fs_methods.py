@@ -6,14 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pytest
 from sklearn.datasets import make_classification, make_regression
 
-# Adjusted imports to match the provided file structure and assumed class names
-from ensemblefs.feature_selectors import (
-    FStatisticSelector,
-    MutualInfoSelector,
-    RandomForestSelector,
-    SVMSelector,
-    XGBoostSelector,
-)
+from ensemblefs.feature_selectors import *
 
 
 @pytest.fixture
@@ -144,6 +137,42 @@ def test_feature_selection_svm_classification(fake_data_classification):
 def test_feature_selection_svm_regression(fake_data_regression):
     X, y, expected_features = fake_data_regression
     selector = SVMSelector(task="regression", num_features_to_select=2)
+    scores, selected_features = selector.select_features(X, y)
+    assert len(scores) == 100
+    assert len(selected_features) == 2
+    assert set(selected_features) == set(expected_features)
+
+
+def test_feature_selection_mrmr_classification(fake_data_classification):
+    X, y, expected_features = fake_data_classification
+    selector = MRMRSelector(task="classification", num_features_to_select=3)
+    scores, selected_features = selector.select_features(X, y)
+    assert len(scores) == 20
+    assert len(selected_features) == 3
+    assert set(selected_features) == set(expected_features)
+
+
+def test_feature_selection_mrrm_regression(fake_data_regression):
+    X, y, expected_features = fake_data_regression
+    selector = MRMRSelector(task="regression", num_features_to_select=2)
+    scores, selected_features = selector.select_features(X, y)
+    assert len(scores) == 100
+    assert len(selected_features) == 2
+    assert set(selected_features) == set(expected_features)
+
+
+def test_feature_selection_lasso_classification(fake_data_classification):
+    X, y, expected_features = fake_data_classification
+    selector = LassoSelector(task="classification", num_features_to_select=3)
+    scores, selected_features = selector.select_features(X, y)
+    assert len(scores) == 20
+    assert len(selected_features) == 3
+    assert set(selected_features) == set(expected_features)
+
+
+def test_feature_selection_lasso_regression(fake_data_regression):
+    X, y, expected_features = fake_data_regression
+    selector = LassoSelector(task="regression", num_features_to_select=2)
     scores, selected_features = selector.select_features(X, y)
     assert len(scores) == 100
     assert len(selected_features) == 2

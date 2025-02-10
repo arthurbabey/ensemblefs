@@ -20,6 +20,7 @@ dependencies = [
     "pyyaml",
     "xgboost",
     "ranky",
+    "mrmr_selection",
     "scipy==1.11"
 ]
 

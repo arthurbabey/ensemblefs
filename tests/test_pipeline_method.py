@@ -26,9 +26,9 @@ def pipeline_instance():
     # Define parameters
     fs_methods = [
         "f_statistic_selector",
-        "random_forest_selector",
+        "mrmr_selector",
         "mutual_info_selector",
-        "xgboost_selector",
+        "lasso_selector",
         "svm_selector",
     ]
     merging_strategy = "union_of_intersections_merger"
@@ -73,10 +73,10 @@ def test_generate_subgroups_names(pipeline_instance):
             assert isinstance(name, str)
             assert name in [
                 "MutualInfo",
-                "RandomForest",
+                "Lasso",
                 "FStatistic",
                 "SVM",
-                "XGBoost",
+                "MRMR",
             ]
 
     # Test for the ValueError when min_size exceeds the number of methods
