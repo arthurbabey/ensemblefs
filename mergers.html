@@ -288,25 +288,33 @@ This class extends the MergingStrategy base class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/merging_strategies/union_of_intersections_merger.html#UnionOfIntersectionsMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes the UnionOfIntersections strategy with ‘set-based’ type.</p>
+<dd><p>Initializes the MergingStrategy with the specified strategy type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>strategy_type</strong> (<em>str</em>) – The type of merging strategy (“set-based” or “rank-based”).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/merging_strategies/union_of_intersections_merger.html#UnionOfIntersectionsMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Merges the input subsets by computing the union of intersections of pairs of subsets.</p>
+<dd><p>Merges the input subsets by computing the union of intersections of pairs of subsets,
+then ensures the final set has exactly <cite>num_features</cite> features (if specified) by ranking
+all features (via summed scores across subsets).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>subsets</strong> (<em>list</em><em> of </em><em>lists</em>) – A list of subsets to be merged.</p></li>
+<li><p><strong>subsets</strong> (<em>list</em><em> of </em><em>lists</em>) – A list of subsets (each subset is a list of Feature objects).</p></li>
+<li><p><strong>num_features</strong> (<em>int</em><em>, </em><em>optional</em>) – Desired number of features in the final set.</p></li>
 <li><p><strong>**kwargs</strong> – Additional keyword arguments specific to the merging strategy.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The union of intersections of the input subsets.</p>
+<dd class="field-even"><p>The final list of selected feature names, of size <cite>num_features</cite> if provided.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>set</p>
+<dd class="field-odd"><p>list</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If subset does not contain Feature objects.</p>
