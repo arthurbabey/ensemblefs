@@ -71,102 +71,51 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.core.feature</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+
 <div class="viewcode-block" id="Feature">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature">[docs]</a>
-<span></span><span class="k">class</span><span class="w"> </span><span class="nc">Feature</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Feature</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a feature with an optional score and selection status.&quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="Feature.__init__">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">score</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">selected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize a new Feature object with a name, optional score, and selection status.</span>
-
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): The name of the feature.</span>
-<span class="sd">            score (float, optional): The score or importance of the feature. Defaults to None.</span>
-<span class="sd">            selected (bool, optional): Indicates whether the feature has been selected. Defaults to False.</span>
+<span class="sd">            name: The name of the feature.</span>
+<span class="sd">            score: The score or importance of the feature (optional).</span>
+<span class="sd">            selected: Whether the feature has been selected.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selected</span> <span class="o">=</span> <span class="n">selected</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">selected</span></div>
 
 
 <div class="viewcode-block" id="Feature.set_score">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.set_score">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the score of the feature.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            score (float): The new score to assign to the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the feature score.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span></div>
 
 
 <div class="viewcode-block" id="Feature.set_selected">
 <a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.set_selected">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selected</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the selection status of the feature.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            selected (bool): The new selection status to assign to the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selected</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the feature selection status.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selected</span> <span class="o">=</span> <span class="n">selected</span></div>
 
 
-<div class="viewcode-block" id="Feature.get_name">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.get_name">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the name of the feature.</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Feature(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, score=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">, selected=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selected</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="p">)</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            str: The name of the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
-
-
-<div class="viewcode-block" id="Feature.get_score">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.get_score">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the score of the feature.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float: The score of the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span></div>
-
-
-<div class="viewcode-block" id="Feature.get_selected">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.feature.Feature.get_selected">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the selection status of the feature.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            bool: The selection status of the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected</span></div>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return a string representation of the feature.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            str: A string that includes the name, score, and selection status of the feature.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Feature: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">, Selected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selected</span><span class="si">}</span><span class="s2">&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return an official string representation of the feature.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            str: A formal representation of the feature suitable for debugging.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Feature(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selected</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Feature(&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selected</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 </pre></div>
 

@@ -71,102 +71,84 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.merging_strategies.base_merger</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..core.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">Feature</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..core.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">Feature</span>
 
 
 <div class="viewcode-block" id="MergingStrategy">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MergingStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class for merging strategies. This class provides the interface and common functionality</span>
-<span class="sd">    for different merging strategies.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        strategy_type (str): Specifies the type of merging strategy, either &#39;set-based&#39; or &#39;rank-based&#39;.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for merging strategies.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MergingStrategy.__init__">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy_type</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes the MergingStrategy with the specified strategy type.</span>
-
 <span class="sd">        Args:</span>
-<span class="sd">            strategy_type (str): The type of merging strategy (&quot;set-based&quot; or &quot;rank-based&quot;).</span>
+<span class="sd">            strategy_type: The type of merging strategy (&#39;set-based&#39; or &#39;rank-based&#39;).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">=</span> <span class="n">strategy_type</span></div>
 
 
 <div class="viewcode-block" id="MergingStrategy.merge">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.merge">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">k_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Merges the input data according to the strategy. Must be implemented by subclasses.</span>
+<span class="sd">        Merges input data according to the strategy (to be implemented by subclasses).</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data (list): The data to be merged.</span>
-<span class="sd">            k_features (int, optional): The number of top features to select. Defaults to None.</span>
-<span class="sd">            **kwargs: Additional keyword arguments specific to the merging strategy.</span>
+<span class="sd">            data: The data to merge.</span>
+<span class="sd">            num_features_to_select: Number of top features to select.</span>
+<span class="sd">            **kwargs: Additional strategy-specific arguments.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            NotImplementedError: If the method is not implemented in a subclass.</span>
+<span class="sd">            NotImplementedError: If not implemented in a subclass.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses must implement this method&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="MergingStrategy.is_set_based">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_set_based">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_set_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks if the strategy is set-based.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            bool: True if the strategy is set-based, False otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_set_based</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the strategy is set-based.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">==</span> <span class="s2">&quot;set-based&quot;</span></div>
 
 
 <div class="viewcode-block" id="MergingStrategy.is_rank_based">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_rank_based">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_rank_based</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks if the strategy is rank-based.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            bool: True if the strategy is rank-based, False otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_rank_based</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the strategy is rank-based.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">==</span> <span class="s2">&quot;rank-based&quot;</span></div>
 
 
 <div class="viewcode-block" id="MergingStrategy._validate_input">
 <a class="viewcode-back" href="../../../mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy._validate_input">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsets</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_input</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">subsets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Validates that the input subsets contain Feature objects.</span>
+<span class="sd">        Validates that subsets contain Feature objects.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            subsets (list or list of lists): The subsets to validate.</span>
+<span class="sd">            subsets: A list or list of lists containing Feature objects.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If the subsets are empty, or do not contain Feature objects.</span>
+<span class="sd">            ValueError: If subsets are empty or contain invalid types.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">subsets</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets cannot be empty&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets cannot be empty.&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Check if subsets is a list of lists or a single list</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subsets</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">subset</span> <span class="ow">in</span> <span class="n">subsets</span><span class="p">):</span>
-                <span class="c1"># It&#39;s a list of lists</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">subsets</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">subsets</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>  <span class="c1"># Check if the first subset is empty</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets cannot contain empty lists&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subsets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">Feature</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets must contain Feature objects&quot;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># It&#39;s a single list</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subsets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Feature</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets must contain Feature objects&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets must be a list or a list of lists&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subsets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>  <span class="c1"># List of lists case</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sub</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subsets</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets cannot contain empty lists.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">Feature</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subsets</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">sub</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets must contain Feature objects.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Single list case</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">Feature</span><span class="p">)</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">subsets</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets must contain Feature objects.&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

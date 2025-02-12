@@ -71,7 +71,11 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.feature_selectors.f_statistic_selector</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">f_classif</span><span class="p">,</span> <span class="n">f_regression</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">f_classif</span><span class="p">,</span> <span class="n">f_regression</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base_selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelector</span>
 
@@ -79,29 +83,18 @@
 <div class="viewcode-block" id="FStatisticSelector">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FStatisticSelector</span><span class="p">(</span><span class="n">FeatureSelector</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A feature selector using F-statistic scores for feature selection.</span>
-<span class="sd">    This class extends the FeatureSelector base class and uses F-statistic scores to evaluate features.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        task (str): Specifies the machine learning task, either &#39;classification&#39; or &#39;regression&#39;.</span>
-<span class="sd">        num_features_to_select (int): The number of top features to select based on importance.</span>
-<span class="sd">            If None, a default selection logic can be applied based on a percentage of features.</span>
-<span class="sd">        kwargs (dict): Additional keyword arguments to pass to the scoring function.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature selector using F-statistic scores.&quot;&quot;&quot;</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;FStatistic&quot;</span>
 
 <div class="viewcode-block" id="FStatisticSelector.__init__">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes the FStatisticSelector with the specified task, number of features, and additional parameters.</span>
-
 <span class="sd">        Args:</span>
-<span class="sd">            task (str): The machine learning task (&quot;classification&quot; or &quot;regression&quot;). Defaults to &quot;classification&quot;.</span>
-<span class="sd">            num_features_to_select (int, optional): The number of features to select. If None, selection defaults to 10% of features.</span>
-<span class="sd">            **kwargs: Arbitrary keyword arguments that are passed to the scoring function.</span>
+<span class="sd">            task: ML task (&#39;classification&#39; or &#39;regression&#39;).</span>
+<span class="sd">            num_features_to_select: Number of features to select.</span>
+<span class="sd">            **kwargs: Additional arguments for the scoring function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
@@ -109,29 +102,31 @@
 
 <div class="viewcode-block" id="FStatisticSelector.compute_scores">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scores</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">X</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the F-statistic scores for feature selection.</span>
+<span class="sd">        Computes F-statistic scores.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            X (array-like, shape = [n_samples, n_features]): Training input samples.</span>
-<span class="sd">            y (array-like, shape = [n_samples] or [n_samples, n_outputs]): Target values (class labels for classification, real numbers for regression).</span>
+<span class="sd">            X: Training samples.</span>
+<span class="sd">            y: Target values.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            array-like: The F-statistic scores for each feature.</span>
+<span class="sd">            F-statistic scores for each feature.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If the task is not &#39;classification&#39; or &#39;regression&#39;.</span>
+<span class="sd">            ValueError: If task is not &#39;classification&#39; or &#39;regression&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span>
-            <span class="n">score_func</span> <span class="o">=</span> <span class="n">f_classif</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span>
-            <span class="n">score_func</span> <span class="o">=</span> <span class="n">f_regression</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be &#39;classification&#39; or &#39;regression&#39;&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Pass additional keyword arguments to the score function</span>
-        <span class="k">return</span> <span class="n">score_func</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+        <span class="n">score_func</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">f_classif</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span> <span class="n">f_regression</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">score_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be &#39;classification&#39; or &#39;regression&#39;.&quot;</span><span class="p">)</span>
+        <span class="n">scores</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">score_func</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">scores</span></div>
 </div>
 
 </pre></div>

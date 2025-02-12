@@ -71,7 +71,11 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ensemblefs.feature_selectors.xgboost_selector</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBClassifier</span><span class="p">,</span> <span class="n">XGBRegressor</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBClassifier</span><span class="p">,</span> <span class="n">XGBRegressor</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base_selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelector</span>
 
@@ -79,29 +83,18 @@
 <div class="viewcode-block" id="XGBoostSelector">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">XGBoostSelector</span><span class="p">(</span><span class="n">FeatureSelector</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A feature selector for XGBoost models that extends the FeatureSelector class.</span>
-<span class="sd">    This class is tailored to utilize XGBoost&#39;s built-in feature importance to select features.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        task (str): The type of machine learning task (&quot;classification&quot; or &quot;regression&quot;).</span>
-<span class="sd">        num_features_to_select (int): The number of top features to select based on importance.</span>
-<span class="sd">            If None, a default selection logic can be applied based on a percentage of features.</span>
-<span class="sd">        kwargs (dict): Additional keyword arguments to pass to the XGBoost model constructor.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature selector using XGBoost feature importance.&quot;&quot;&quot;</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;XGBoost&quot;</span>
 
 <div class="viewcode-block" id="XGBoostSelector.__init__">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes the XGBoostFeatureSelector with the specified task, number of features, and any additional parameters.</span>
-
 <span class="sd">        Args:</span>
-<span class="sd">            task (str): The machine learning task (&quot;classification&quot; or &quot;regression&quot;). Defaults to &quot;classification&quot;.</span>
-<span class="sd">            num_features_to_select (int, optional): The number of features to select. If None, selection defaults to 10% of features.</span>
-<span class="sd">            **kwargs: Arbitrary keyword arguments that are passed to the XGBoost model.</span>
+<span class="sd">            task: ML task (&#39;classification&#39; or &#39;regression&#39;).</span>
+<span class="sd">            num_features_to_select: Number of features to select.</span>
+<span class="sd">            **kwargs: Additional arguments for the XGBoost model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
@@ -109,23 +102,34 @@
 
 <div class="viewcode-block" id="XGBoostSelector.compute_scores">
 <a class="viewcode-back" href="../../../feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scores</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">X</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the feature importances using an XGBoost model.</span>
+<span class="sd">        Computes feature importances using an XGBoost model.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            X (array-like, shape = [n_samples, n_features]): The training input samples.</span>
-<span class="sd">            y (array-like, shape = [n_samples] or [n_samples, n_outputs]): The target values (class labels for classification, real numbers for regression).</span>
+<span class="sd">            X: Training samples.</span>
+<span class="sd">            y: Target values.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            array-like: The feature importances derived from the XGBoost model.</span>
+<span class="sd">            Feature importances from the trained XGBoost model.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If task is not &#39;classification&#39; or &#39;regression&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span>
-            <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span>
-            <span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">model_cls</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">XGBClassifier</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span> <span class="n">XGBRegressor</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">model_cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be &#39;classification&#39; or &#39;regression&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model_cls</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span></div>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+        <span class="k">return</span> <span class="n">scores</span></div>
 </div>
 
 </pre></div>

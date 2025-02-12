@@ -73,8 +73,10 @@
   <h1>Source code for ensemblefs.feature_selection_pipeline</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
@@ -90,111 +92,109 @@
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">data</span><span class="p">,</span>
-        <span class="n">fs_methods</span><span class="p">,</span>
-        <span class="n">merging_strategy</span><span class="p">,</span>
-        <span class="n">num_repeats</span><span class="p">,</span>
-        <span class="n">num_features_to_select</span><span class="p">,</span>
-        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span> <span class="s2">&quot;f1_score&quot;</span><span class="p">,</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">],</span>
-        <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span>
-        <span class="n">min_group_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">fs_methods</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]],</span>
+        <span class="n">merging_strategy</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span>
+        <span class="n">num_repeats</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_features_to_select</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span> <span class="s2">&quot;f1_score&quot;</span><span class="p">,</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">],</span>
+        <span class="n">task</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;classification&quot;</span><span class="p">,</span>
+        <span class="n">min_group_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes a FeatureSelectionPipeline object, which configures and executes</span>
-<span class="sd">        a feature selection process using specified methods and strategies.</span>
+<span class="sd">        Initializes the feature selection pipeline.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data (pandas.DataFrame): The dataset to process, which must include a &#39;target&#39; column.</span>
-<span class="sd">            fs_methods (list of classes or str): Feature selection methods to be used. Each entry</span>
-<span class="sd">                can be either a class or a string that corresponds to a defined class name. These</span>
-<span class="sd">                classes should implement a method for feature selection.</span>
-<span class="sd">            merging_strategy (class or str): The strategy used to merge features selected by</span>
-<span class="sd">                different methods. Can be either a class or a string corresponding to a defined class name.</span>
-<span class="sd">            num_repeats (int): The number of times the feature selection process will be repeated.</span>
-<span class="sd">            threshold (int, optional): The number of features to select. Defaults to one-tenth of the</span>
-<span class="sd">                number of features in &#39;data&#39; if not provided.</span>
-<span class="sd">            metrics (list of classes or str): Performance metrics to be used for evaluation. Each entry</span>
-<span class="sd">                can be either a class or a string that corresponds to a defined class name. These classes</span>
-<span class="sd">                should implement a method for computing the metric.</span>
-<span class="sd">            task (str, optional): The type of task (&#39;classification&#39; or &#39;regression&#39;). Defaults to</span>
-<span class="sd">                &#39;classification&#39;.</span>
-<span class="sd">            random_state (int, optional): Random seed for reproducibility. Defaults to None.</span>
-<span class="sd">            n_jobs (int, optional): The number of jobs to compute the feature selection pipeline, -1 means using all processors.</span>
+<span class="sd">            data: DataFrame including a &#39;target&#39; column.</span>
+<span class="sd">            fs_methods: List of feature selection methods (classes or strings).</span>
+<span class="sd">            merging_strategy: Merging strategy (class or string).</span>
+<span class="sd">            num_repeats: Number of repeats for the pipeline.</span>
+<span class="sd">            num_features_to_select: Desired number of features to select.</span>
+<span class="sd">                (For rank-based merging, this must be provided.)</span>
+<span class="sd">            metrics: List of performance metrics (classes or strings).</span>
+<span class="sd">            task: &#39;classification&#39; or &#39;regression&#39;.</span>
+<span class="sd">            min_group_size: Minimum number of methods in each subgroup.</span>
+<span class="sd">            fill: If True, ensures exactly num_features_to_select features.</span>
+<span class="sd">            random_state: Seed for reproducibility.</span>
+<span class="sd">            n_jobs: Number of parallel jobs (-1 uses all processors).</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If &#39;task&#39; is neither &#39;classification&#39; nor &#39;regression&#39;.</span>
-
-<span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; pipeline = FeatureSelectionPipeline(</span>
-<span class="sd">                data=df,</span>
-<span class="sd">                fs_methods=[&#39;RandomForestSelector&#39;, &#39;MutualInfoSelector&#39;],</span>
-<span class="sd">                merging_strategy=&#39;BordaMerger&#39;,</span>
-<span class="sd">                num_repeats=10,</span>
-<span class="sd">                threshold=5,</span>
-<span class="sd">                metrics=[&#39;loglloss&#39;, &#39;f1_score&#39;, &#39;accuracy&#39;],</span>
-<span class="sd">                task=&#39;classification&#39;,</span>
-<span class="sd">                random_state=42</span>
-<span class="sd">                n_jobs=n_jobs</span>
-<span class="sd">            )</span>
+<span class="sd">            ValueError: If the task is invalid or if num_features_to_select is missing for rank-based merging.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span> <span class="o">=</span> <span class="n">num_repeats</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span> <span class="o">=</span> <span class="n">num_features_to_select</span>  <span class="c1"># if None AND union_of_intersections_merger, then return only union of intersections</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span> <span class="o">=</span> <span class="n">num_repeats</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span> <span class="o">=</span> <span class="n">num_features_to_select</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">random_state</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">fs_methods</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_load_class</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">fs_methods</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_load_class</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_class</span><span class="p">(</span><span class="n">merging_strategy</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span><span class="o">.</span><span class="n">is_rank_based</span><span class="p">()</span>
-        <span class="p">):</span>  <span class="c1"># check to avoid None and rank based merging strategy</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;num_features_to_select must be provided when using a merging strategy other than UnionOfIntersections&quot;</span>
-            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_features_to_select must be provided&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">min_group_size</span> <span class="o">=</span> <span class="n">min_group_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_subgroup_names</span><span class="p">(</span>
-            <span class="n">min_group_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">min_group_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="n">fill</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_subgroup_names</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_group_size</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span> <span class="o">=</span> <span class="p">{}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._validate_task">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_task</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be either &#39;classification&#39; or &#39;regression&#39;.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FeatureSelectionPipeline._generate_subgroup_names">
-<a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_subgroup_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_group_size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_class</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">class_or_str</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span> <span class="n">instantiate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generates all unique combinations of feature selection method names with sizes</span>
-<span class="sd">        ranging from min_group_size to the total number of methods.</span>
-<span class="sd">        Generates combinations using: nCr = n! / (r! * (n - r)!)</span>
+<span class="sd">        Loads a class given a string or returns the class if already provided.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            min_group_size (int): Minimum size of each combination.</span>
+<span class="sd">            class_or_str: The class or its name.</span>
+<span class="sd">            instantiate: If True, returns an instance of the class.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list: Combinations of method names.</span>
+<span class="sd">            The class or its instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_class_info</span><span class="p">(</span><span class="n">class_or_str</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">class_or_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">class_or_str</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span> <span class="k">if</span> <span class="n">instantiate</span> <span class="k">else</span> <span class="bp">cls</span>
+
+<div class="viewcode-block" id="FeatureSelectionPipeline._generate_subgroup_names">
+<a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_subgroup_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_group_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates all unique combinations of feature selection method names.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_group_size: Minimum size of each combination.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tuples containing method names.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fs_method_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">fs_method</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">fs_method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fs_methods</span><span class="p">]</span>
-
         <span class="k">if</span> <span class="n">min_group_size</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">fs_method_names</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Minimum group size of </span><span class="si">{</span><span class="n">min_group_size</span><span class="si">}</span><span class="s2"> exceeds available methods (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">fs_method_names</span><span class="p">)</span><span class="si">}</span><span class="s2">).&quot;</span>
             <span class="p">)</span>
-
         <span class="k">return</span> <span class="p">[</span>
             <span class="n">combo</span>
             <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_group_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fs_method_names</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -204,25 +204,23 @@
 
 <div class="viewcode-block" id="FeatureSelectionPipeline.run">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Runs the entire feature selection and classification pipeline.</span>
-
-<span class="sd">        This method iterates through the pipeline for the specified number of repeats, performing:</span>
-<span class="sd">        - Data splitting</span>
-<span class="sd">        - Feature computation and merging</span>
-<span class="sd">        - Performance evaluation</span>
-<span class="sd">        - Calculation of mean metrics per repeat</span>
-<span class="sd">        - Pareto analysis to identify best performing groups and repeats</span>
+<span class="sd">        Runs the complete feature selection pipeline.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">        - tuple: A tuple containing the merged features, the best repeat, and the best group name.</span>
+<span class="sd">            A tuple containing:</span>
+<span class="sd">              - The merged features from the best group,</span>
+<span class="sd">              - The index of the best repeat,</span>
+<span class="sd">              - The best subgroup (tuple of method names).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_random_seed</span><span class="p">()</span>
-        <span class="n">result_dicts</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-        <span class="p">]</span>  <span class="c1"># store 3 performance metrics and 1 stability</span>
+
+        <span class="c1"># Initialize list of dictionaries for metrics (last dict reserved for stability)</span>
+        <span class="n">num_metrics</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">result_dicts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_metrics</span><span class="p">)</span>
+        <span class="p">]</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Pipeline Progress&quot;</span><span class="p">):</span>
             <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_data</span><span class="p">(</span>
@@ -232,70 +230,61 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_compute_merging</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
             <span class="n">result_dicts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_metrics</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">result_dicts</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 
-        <span class="c1"># this is list of groups where each groups are a list of mean metrics respecting the orders of result_dicts</span>
-        <span class="c1"># first list of the list is : mean accs for group1, means AUROC for group1 etc</span>
-        <span class="n">list_of_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_means</span><span class="p">(</span><span class="n">result_dicts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">)</span>
+        <span class="n">means_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_means</span><span class="p">(</span><span class="n">result_dicts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">)</span>
+        <span class="n">means_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_replace_none</span><span class="p">(</span><span class="n">means_list</span><span class="p">)</span>
 
-        <span class="c1"># replace None with -inf coming from group with no merged features from all repeats</span>
-        <span class="n">list_of_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_replace_none</span><span class="p">(</span><span class="n">list_of_means</span><span class="p">)</span>
-
-        <span class="c1"># add number of methods to maximize; ensuring diversity</span>
-        <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">mean</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">group_name</span><span class="p">)]</span>
-            <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">group_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list_of_means</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">)</span>
+        <span class="c1"># Append diversity measure (number of methods in the subgroup)</span>
+        <span class="n">metrics_with_diversity</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mean</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">)</span>
         <span class="p">]</span>
-        <span class="n">metrics_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span>
-
-        <span class="c1"># find the best group using average metrics</span>
-        <span class="n">best_group_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_pareto</span><span class="p">(</span><span class="n">groups</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">metrics_names</span><span class="p">)</span>
-        <span class="n">best_group_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_repeat_metrics</span><span class="p">(</span>
-            <span class="n">best_group_name</span><span class="p">,</span> <span class="o">*</span><span class="n">result_dicts</span>
-        <span class="p">)</span>
-
-        <span class="c1"># replace None with -inf coming if best_group has one empty repeat</span>
+        <span class="n">best_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_pareto</span><span class="p">(</span><span class="n">metrics_with_diversity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">)</span>
+        <span class="n">best_group_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_repeat_metrics</span><span class="p">(</span><span class="n">best_group</span><span class="p">,</span> <span class="o">*</span><span class="n">result_dicts</span><span class="p">)</span>
         <span class="n">best_group_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_replace_none</span><span class="p">(</span><span class="n">best_group_metrics</span><span class="p">)</span>
-
-        <span class="c1"># find the best repeat using metrics from best group only</span>
         <span class="n">best_repeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_pareto</span><span class="p">(</span>
-            <span class="n">groups</span><span class="o">=</span><span class="n">best_group_metrics</span><span class="p">,</span>
-            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span><span class="p">)],</span>
+            <span class="n">best_group_metrics</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span><span class="p">)]</span>
         <span class="p">)</span>
-
         <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">best_repeat</span><span class="p">),</span> <span class="n">best_group_name</span><span class="p">)],</span>
-            <span class="n">best_repeat</span><span class="p">,</span>
-            <span class="n">best_group_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">best_repeat</span><span class="p">),</span> <span class="n">best_group</span><span class="p">)],</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">best_repeat</span><span class="p">),</span>
+            <span class="n">best_group</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._replace_none">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_replace_none</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="p">):</span>
-        <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_replace_none</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces groups containing None with lists of -inf.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metrics: List of metric lists per group.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Cleaned list with no None values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
             <span class="p">(</span>
                 <span class="n">group_metrics</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">metric</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">group_metrics</span><span class="p">)</span>
                 <span class="k">else</span> <span class="p">[</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">group_metrics</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">group_metrics</span> <span class="ow">in</span> <span class="n">metrics</span>
-        <span class="p">]</span>
-        <span class="k">return</span> <span class="n">metrics</span></div>
+        <span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._set_random_seed">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_set_random_seed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-
-            <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
-            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_random_seed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._split_data">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_split_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_split_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
         <span class="n">stratify</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">train_test_split</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">stratify</span>
@@ -304,22 +293,21 @@
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._compute_subset">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes feature subset for each feature selection method per repeat.</span>
+<span class="sd">        Computes feature subsets using each feature selection method.</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">        - train_data (pandas.DataFrame): The training dataset.</span>
-<span class="sd">        - idx (int): Index for the current iteration.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            train_data: Training dataset.</span>
+<span class="sd">            idx: Current repeat index.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
         <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">fs_method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fs_methods</span><span class="p">:</span>
             <span class="n">method_name</span> <span class="o">=</span> <span class="n">fs_method</span><span class="o">.</span><span class="n">name</span>
             <span class="n">scores</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">fs_method</span><span class="o">.</span><span class="n">select_features</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-            <span class="c1"># add all features in FS_subsets with name, score and selected status</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="n">Feature</span><span class="p">(</span>
                     <span class="n">name</span><span class="p">,</span>
@@ -332,74 +320,114 @@
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._compute_merging">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_merging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_merging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merges feature subsets for each subgroup.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx: Current repeat index.</span>
+<span class="sd">            verbose: If True, prints warnings when no merged features are produced.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">:</span>
-            <span class="n">merged_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_group_features</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">merged_features</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">)]</span> <span class="o">=</span> <span class="n">merged_features</span>
+            <span class="n">merged</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_group_features</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">merged</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">)]</span> <span class="o">=</span> <span class="n">merged</span>
             <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; produced no merged features.&quot;</span><span class="p">)</span></div>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2"> produced no merged features.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._merge_group_features">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_group_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_group_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merges features for a specific group of methods.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            idx: Current repeat index.</span>
+<span class="sd">            group: Tuple of method names.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Merged features as produced by the merging strategy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">group_features</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">[</span>
-                <span class="n">feature</span>
-                <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span>
-                <span class="k">if</span> <span class="n">feature</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
-            <span class="p">]</span>
+            <span class="p">[</span><span class="n">feature</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span> <span class="k">if</span> <span class="n">feature</span><span class="o">.</span><span class="n">selected</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">group</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">group_features</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">group_features</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_features_to_select</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fill</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._compute_performance_metrics">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_performance_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_performance_metrics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">X_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">y_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+        <span class="n">X_test</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">y_test</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes performance metrics using all metric methods.</span>
 
-        <span class="n">metric_values</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
-            <span class="n">m</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-            <span class="n">metric_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">metric_values</span>  <span class="c1"># list of len(self.metrics) averaged metrics, e.g : loglloss, f1_score, accuracy</span></div>
+<span class="sd">        Returns:</span>
+<span class="sd">            List of averaged metric values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">metric</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span>
+        <span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._compute_metrics">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">result_dicts</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">group_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">:</span>
-            <span class="c1"># if the group has no merged features, skip</span>
-            <span class="c1"># result_dicts wont have the key for this idx, group_name keypair</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_metrics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">train_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">test_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">result_dicts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="nb">float</span><span class="p">]],</span>
+        <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes and stores performance and stability metrics for each subgroup.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            train_data: Training dataset.</span>
+<span class="sd">            test_data: Test dataset.</span>
+<span class="sd">            result_dicts: List of dictionaries to store metrics.</span>
+<span class="sd">            idx: Current repeat index.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Updated result_dicts with computed metrics.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subgroup_names</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">:</span>
                 <span class="k">continue</span>
 
-            <span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)])</span>
+            <span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="n">X_train_subset</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+            <span class="n">X_test_subset</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">test_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
 
-            <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
-            <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">test_data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
-            <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_performance_metrics</span><span class="p">(</span>
-                <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
+            <span class="n">metrics_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_performance_metrics</span><span class="p">(</span>
+                <span class="n">X_train_subset</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test_subset</span><span class="p">,</span> <span class="n">y_test</span>
             <span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-                <span class="n">result_dicts</span><span class="p">[</span><span class="n">i</span><span class="p">][(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metrics_vals</span><span class="p">):</span>
+                <span class="n">result_dicts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
             <span class="n">features_stability</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">[</span>
-                    <span class="n">feature</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
-                    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)]</span>
-                    <span class="k">if</span> <span class="n">feature</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+                    <span class="n">feature</span><span class="o">.</span><span class="n">name</span>
+                    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span><span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span>
+                    <span class="k">if</span> <span class="n">feature</span><span class="o">.</span><span class="n">selected</span>
                 <span class="p">]</span>
-                <span class="k">for</span> <span class="n">method_name</span> <span class="ow">in</span> <span class="n">group_name</span>
+                <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">group</span>
             <span class="p">]</span>
             <span class="n">stability</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">compute_stability_metrics</span><span class="p">(</span><span class="n">features_stability</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">features_stability</span>
                 <span class="k">else</span> <span class="mi">0</span>
             <span class="p">)</span>
-            <span class="n">result_dicts</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)][(</span><span class="n">idx</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">stability</span>
+            <span class="n">result_dicts</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">metrics_vals</span><span class="p">)][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">stability</span>
 
         <span class="k">return</span> <span class="n">result_dicts</span></div>
 
@@ -407,31 +435,32 @@
 <div class="viewcode-block" id="FeatureSelectionPipeline._calculate_means">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_means</span><span class="p">(</span><span class="n">result_dicts</span><span class="p">,</span> <span class="n">group_names</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_means</span><span class="p">(</span>
+        <span class="n">result_dicts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="nb">float</span><span class="p">]],</span>
+        <span class="n">group_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the mean of the metrics for each group_name,</span>
-<span class="sd">        returning None for all metrics for group with no merged features i.e when  np.mean return np.nan</span>
+<span class="sd">        Calculates the mean metrics for each subgroup.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_dicts: List of dictionaries with metrics.</span>
+<span class="sd">            group_names: List of subgroup names.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of lists containing mean metrics per group.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">means_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">group_name</span> <span class="ow">in</span> <span class="n">group_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">group_names</span><span class="p">:</span>
             <span class="n">group_means</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">(</span>
                     <span class="kc">None</span>
                     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
-                            <span class="p">[</span>
-                                <span class="n">value</span>
-                                <span class="k">for</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">group_name</span>
-                            <span class="p">]</span>
+                            <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">group</span><span class="p">]</span>
                         <span class="p">)</span>
                     <span class="p">)</span>
                     <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
-                        <span class="p">[</span>
-                            <span class="n">value</span>
-                            <span class="k">for</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">group_name</span>
-                        <span class="p">]</span>
+                        <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">group</span><span class="p">]</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result_dicts</span>
@@ -443,69 +472,86 @@
 <div class="viewcode-block" id="FeatureSelectionPipeline._compute_pareto">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_pareto</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_pareto</span><span class="p">(</span><span class="n">groups</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Performs Pareto analysis to identify best-performing groups or repeats.</span>
+<span class="sd">        Performs Pareto analysis to identify the best-performing group or repeat.</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">        - groups (list of list): Group of data to perform the pareto analysis on.</span>
-<span class="sd">        - names (list): Names of the scores for analysis.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            groups: List of metric lists.</span>
+<span class="sd">            names: List of corresponding names.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">        - str: Name of the best-performing group or repeat.</span>
-
-<span class="sd">        Details:</span>
-<span class="sd">        - Utilizes Pareto analysis to determine the best performing group or repeat.</span>
+<span class="sd">            The name of the best-performing group or repeat.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pareto</span> <span class="o">=</span> <span class="n">ParetoAnalysis</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
         <span class="n">pareto_results</span> <span class="o">=</span> <span class="n">pareto</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
-        <span class="n">best_group_name</span> <span class="o">=</span> <span class="n">pareto_results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">best_group_name</span></div>
+        <span class="k">return</span> <span class="n">pareto_results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._extract_repeat_metrics">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_repeat_metrics</span><span class="p">(</span><span class="n">group_name</span><span class="p">,</span> <span class="o">*</span><span class="n">result_dicts</span><span class="p">):</span>
-        <span class="c1"># Find all unique indices</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">result_dicts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-        <span class="c1"># Create a 2D array to store the metrics for the fixed group name</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_repeat_metrics</span><span class="p">(</span>
+        <span class="n">group</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span>
+        <span class="o">*</span><span class="n">result_dicts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts metrics across repeats for a given group.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            group: The subgroup name.</span>
+<span class="sd">            result_dicts: Dictionaries with metrics per repeat.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A 2D list of metrics with each row corresponding to a repeat.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">result_dicts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()})</span>
         <span class="n">result_array</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">idx</span><span class="p">,</span> <span class="n">group_name</span><span class="p">))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result_dicts</span><span class="p">]</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">idx</span><span class="p">,</span> <span class="n">group</span><span class="p">))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result_dicts</span><span class="p">]</span>
             <span class="n">result_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-
         <span class="k">return</span> <span class="n">result_array</span></div>
 
 
 <div class="viewcode-block" id="FeatureSelectionPipeline._load_class">
 <a class="viewcode-back" href="../../feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_load_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">],</span> <span class="n">instantiate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads a class or returns an instance if already provided.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input: A string identifier or an instance of a feature selector/merging strategy.</span>
+<span class="sd">            instantiate: If True, instantiates the class with extracted parameters.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The class or its instance.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If input is not a valid identifier or instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">cls</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">get_class_info</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>
-            <span class="c1"># here i should add a check to ensure object is a feature selectors or a merging strategy</span>
+            <span class="k">if</span> <span class="n">instantiate</span><span class="p">:</span>
+                <span class="n">init_params</span> <span class="o">=</span> <span class="n">extract_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">init_params</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="s2">&quot;select_features&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="s2">&quot;merge&quot;</span><span class="p">):</span>
+            <span class="c1"># Assumes valid instance if it has a &#39;select_features&#39; or &#39;merge&#39; method.</span>
             <span class="k">return</span> <span class="nb">input</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Input must be a string identifier or an instance of a class.&quot;</span>
-            <span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">instantiate</span><span class="p">:</span>
-            <span class="n">init_params</span> <span class="o">=</span> <span class="n">extract_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">init_params</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span></div>
+                <span class="s2">&quot;Input must be a string identifier or a valid instance of a feature selector or merging strategy.&quot;</span>
+            <span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Feature selection pipeline with : &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;merging strategy : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Feature selection pipeline with: merging strategy: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">merging_strategy</span><span class="si">}</span><span class="s2">, &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;feature selection methods: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fs_methods</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Number of repeats: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;number of repeats: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_repeats</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
 
 </pre></div>
