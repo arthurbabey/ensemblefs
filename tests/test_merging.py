@@ -40,7 +40,7 @@ def test_single_subset(union_of_intersections):
     subsets = [[1, 2, 3, 4]]
     subsets = subset_to_Feature(subsets)
     result = union_of_intersections.merge(subsets)
-    assert result == ["1", "2", "3", "4"]
+    assert result == {"1", "2", "3", "4"}
 
 
 def test_multiple_subsets(union_of_intersections):
@@ -70,14 +70,14 @@ def test_empty_output(union_of_intersections):
 def test_merge_fill_full(union_of_intersections):
     subsets = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     subsets = subset_to_Feature(subsets)
-    result = union_of_intersections.merge(subsets, num_features=9)
+    result = union_of_intersections.merge(subsets, num_features_to_select=9, fill=True)
     assert result == set([str(i) for i in range(1, 10)])
 
 
 def test_merge_fill(union_of_intersections):
     subsets = [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
     subsets = subset_to_Feature(subsets)
-    result = union_of_intersections.merge(subsets, num_features=4)
+    result = union_of_intersections.merge(subsets, num_features_to_select=4, fill=True)
     for i in ["2", "3", "4"]:
         assert i in result
     assert len(result) == 4
@@ -89,19 +89,19 @@ def test_borda_basic_functionality(borda_merger):
         [Feature("A", 9), Feature("B", 7), Feature("C", 5)],
         [Feature("A", 11), Feature("B", 6), Feature("C", 4)],
     ]
-    result = borda_merger.merge(subsets)
+    result = borda_merger.merge(subsets, num_features_to_select=3)
     assert result == ["A", "B", "C"]  # Expected ranking based on scores
 
 
 def test_borda_empty_input(borda_merger):
     subsets = []
     with pytest.raises(ValueError):
-        borda_merger.merge(subsets)
+        borda_merger.merge(subsets, num_features_to_select=3)
 
 
 def test_borda_single_score_list(borda_merger):
     subsets = [[Feature("A", 10), Feature("B", 8), Feature("C", 6)]]
-    result = borda_merger.merge(subsets)
+    result = borda_merger.merge(subsets, num_features_to_select=3)
     assert result == ["A", "B", "C"]  # Single list should return names in order
 
 
@@ -111,7 +111,7 @@ def test_borda_multiple_scores(borda_merger):
         [Feature("A", 9), Feature("B", 8), Feature("C", 6)],
         [Feature("A", 8), Feature("B", 6), Feature("C", 7)],
     ]
-    result = borda_merger.merge(subsets)
+    result = borda_merger.merge(subsets, num_features_to_select=3)
     assert result == ["A", "B", "C"]  # Expected merged ranking
 
 
@@ -121,7 +121,7 @@ def test_borda_k_features(borda_merger):
         [Feature("A", 9), Feature("B", 7), Feature("C", 5)],
         [Feature("A", 11), Feature("B", 6), Feature("C", 4)],
     ]
-    result = borda_merger.merge(subsets, k_features=2)
+    result = borda_merger.merge(subsets, num_features_to_select=2)
     assert result == ["A", "B"]  # Top 2 features
 
 
@@ -130,7 +130,7 @@ def test_borda_symmetry_property(borda_merger):
         [Feature("A", 10), Feature("B", 7), Feature("C", 6)],
         [Feature("A", 7), Feature("B", 10), Feature("C", 6)],
     ]
-    result = borda_merger.merge(subsets)
+    result = borda_merger.merge(subsets, num_features_to_select=3)
     assert result == ["A", "B", "C"]  # Symmetry test: A and B tie for top spots
 
 
@@ -177,7 +177,7 @@ def test_borda_big(borda_merger):
     subsets = [features1, features2]
 
     # Call the merge function
-    result = borda_merger.merge(subsets)
+    result = borda_merger.merge(subsets, num_features_to_select=10)
 
     # Assert the result matches the expected output
     assert result == expected_result

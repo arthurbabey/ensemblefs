@@ -1,3 +1,5 @@
+from typing import Dict, List, Union
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Lasso
@@ -6,43 +8,43 @@ from .base_selector import FeatureSelector
 
 
 class LassoSelector(FeatureSelector):
-    """
-    A feature selector using Lasso regression to compute feature scores.
-    """
+    """Feature selector using Lasso regression."""
 
     name = "Lasso"
 
-    def __init__(self, task, num_features_to_select=None, **kwargs):
+    def __init__(self, task: str, num_features_to_select: int, **kwargs: Dict) -> None:
+        """
+        Args:
+            task: ML task ('classification' or 'regression').
+            num_features_to_select: Number of features to select.
+            **kwargs: Additional arguments for Lasso.
+        """
         super().__init__(task, num_features_to_select)
         self.kwargs = kwargs
 
-    def compute_scores(self, X, y):
+    def compute_scores(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        y: Union[np.ndarray, pd.Series, pd.DataFrame],
+    ) -> np.ndarray:
         """
-        Computes feature scores using Lasso regression coefficients.
+        Computes feature scores using Lasso regression.
 
         Args:
-            X (DataFrame or ndarray): Training input samples.
-            y (Series or ndarray): Target values.
+            X: Training samples.
+            y: Target values.
 
         Returns:
-            list: Scores for each feature, ordered according to X.columns.
+            Feature scores based on absolute Lasso coefficients.
         """
-        # Ensure X is a DataFrame
         if isinstance(X, np.ndarray):
             X = pd.DataFrame(X, columns=[f"feature_{i}" for i in range(X.shape[1])])
 
-        # Ensure y is a 1D array
         if isinstance(y, np.ndarray) and y.ndim == 2:
             y = y.ravel()
 
-        # Set alpha with a default of 0.05, but allow override via kwargs
-        alpha = self.kwargs.get("alpha", 0.05)
-
-        # Initialize and fit Lasso
-        model = Lasso(alpha=alpha, **self.kwargs)
+        # set default alpha to 0.05 if not provided in kwargs
+        model = Lasso(alpha=self.kwargs.pop("alpha", 0.05), **self.kwargs)
         model.fit(X, y)
-
-        # Get absolute coefficients as feature importance scores
         scores = np.abs(model.coef_)
-
-        return list(scores)
+        return scores

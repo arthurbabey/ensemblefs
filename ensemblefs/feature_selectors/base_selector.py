@@ -1,58 +1,56 @@
+from typing import Tuple, Union
+
 import numpy as np
+import pandas as pd
 
 
 class FeatureSelector:
-    """
-    Base class for feature selection. This class provides the interface and common functionality for selecting features based on their scores.
+    """Base class for feature selection."""
 
-    Attributes:
-        task (str): Specifies the machine learning task, either 'classification' or 'regression'.
-        num_features_to_select (int): The number of top features to select based on importance.
-            If None, a default selection logic can be applied based on a percentage of features.
-    """
-
-    def __init__(self, task=None, num_features_to_select=None):
+    def __init__(self, task: str, num_features_to_select: int) -> None:
         """
-        Initializes the FeatureSelector with the specified task and number of features.
-
         Args:
-            task (str, optional): The machine learning task ("classification" or "regression"). Defaults to None.
-            num_features_to_select (int, optional): The number of features to select. If None, selection defaults to 10% of features.
+            task: ML task ('classification' or 'regression').
+            num_features_to_select: Number of top features to select.
         """
         self.task = task
         self.num_features_to_select = num_features_to_select
 
-    def select_features(self, X, y):
+    def select_features(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        y: Union[np.ndarray, pd.Series, pd.DataFrame],
+    ) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Selects the top features based on their computed scores.
+        Selects top features based on computed scores.
 
         Args:
-            X (array-like, shape = [n_samples, n_features]): Training input samples.
-            y (array-like, shape = [n_samples] or [n_samples, n_outputs]): Target values (class labels for classification, real numbers for regression).
+            X: Training samples, shape [n_samples, n_features].
+            y: Target values, shape [n_samples] or [n_samples, n_outputs].
 
         Returns:
-            tuple: A tuple containing the feature scores and the indices of the selected features.
+            A tuple containing feature scores and indices of the selected features.
         """
-        if self.num_features_to_select is None:
-            self.num_features_to_select = int(0.1 * X.shape[1])
-        feature_scores = self.compute_scores(X, y)
-        selected_features_indices = np.argsort(feature_scores)[::-1][
-            : self.num_features_to_select
-        ]
-        return feature_scores, selected_features_indices
+        scores = self.compute_scores(X, y)
+        indices = np.argsort(scores)[::-1][: self.num_features_to_select]
+        return scores, indices
 
-    def compute_scores(self, X, y):
+    def compute_scores(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        y: Union[np.ndarray, pd.Series, pd.DataFrame],
+    ) -> np.ndarray:
         """
-        Computes the scores for each feature. This method must be implemented by subclasses.
+        Computes feature scores (to be implemented by subclasses).
 
         Args:
-            X (array-like, shape = [n_samples, n_features]): Training input samples.
-            y (array-like, shape = [n_samples] or [n_samples, n_outputs]): Target values (class labels for classification, real numbers for regression).
+            X: Training samples.
+            y: Target values.
 
         Returns:
-            array-like: The scores for each feature.
+            An array of feature scores.
 
         Raises:
-            NotImplementedError: If the method is not implemented in a subclass.
+            NotImplementedError: If not implemented in a subclass.
         """
-        raise NotImplementedError("Subclasses must implement compute_scores method")
+        raise NotImplementedError("Subclasses must implement compute_scores")

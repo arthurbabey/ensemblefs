@@ -1,9 +1,9 @@
 import inspect
+from typing import Any, Dict, List, Tuple
 
-# Mapping of class identifiers to their import paths and initialization parameters.
-# Template:
-#     "identifier": ("module.path.ClassName", ["param1", "param2", ...])
-class_path_mapping = {
+# Mapping of class identifiers to their import paths and expected initialization parameters.
+# Template: "identifier": ("module.path.ClassName", ["param1", "param2", ...])
+class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
     "mae": (
         "ensemblefs.metrics.performance_metrics.MeanSquaredError",
         [],
@@ -72,10 +72,6 @@ class_path_mapping = {
         "ensemblefs.merging_strategies.borda_merger.BordaMerger",
         [],
     ),
-    "kemeny_young_merger": (
-        "ensemblefs.merging_strategies.kemeny_young_merger.KemenyYoungMerger",
-        [],
-    ),
     "union_of_intersections_merger": (
         "ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger",
         [],
@@ -83,15 +79,15 @@ class_path_mapping = {
 }
 
 
-def dynamic_import(class_path):
+def dynamic_import(class_path: str) -> type:
     """
     Dynamically imports a class based on its full class path.
 
     Args:
-        class_path (str): The full dot-separated path to the class, e.g., 'ensemblefs.module.ClassName'.
+        class_path: Full dot-separated path to the class (e.g., 'ensemblefs.module.ClassName').
 
     Returns:
-        type: The class object specified by class_path.
+        The class object specified by class_path.
     """
     components = class_path.split(".")
     module_path = ".".join(components[:-1])
@@ -100,15 +96,15 @@ def dynamic_import(class_path):
     return getattr(module, class_name)
 
 
-def get_class_info(identifier):
+def get_class_info(identifier: str) -> Tuple[type, List[str]]:
     """
     Retrieves the class object and its expected parameters based on a string identifier.
 
     Args:
-        identifier (str): A string representing a class identifier in `class_path_mapping`.
+        identifier: A string representing a class identifier defined in `class_path_mapping`.
 
     Returns:
-        tuple: (class object, list of expected parameters)
+        A tuple containing the class object and a list of expected parameter names.
 
     Raises:
         ValueError: If the identifier is not found in `class_path_mapping`.
@@ -120,29 +116,28 @@ def get_class_info(identifier):
     return cls, params
 
 
-def extract_params(cls, instance, params):
+def extract_params(cls: type, instance: Any, params: List[str]) -> Dict[str, Any]:
     """
     Extracts and returns the initialization parameters required by the class,
-    based on the class signature and the provided instance attributes.
+    based on the class signature and attributes of the provided instance.
 
     Args:
-        cls (type): The class object to be instantiated.
-        instance (object): The instance from which to pull attribute values for initialization.
-        params (list): A list of parameter names expected by the class.
+        cls: The class object to be instantiated.
+        instance: The instance from which attribute values are extracted.
+        params: A list of parameter names expected by the class.
 
     Returns:
-        dict: A dictionary of parameters (name-value pairs) for instantiating the class.
+        A dictionary of parameters (name-value pairs) for instantiating the class.
     """
     sig = inspect.signature(cls.__init__)
 
-    # Extract explicitly defined parameters
-    extracted_params = {
+    extracted_params: Dict[str, Any] = {
         param: getattr(instance, param)
         for param in params
         if param in sig.parameters and hasattr(instance, param)
     }
 
-    # If **kwargs exists in the class signature, capture additional params
+    # If **kwargs exists in the class signature, include additional parameters.
     if any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
         additional_params = {
             param: getattr(instance, param)

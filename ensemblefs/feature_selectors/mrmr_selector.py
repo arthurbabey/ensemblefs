@@ -1,3 +1,5 @@
+from typing import Dict, List, Union
+
 import numpy as np
 import pandas as pd
 from mrmr import mrmr_classif, mrmr_regression
@@ -6,67 +8,54 @@ from .base_selector import FeatureSelector
 
 
 class MRMRSelector(FeatureSelector):
-    """
-    A feature selector using Minimum Redundancy Maximum Relevance (MRMR) for feature scoring.
-    This class extends the FeatureSelector base class and computes a score for each feature.
-
-    Attributes:
-        task (str): Specifies the machine learning task, either 'classification' or 'regression'.
-        kwargs (dict): Additional keyword arguments to pass to mRMR functions.
-    """
+    """Feature selector using Minimum Redundancy Maximum Relevance (MRMR)."""
 
     name = "MRMR"
 
-    def __init__(self, task, num_features_to_select=None, **kwargs):
+    def __init__(self, task: str, num_features_to_select: int, **kwargs: Dict) -> None:
         """
-        Initializes the MRMRSelector with the specified task and additional parameters.
-
         Args:
-            task (str): The machine learning task ("classification" or "regression").
-            num_features_to_select (int, optional): The number of features to select.
-            **kwargs: Arbitrary keyword arguments that are passed to mrmr_classif or mrmr_regression.
+            task: ML task ('classification' or 'regression').
+            num_features_to_select: Number of features to select.
+            **kwargs: Additional arguments for mRMR functions.
         """
         super().__init__(task, num_features_to_select)
         self.kwargs = kwargs
 
-    def compute_scores(self, X, y):
+    def compute_scores(
+        self, X: Union[np.ndarray, pd.DataFrame], y: Union[np.ndarray, pd.Series]
+    ) -> np.ndarray:
         """
         Computes feature scores using the MRMR algorithm.
 
         Args:
-            X (array-like or DataFrame): Training input samples.
-            y (array-like or Series): Target values.
+            X: Training samples.
+            y: Target values.
 
         Returns:
-            list: A list of scores, one for each feature, in the same order as the columns of X.
+            MRMR scores for each feature.
         """
-        # Ensure X is a DataFrame
         if isinstance(X, np.ndarray):
             X = pd.DataFrame(X, columns=[f"feature_{i}" for i in range(X.shape[1])])
         elif not isinstance(X, pd.DataFrame):
             raise TypeError("X must be a pandas DataFrame or a NumPy array.")
 
-        # Ensure y is a Series
         if isinstance(y, np.ndarray):
             y = pd.Series(y)
 
-        # Select MRMR function based on task
-        if self.task == "classification":
-            _, relevance, redundancy = mrmr_classif(
-                X, y, K=X.shape[1], return_scores=True, **self.kwargs
-            )
-        elif self.task == "regression":
-            _, relevance, redundancy = mrmr_regression(
-                X, y, K=X.shape[1], return_scores=True, **self.kwargs
-            )
-        else:
-            raise ValueError("Task must be 'classification' or 'regression'")
+        score_func = {
+            "classification": mrmr_classif,
+            "regression": mrmr_regression,
+        }.get(self.task)
+        if score_func is None:
+            raise ValueError("Task must be 'classification' or 'regression'.")
 
-        # Compute MRMR scores (Relevance / Redundancy)
-        mrmr_scores = relevance / redundancy.mean(axis=1).replace(
-            0, np.nan
-        )  # Avoid division by zero
-        mrmr_scores = mrmr_scores.fillna(0)  # Replace NaNs with 0 if needed
+        _, relevance, redundancy = score_func(
+            X, y, K=X.shape[1], return_scores=True, **self.kwargs
+        )
 
-        # Return scores in the same order as X.columns
-        return [mrmr_scores.get(feature, 0) for feature in X.columns]
+        # Compute MRMR scores (Relevance / Mean Redundancy), handling division by zero
+        mrmr_scores = relevance / redundancy.mean(axis=1).replace(0, np.nan)
+        mrmr_scores = mrmr_scores.fillna(0)
+        scores = np.array([mrmr_scores.get(feature, 0) for feature in X.columns])
+        return scores

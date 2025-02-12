@@ -1,3 +1,6 @@
+from typing import Dict, Union
+
+import numpy as np
 from sklearn.ensemble import (
     GradientBoostingClassifier,
     GradientBoostingRegressor,
@@ -18,54 +21,75 @@ from sklearn.metrics import (
 
 
 class BaseMetric:
-    def __init__(self, name, task="classification"):
+    """Base class for computing evaluation metrics."""
+
+    def __init__(self, name: str, task: str) -> None:
         """
-        Initialize BaseMetric with a task.
         Args:
-            name (str): Name of the metric.
-            task (str): Task type, either 'classification' or 'regression'.
+            name: Metric name.
+            task: Task type ('classification' or 'regression').
         """
+        if task not in {"classification", "regression"}:
+            raise ValueError("Task must be 'classification' or 'regression'.")
+
         self.name = name
         self.task = task
-        self.classifiers = self._initialize_models()
+        self.models = self._initialize_models()
 
-    def _initialize_models(self):
-        """
-        Initialize models based on the task.
-        Returns:
-            dict: A dictionary of models appropriate for the task.
-        """
-        if self.task == "classification":
-            return {
+    def _initialize_models(
+        self,
+    ) -> Dict[
+        str,
+        Union[
+            RandomForestClassifier,
+            LogisticRegression,
+            GradientBoostingClassifier,
+            RandomForestRegressor,
+            LinearRegression,
+            GradientBoostingRegressor,
+        ],
+    ]:
+        """Initialize task-specific models."""
+        return {
+            "classification": {
                 "Random Forest": RandomForestClassifier(),
-                "Logistic Regression": LogisticRegression(
-                    max_iter=1000, solver="lbfgs", penalty="l2"
-                ),
+                "Logistic Regression": LogisticRegression(max_iter=1000),
                 "Gradient Boosting": GradientBoostingClassifier(),
-            }
-        elif self.task == "regression":
-            return {
+            },
+            "regression": {
                 "Random Forest": RandomForestRegressor(),
                 "Linear Regression": LinearRegression(),
                 "Gradient Boosting": GradientBoostingRegressor(),
-            }
-        else:
-            raise ValueError("Invalid task. Choose 'classification' or 'regression'.")
+            },
+        }[self.task]
 
-    def train_and_predict(self, X_train, y_train, X_test, y_test):
+    def train_and_predict(
+        self,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
+    ) -> Dict[str, Dict[str, Union[np.ndarray, None]]]:
         """
-        Train all models on X_train, y_train and generate predictions.
-        Returns a dictionary with predictions for regression and
-        predictions + probabilities for classification.
+        Train all models and generate predictions.
+
+        Args:
+            X_train: Training data.
+            y_train: Training labels.
+            X_test: Test data.
+            y_test: Test labels.
+
+        Returns:
+            Dictionary containing predictions and probabilities.
         """
         results = {}
 
-        for model_name, model in self.classifiers.items():
+        for model_name, model in self.models.items():
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
-            probabilities = None
-            if self.task == "classification":
-                probabilities = model.predict_proba(X_test)
+            probabilities = (
+                model.predict_proba(X_test) if self.task == "classification" else None
+            )
             results[model_name] = {
                 "predictions": predictions,
                 "probabilities": probabilities,
@@ -73,147 +97,154 @@ class BaseMetric:
 
         return results
 
-    def compute(self, X_train, y_train, X_test, y_test):
+    def compute(
+        self,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
+    ) -> float:
         """
-        Abstract method to compute the metric.
-        Must be implemented in child classes.
+        Compute the metric. Must be implemented in child classes.
+
+        Args:
+            X_train: Training data.
+            y_train: Training labels.
+            X_test: Test data.
+            y_test: Test labels.
+
+        Returns:
+            Computed metric value.
+
+        Raises:
+            NotImplementedError: If not implemented in subclasses.
         """
-        raise NotImplementedError("This method should be overridden in child classes.")
+        raise NotImplementedError("This method must be overridden in subclasses.")
 
 
-class R2Score(BaseMetric):
-    def __init__(self):
-        super().__init__(name="R2 Score", task="regression")
+class RegressionMetric(BaseMetric):
+    """Base class for regression metrics."""
 
-    def compute(self, X_train, y_train, X_test, y_test):
+    def __init__(self, name: str) -> None:
+        super().__init__(name, task="regression")
+
+    def compute(
+        self,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
+    ) -> float:
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
+        return np.mean(
+            [self._metric_func(y_test, res["predictions"]) for res in results.values()]
+        )
 
-        for model_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(r2_score(y_test, predictions))
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        """Metric function to be overridden by subclasses."""
+        raise NotImplementedError("This method must be overridden in subclasses.")
 
 
-class MeanAbsoluteError(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Mean Absolute Error", task="regression")
+class R2Score(RegressionMetric):
+    def __init__(self) -> None:
+        super().__init__("R2 Score")
 
-    def compute(self, X_train, y_train, X_test, y_test):
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        return r2_score(y_true, y_pred)
+
+
+class MeanAbsoluteError(RegressionMetric):
+    def __init__(self) -> None:
+        super().__init__("Mean Absolute Error")
+
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        return -mean_absolute_error(y_true, y_pred)  # Return negative MAE
+
+
+class MeanSquaredError(RegressionMetric):
+    def __init__(self) -> None:
+        super().__init__("Mean Squared Error")
+
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        return -mean_squared_error(y_true, y_pred)  # Return negative MSE
+
+
+class ClassificationMetric(BaseMetric):
+    """Base class for classification metrics."""
+
+    def __init__(self, name: str) -> None:
+        super().__init__(name, task="classification")
+
+    def compute(
+        self,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
+    ) -> float:
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
+        return np.mean(
+            [
+                self._metric_func(y_test, res["predictions"], res.get("probabilities"))
+                for res in results.values()
+            ]
+        )
 
-        for model_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(mean_absolute_error(y_test, predictions))
-
-        return -sum(metric_values) / len(metric_values)  # Return negative MAE
-
-
-class MeanSquaredError(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Mean Squared Error", task="regression")
-
-    def compute(self, X_train, y_train, X_test, y_test):
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for model_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(mean_squared_error(y_test, predictions))
-
-        return -sum(metric_values) / len(metric_values)  # Return negative MSE
+    def _metric_func(
+        self,
+        y_true: np.ndarray,
+        y_pred: np.ndarray,
+        y_proba: Union[np.ndarray, None] = None,
+    ) -> float:
+        """Metric function to be overridden by subclasses."""
+        raise NotImplementedError("This method must be overridden in subclasses.")
 
 
-# Child Classes
-class LogLoss(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Log Loss")
+class LogLoss(ClassificationMetric):
+    def __init__(self) -> None:
+        super().__init__("Log Loss")
 
-    def compute(self, X_train, y_train, X_test, y_test):
-        """
-        Compute the average Log Loss across all classifiers.
-        """
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for clf_name, result in results.items():
-            probabilities = result["probabilities"]
-            metric_values.append(log_loss(y_test, probabilities))
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(
+        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: np.ndarray
+    ) -> float:
+        return log_loss(y_true, y_proba)
 
 
-class F1Score(BaseMetric):
-    def __init__(self):
-        super().__init__(name="F1Score")
+class F1Score(ClassificationMetric):
+    def __init__(self) -> None:
+        super().__init__("F1 Score")
 
-    def compute(self, X_train, y_train, X_test, y_test):
-        """
-        Compute the average Macro F1 Score across all classifiers.
-        """
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for clf_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(f1_score(y_test, predictions, average="macro"))
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(
+        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
+    ) -> float:
+        return f1_score(y_true, y_pred, average="macro")
 
 
-class Accuracy(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Accuracy")
+class Accuracy(ClassificationMetric):
+    def __init__(self) -> None:
+        super().__init__("Accuracy")
 
-    def compute(self, X_train, y_train, X_test, y_test):
-        """
-        Compute the average Accuracy across all classifiers.
-        """
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for clf_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(accuracy_score(y_test, predictions))
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(
+        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
+    ) -> float:
+        return accuracy_score(y_true, y_pred)
 
 
-class PrecisionScore(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Precision Score")
+class PrecisionScore(ClassificationMetric):
+    def __init__(self) -> None:
+        super().__init__("Precision Score")
 
-    def compute(self, X_train, y_train, X_test, y_test):
-        """
-        Compute the average Precision Score across all classifiers.
-        """
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for clf_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(
-                precision_score(y_test, predictions, average="macro", zero_division=0)
-            )
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(
+        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
+    ) -> float:
+        return precision_score(y_true, y_pred, average="macro", zero_division=0)
 
 
-class RecallScore(BaseMetric):
-    def __init__(self):
-        super().__init__(name="Recall Score")
+class RecallScore(ClassificationMetric):
+    def __init__(self) -> None:
+        super().__init__("Recall Score")
 
-    def compute(self, X_train, y_train, X_test, y_test):
-        """
-        Compute the average Recall Score across all classifiers.
-        """
-        results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        metric_values = []
-
-        for clf_name, result in results.items():
-            predictions = result["predictions"]
-            metric_values.append(recall_score(y_test, predictions, average="macro"))
-
-        return sum(metric_values) / len(metric_values)
+    def _metric_func(
+        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
+    ) -> float:
+        return recall_score(y_true, y_pred, average="macro")

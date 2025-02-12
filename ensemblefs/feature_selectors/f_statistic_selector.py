@@ -1,54 +1,49 @@
+from typing import Dict, Union
+
+import numpy as np
+import pandas as pd
 from sklearn.feature_selection import f_classif, f_regression
 
 from .base_selector import FeatureSelector
 
 
 class FStatisticSelector(FeatureSelector):
-    """
-    A feature selector using F-statistic scores for feature selection.
-    This class extends the FeatureSelector base class and uses F-statistic scores to evaluate features.
-
-    Attributes:
-        task (str): Specifies the machine learning task, either 'classification' or 'regression'.
-        num_features_to_select (int): The number of top features to select based on importance.
-            If None, a default selection logic can be applied based on a percentage of features.
-        kwargs (dict): Additional keyword arguments to pass to the scoring function.
-    """
+    """Feature selector using F-statistic scores."""
 
     name = "FStatistic"
 
-    def __init__(self, task="classification", num_features_to_select=None, **kwargs):
+    def __init__(self, task: str, num_features_to_select: int, **kwargs: Dict) -> None:
         """
-        Initializes the FStatisticSelector with the specified task, number of features, and additional parameters.
-
         Args:
-            task (str): The machine learning task ("classification" or "regression"). Defaults to "classification".
-            num_features_to_select (int, optional): The number of features to select. If None, selection defaults to 10% of features.
-            **kwargs: Arbitrary keyword arguments that are passed to the scoring function.
+            task: ML task ('classification' or 'regression').
+            num_features_to_select: Number of features to select.
+            **kwargs: Additional arguments for the scoring function.
         """
         super().__init__(task, num_features_to_select)
         self.kwargs = kwargs
 
-    def compute_scores(self, X, y):
+    def compute_scores(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        y: Union[np.ndarray, pd.Series, pd.DataFrame],
+    ) -> np.ndarray:
         """
-        Computes the F-statistic scores for feature selection.
+        Computes F-statistic scores.
 
         Args:
-            X (array-like, shape = [n_samples, n_features]): Training input samples.
-            y (array-like, shape = [n_samples] or [n_samples, n_outputs]): Target values (class labels for classification, real numbers for regression).
+            X: Training samples.
+            y: Target values.
 
         Returns:
-            array-like: The F-statistic scores for each feature.
+            F-statistic scores for each feature.
 
         Raises:
-            ValueError: If the task is not 'classification' or 'regression'.
+            ValueError: If task is not 'classification' or 'regression'.
         """
-        if self.task == "classification":
-            score_func = f_classif
-        elif self.task == "regression":
-            score_func = f_regression
-        else:
-            raise ValueError("Task must be 'classification' or 'regression'")
-
-        # Pass additional keyword arguments to the score function
-        return score_func(X, y, **self.kwargs)[0]
+        score_func = {"classification": f_classif, "regression": f_regression}.get(
+            self.task
+        )
+        if score_func is None:
+            raise ValueError("Task must be 'classification' or 'regression'.")
+        scores, _ = score_func(X, y, **self.kwargs)
+        return scores

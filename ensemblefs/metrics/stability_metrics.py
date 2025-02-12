@@ -1,20 +1,16 @@
+from typing import List
+
 from ensemblefs.core.novovicova import StabilityNovovicova
 
 
-def compute_stability_metrics(features_list):
+def compute_stability_metrics(features_list: List[List[str]]) -> float:
     """
-    Computes the stability metrics using the StabilityNovovicova class.
+    Computes stability metrics using StabilityNovovicova.
 
     Args:
-        features_list (list of lists): Each sublist represents features selected in one dataset.
+        features_list: A list of lists, where each sublist contains selected feature names.
 
     Returns:
-        float: The computed stability measure SH(S).
+        The computed stability measure SH(S).
     """
-    # Initialize the StabilityNovovicova class
-    stability_calculator = StabilityNovovicova(features_list)
-
-    # Compute the stability
-    result = stability_calculator.compute_stability()
-
-    return result
+    return StabilityNovovicova(features_list).compute_stability()

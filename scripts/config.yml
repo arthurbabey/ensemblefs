@@ -20,7 +20,8 @@ pipeline:
     - random_forest_selector
     - svm_selector
     - xgboost_selector
-    - rfe_rf_selector
+    - laso_selector
+    - mrmr_selector
     value:
     - f_statistic_selector
     - mutual_info_selector
@@ -32,7 +33,6 @@ pipeline:
       merging strategy.
     valid_values:
     - union_of_intersections_merger
-    - kemeny_young_merger
     - borda_merger
     value: union_of_intersections_merger
   num_repeats:
@@ -68,11 +68,10 @@ pipeline:
     - classification
     value: classification
   num_features_to_select:
-    description: Number of features to select, if None threshold is set to 10%
+    description: Number of features to select
     valid_values:
     - int
-    - None
-    value: NUMBERS_OF_FEATURES
+    value: 100
   n_jobs:
     description: to define number of cores for sklearn module
     valid_values:

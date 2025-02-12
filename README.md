@@ -1,17 +1,26 @@
-# ensemblefs [![tests](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml) [![Documentation](https://github.com/arthurbabey/ensemblefs/actions/workflows/doc.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/doc.yml)
+# ensemblefs
 
-* [Documentation](https://arthurbabey.github.io/ensemblefs/)
+[Documentation](https://arthurbabey.github.io/ensemblefs/)
 
 ## Overview
 
-The **ensemblefs package** is a tool designed to automate feature selection with multi-objective optimization, using an ensemble approach. It combines multiple feature selection methods, assesses each combination across several repetitions, and uses Pareto optimization to balance performance and stability. You can use this pipeline as a Python library or interact through a command-line interface (CLI) with `efs-pipeline`, which runs the main script `scripts/main.py`.
+**ensemblefs** is a feature selection library that leverages an ensemble-based approach to optimize both predictive performance and stability. By combining multiple feature selection methods, merging strategies, and evaluation metrics, it provides a highly flexible and tunable pipeline for both classification and regression tasks. The package automates feature selection across multiple iterations and uses Pareto optimization to identify the best feature subsets.
+
+Users can define their feature selection process by:
+- Selecting feature selection methods from predefined options or implementing custom ones.
+- Choosing merging strategies to aggregate feature rankings.
+- Specifying performance metrics to evaluate selected features.
+- Configuring the number of features to select and the number of repetitions.
+- Working with either **classification** or **regression** problems.
+
+The library allows defining feature selectors, merging strategies, and metrics either as **class instances** or as **string identifiers**, which act as placeholders for built-in methods. The framework is modular and can be easily extended by adding new selection algorithms or merging strategies.
 
 ---
 
 ## Requirements
 
 - **Python** 3.9 or higher
-- **Dependencies**: All required packages are listed in the `pyproject.toml` file and will be installed automatically.
+- **Dependencies**: Automatically installed from `pyproject.toml`.
 
 ---
 
@@ -19,64 +28,40 @@ The **ensemblefs package** is a tool designed to automate feature selection with
 
 ### From Source
 
-To install the package from source, follow these steps:
+To install the package from source, run:
 
-1. Install the package directly from the repository:
+```bash
+pip install git+https://github.com/arthurbabey/ensemblefs.git
+```
 
-   ```bash
-   pip install git+https://github.com/arthurbabey/ensemblefs.git
-   ```
+Alternatively, clone the repository and install locally:
 
-2. Alternatively, clone the repository and install locally:
-
-   ```bash
-   git clone https://github.com/arthurbabey/ensemblefs.git
-   cd ensemblefs
-   pip install .
-   ```
-
-   Or, if you are planning to modify the source code and want changes to be reflected immediately without reinstalling, you can install the package in **editable mode**:
-
-   ```bash
-   pip install -e .
-   ```
-
-In **editable mode**, any modifications to the source code will take effect immediately, making it ideal for development.
+```bash
+git clone https://github.com/arthurbabey/ensemblefs.git
+cd ensemblefs
+pip install .
+```
 
 ---
 
-> **Note**: This project will soon be available on [PyPI](https://pypi.org/), allowing for easy installation with:
+## Using the Library
 
-   ```bash
-   pip install ensemblefs
-   ```
+### 1. Feature Selection Pipeline
 
----
+The core of **ensemblefs** is the `FeatureSelectionPipeline`, which provides a fully configurable workflow for feature selection. Users can specify:
+- Feature selection methods
+- Merging strategy
+- Evaluation metrics
+- Task type (classification or regression)
+- Number of features to select
+- Number of repetitions
 
-## Code Structure
-
-- **`core/`**: Contains core modules for data processing, metrics, and algorithm-specific logic.
-- **`feature_selection_pipeline.py`**: Defines the main feature selection pipeline logic. The `.run()` method is the primary entry point.
-- **`feature_selectors/`**: Defines feature selection methods like F-statistic, mutual information, RandomForest, and SVM.
-- **`merging_strategies/`**: Contains merging strategies such as Borda count and union of intersections.
-
----
-
-## Using the Package
-
-### 1. Using the Library
-
-To use as a library, import and instantiate the main functionality in `ensemblefs/feature_selection_pipeline.py`. The `.run()` method executes the pipeline using specific parameters. Refer to the [tutorials](https://github.com/arthurbabey/ensemblefs/tree/main/tutorials) or [documentation](https://arthurbabey.github.io/ensemblefs/) for parameter details.
+#### Example Usage
 
 ```python
 from ensemblefs import FeatureSelectionPipeline
 
-# Example usage
-fs_methods = [
-    "f_statistic_selector",
-    "random_forest_selector",
-    "svm_selector"
-]
+fs_methods = ["f_statistic_selector", "random_forest_selector", "svm_selector"]
 merging_strategy = "union_of_intersections_merger"
 pipeline = FeatureSelectionPipeline(
     data=data,
@@ -89,39 +74,34 @@ pipeline = FeatureSelectionPipeline(
 results = pipeline.run()
 ```
 
+This will run feature selection, merge results using the chosen strategy, and return the best-selected features.
+
+### 2. Extensibility
+
+**ensemblefs** is designed to be easily extended. Users can implement custom:
+- **Feature selection methods**: Define a new feature selector class and integrate it into the pipeline.
+- **Merging strategies**: Implement a custom strategy to aggregate selected features.
+- **Metrics**: Add new evaluation metrics tailored to specific tasks.
+
+New methods can be used directly in the pipeline by passing the class or a corresponding identifier.
+
 ---
 
-### 2. Using the Command Line Interface (CLI)
+## Using the CLI
 
-Once the package is installed, you can run the pipeline using the `efs-pipeline` command from the command line. This command executes `scripts/main.py`, which utilizes the parameters defined in the `scripts/config.yaml` file. This configuration file contains **all the necessary settings for the pipeline**, including experiment details, preprocessing options, and feature selection parameters. It shows valid values and a function validate your values before running the experiment.
+Once installed, the pipeline can also be run from the command line using:
 
 ```bash
 efs-pipeline
 ```
 
-By default, the script will use the `config.yaml` file located in the `scripts/` directory. However, if you wish to override the default configuration, you can copy `scripts/config.yaml` to your working directory, modify it as needed, and specify your custom configuration file:
+This command executes `scripts/main.py` using parameters from `scripts/config.yaml`. Users can specify a different config file:
 
 ```bash
 efs-pipeline path/to/your_config.yaml
 ```
 
-#### Configuration Details
-
-The pipeline relies primarily on the **pipeline** section of the `config.yaml` file. While the **experiment** and **preprocessing** sections are optional, including them helps to better organize and manage the pipeline execution.
-
-- The **experiment** section specifies the experiment name, paths to the raw data, and the results directory.
-- The **preprocessing** section defines preprocessing steps like normalization or missing value handling.
-- The **pipeline** section configures the feature selection methods, merging strategy, task type, and other parameters for the pipeline run.
-
-If you don’t include the experiment section at all, the pipeline will still function, but you must explicitly provide a processed dataset as a second argument. For example, in the following command, `path/to/your_config.yaml` points to your configuration file, and `/path/to/processed_data.csv` is the preprocessed dataset:
-
-```bash
-efs-pipeline path/to/your_config.yaml /path/to/processed_data.csv
-```
-
-#### Example `config.yaml`
-
-Here is an example of how a `config.yaml` file may look. The **pipeline** section is required, while **experiment** and **preprocessing** are optional but recommended for easier management:
+### Example `config.yaml`
 
 ```yaml
 experiment:
@@ -141,17 +121,29 @@ pipeline:
   num_features_to_select: 10
 ```
 
-#### Results
+### Results
 
-Upon execution, the script creates a `results` directory at the location specified in `config.yaml` under `results_path`, organized by the experiment name. For example, results will be stored at:
-
-```
-results/example_experiment/
-```
-
-Within this directory, the pipeline will save two files:
-
-- A **text file** containing a summary of the pipeline run.
+The results are saved in a structured directory under `results/example_experiment/`, including:
+- A **text file** summarizing the pipeline run.
 - A **CSV file** containing the final results.
 
-By adding the **experiment** and **preprocessing sections**, you can better manage multiple experiments and reuse common preprocessing steps across different runs.
+---
+
+## Code Structure
+
+- **`core/`**: Core modules for data processing, metrics, and stability computation.
+- **`feature_selection_pipeline.py`**: Defines the main feature selection workflow.
+- **`feature_selectors/`**: Implements feature selection methods (e.g., F-statistic, mutual information, RandomForest, SVM).
+- **`merging_strategies/`**: Implements merging strategies such as Borda count and union of intersections.
+
+---
+
+## Contributing
+
+Contributions are welcome! If you have ideas for improving **ensemblefs**, feel free to open an issue or submit a pull request.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
