@@ -25,7 +25,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install .[docs, build]
+        pip install ".[docs,build]"
+
 
     - name: Ensure root directory is included in PYTHONPATH
       run: |
