@@ -1,5 +1,6 @@
 # ensemblefs
 
+[![tests](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml)  
 [Documentation](https://arthurbabey.github.io/ensemblefs/)
 
 ## Overview
