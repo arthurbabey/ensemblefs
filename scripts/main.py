@@ -51,11 +51,11 @@ def main() -> None:
         help="Path to the processed data file. If not provided, a raw dataset should be defined in the config file.",
     )
     args = parser.parse_args()
-    config_path: str = args.config
-    dataset_arg: Optional[str] = args.data
+    config_path = args.config
+    dataset_arg = args.data
 
     # Load the configuration
-    config: Dict[str, Any] = load_config(config_path)
+    config = load_config(config_path)
 
     # Validate configuration sections
     config_experience, config_preprocessing, config_pipeline = read_config(config)
@@ -67,9 +67,7 @@ def main() -> None:
 
     # Determine data path if not provided as argument
     if dataset_arg is None:
-        data_path: Optional[str] = config_experience.get("data_path", {}).get(
-            "value", None
-        )
+        data_path = config_experience.get("data_path", {}).get("value", None)
         if data_path is None:
             raise ValueError(
                 "No data path provided. Please specify a processed data file or a raw data path in the config."
@@ -77,16 +75,14 @@ def main() -> None:
     else:
         data_path = dataset_arg
 
-    metadata_path: Optional[str] = config_experience.get("metadata_path", {}).get(
-        "value", None
-    )
-    result_path: str = config_experience.get("result_path", {}).get(
+    metadata_path = config_experience.get("metadata_path", {}).get("value", None)
+    result_path = config_experience.get("result_path", {}).get(
         "value", "default_results"
     )
-    experiment_name: str = config_experience.get("experiment_name", {}).get(
+    experiment_name = config_experience.get("experiment_name", {}).get(
         "value", "default_experiment"
     )
-    experiment_folder: str = os.path.join(result_path, experiment_name)
+    experiment_folder = os.path.join(result_path, experiment_name)
     os.makedirs(experiment_folder, exist_ok=True)
 
     # Copy the configuration file into the experiment folder for reproducibility.
@@ -131,7 +127,7 @@ def main() -> None:
         merging_strategy=merging_strategy,
         num_repeats=num_repeats,
         num_features_to_select=num_features_to_select,
-        # metrics=metrics,  # Uncomment if metrics are required
+        metrics=metrics,
         task=task,
         random_state=random_state,
         n_jobs=n_jobs,
