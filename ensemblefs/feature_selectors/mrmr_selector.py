@@ -51,7 +51,7 @@ class MRMRSelector(FeatureSelector):
             raise ValueError("Task must be 'classification' or 'regression'.")
 
         _, relevance, redundancy = score_func(
-            X, y, K=X.shape[1], return_scores=True, **self.kwargs
+            X, y, K=self.num_features_to_select, return_scores=True, **self.kwargs
         )
 
         # Compute MRMR scores (Relevance / Mean Redundancy), handling division by zero
