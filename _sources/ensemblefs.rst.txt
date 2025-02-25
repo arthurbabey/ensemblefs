@@ -1,0 +1,40 @@
+ensemblefs package
+==================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ensemblefs.core
+   ensemblefs.feature_selectors
+   ensemblefs.merging_strategies
+   ensemblefs.metrics
+
+Submodules
+----------
+
+ensemblefs.feature\_selection\_pipeline module
+----------------------------------------------
+
+.. automodule:: ensemblefs.feature_selection_pipeline
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.utils module
+-----------------------
+
+.. automodule:: ensemblefs.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: ensemblefs
+   :members:
+   :show-inheritance:
+   :undoc-members:

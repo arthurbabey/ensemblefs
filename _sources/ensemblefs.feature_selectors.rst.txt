@@ -1,0 +1,77 @@
+ensemblefs.feature\_selectors package
+=====================================
+
+Submodules
+----------
+
+ensemblefs.feature\_selectors.base\_selector module
+---------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.base_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.f\_statistic\_selector module
+-----------------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.f_statistic_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.lasso\_selector module
+----------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.lasso_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.mrmr\_selector module
+---------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.mrmr_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.mutual\_info\_selector module
+-----------------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.mutual_info_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.random\_forest\_selector module
+-------------------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.random_forest_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.svm\_selector module
+--------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.svm_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.feature\_selectors.xgboost\_selector module
+------------------------------------------------------
+
+.. automodule:: ensemblefs.feature_selectors.xgboost_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: ensemblefs.feature_selectors
+   :members:
+   :show-inheritance:
+   :undoc-members:

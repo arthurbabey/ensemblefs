@@ -1,0 +1,1101 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ensemblefs package &mdash; ensemblefs 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ensemblefs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ensemblefs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ensemblefs package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ensemblefs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ensemblefs-package">
+<h1>ensemblefs package<a class="headerlink" href="#ensemblefs-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ensemblefs.core.html">ensemblefs.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#module-ensemblefs.core.data_processor">ensemblefs.core.data_processor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor"><code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor.__init__"><code class="docutils literal notranslate"><span class="pre">DataProcessor.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor.preprocess_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor.preprocess_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._load_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor._load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata"><code class="docutils literal notranslate"><span class="pre">DataProcessor._merge_data_and_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._rename_target_column"><code class="docutils literal notranslate"><span class="pre">DataProcessor._rename_target_column()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._drop_columns"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_columns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._drop_missing_values"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_missing_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables"><code class="docutils literal notranslate"><span class="pre">DataProcessor._encode_categorical_variables()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor.get_label_mapping"><code class="docutils literal notranslate"><span class="pre">DataProcessor.get_label_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features"><code class="docutils literal notranslate"><span class="pre">DataProcessor._scale_numerical_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset"><code class="docutils literal notranslate"><span class="pre">DataProcessor._filtered_time_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor._fill_nan"><code class="docutils literal notranslate"><span class="pre">DataProcessor._fill_nan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.data_processor.DataProcessor.flatten_time"><code class="docutils literal notranslate"><span class="pre">DataProcessor.flatten_time()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#module-ensemblefs.core.feature">ensemblefs.core.feature module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.feature.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.feature.Feature.__init__"><code class="docutils literal notranslate"><span class="pre">Feature.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.feature.Feature.set_score"><code class="docutils literal notranslate"><span class="pre">Feature.set_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.feature.Feature.set_selected"><code class="docutils literal notranslate"><span class="pre">Feature.set_selected()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#module-ensemblefs.core.novovicova">ensemblefs.core.novovicova module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.novovicova.StabilityNovovicova"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.novovicova.StabilityNovovicova.__init__"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.novovicova.StabilityNovovicova._validate_inputs"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova._validate_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.novovicova.StabilityNovovicova.compute_stability"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.compute_stability()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#module-ensemblefs.core.pareto">ensemblefs.core.pareto module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.__init__"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_dominate_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_isdominated_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.compute_dominance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.get_results"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.get_results()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.core.html#module-ensemblefs.core">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor"><code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor.__init__"><code class="docutils literal notranslate"><span class="pre">DataProcessor.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._drop_columns"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_columns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._drop_missing_values"><code class="docutils literal notranslate"><span class="pre">DataProcessor._drop_missing_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._encode_categorical_variables"><code class="docutils literal notranslate"><span class="pre">DataProcessor._encode_categorical_variables()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._fill_nan"><code class="docutils literal notranslate"><span class="pre">DataProcessor._fill_nan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._filtered_time_dataset"><code class="docutils literal notranslate"><span class="pre">DataProcessor._filtered_time_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._load_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor._load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._merge_data_and_metadata"><code class="docutils literal notranslate"><span class="pre">DataProcessor._merge_data_and_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._rename_target_column"><code class="docutils literal notranslate"><span class="pre">DataProcessor._rename_target_column()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor._scale_numerical_features"><code class="docutils literal notranslate"><span class="pre">DataProcessor._scale_numerical_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor.flatten_time"><code class="docutils literal notranslate"><span class="pre">DataProcessor.flatten_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor.get_label_mapping"><code class="docutils literal notranslate"><span class="pre">DataProcessor.get_label_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.DataProcessor.preprocess_data"><code class="docutils literal notranslate"><span class="pre">DataProcessor.preprocess_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.Feature.__init__"><code class="docutils literal notranslate"><span class="pre">Feature.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.Feature.set_score"><code class="docutils literal notranslate"><span class="pre">Feature.set_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.Feature.set_selected"><code class="docutils literal notranslate"><span class="pre">Feature.set_selected()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.StabilityNovovicova"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.StabilityNovovicova.__init__"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.StabilityNovovicova._validate_inputs"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova._validate_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.StabilityNovovicova.compute_stability"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova.compute_stability()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis.__init__"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis.compute_dominance"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.compute_dominance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis.get_results"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.get_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis.group_dominate_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_dominate_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.core.html#ensemblefs.core.ParetoAnalysis.group_isdominated_count"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis.group_isdominated_count()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ensemblefs.feature_selectors.html">ensemblefs.feature_selectors package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.base_selector">ensemblefs.feature_selectors.base_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.select_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.compute_scores()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.f_statistic_selector">ensemblefs.feature_selectors.f_statistic_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.name"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.lasso_selector">ensemblefs.feature_selectors.lasso_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.lasso_selector.LassoSelector"><code class="docutils literal notranslate"><span class="pre">LassoSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.lasso_selector.LassoSelector.name"><code class="docutils literal notranslate"><span class="pre">LassoSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.lasso_selector.LassoSelector.__init__"><code class="docutils literal notranslate"><span class="pre">LassoSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.lasso_selector.LassoSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">LassoSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.lasso_selector.LassoSelector.select_features"><code class="docutils literal notranslate"><span class="pre">LassoSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.mrmr_selector">ensemblefs.feature_selectors.mrmr_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mrmr_selector.MRMRSelector"><code class="docutils literal notranslate"><span class="pre">MRMRSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mrmr_selector.MRMRSelector.name"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mrmr_selector.MRMRSelector.__init__"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mrmr_selector.MRMRSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mrmr_selector.MRMRSelector.select_features"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.mutual_info_selector">ensemblefs.feature_selectors.mutual_info_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.name"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.__init__"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.select_features"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.random_forest_selector">ensemblefs.feature_selectors.random_forest_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.name"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.__init__"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.select_features"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.svm_selector">ensemblefs.feature_selectors.svm_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector"><code class="docutils literal notranslate"><span class="pre">SVMSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.name"><code class="docutils literal notranslate"><span class="pre">SVMSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.__init__"><code class="docutils literal notranslate"><span class="pre">SVMSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">SVMSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.select_features"><code class="docutils literal notranslate"><span class="pre">SVMSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors.xgboost_selector">ensemblefs.feature_selectors.xgboost_selector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.name"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.select_features"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.feature_selectors.html#module-ensemblefs.feature_selectors">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.RandomForestSelector"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.RandomForestSelector.__init__"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.RandomForestSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.RandomForestSelector.name"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.RandomForestSelector.select_features"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FStatisticSelector"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FStatisticSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FStatisticSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FStatisticSelector.name"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FStatisticSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MutualInfoSelector"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MutualInfoSelector.__init__"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MutualInfoSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MutualInfoSelector.name"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MutualInfoSelector.select_features"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.SVMSelector"><code class="docutils literal notranslate"><span class="pre">SVMSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.SVMSelector.__init__"><code class="docutils literal notranslate"><span class="pre">SVMSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.SVMSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">SVMSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.SVMSelector.name"><code class="docutils literal notranslate"><span class="pre">SVMSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.SVMSelector.select_features"><code class="docutils literal notranslate"><span class="pre">SVMSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.XGBoostSelector"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.XGBoostSelector.__init__"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.XGBoostSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.XGBoostSelector.name"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.XGBoostSelector.select_features"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FeatureSelector"><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FeatureSelector.__init__"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FeatureSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.FeatureSelector.select_features"><code class="docutils literal notranslate"><span class="pre">FeatureSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MRMRSelector"><code class="docutils literal notranslate"><span class="pre">MRMRSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MRMRSelector.__init__"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MRMRSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MRMRSelector.name"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.MRMRSelector.select_features"><code class="docutils literal notranslate"><span class="pre">MRMRSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.LassoSelector"><code class="docutils literal notranslate"><span class="pre">LassoSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.LassoSelector.__init__"><code class="docutils literal notranslate"><span class="pre">LassoSelector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.LassoSelector.compute_scores"><code class="docutils literal notranslate"><span class="pre">LassoSelector.compute_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.LassoSelector.name"><code class="docutils literal notranslate"><span class="pre">LassoSelector.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.feature_selectors.html#ensemblefs.feature_selectors.LassoSelector.select_features"><code class="docutils literal notranslate"><span class="pre">LassoSelector.select_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ensemblefs.merging_strategies.html">ensemblefs.merging_strategies package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.merging_strategies.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.merging_strategies.html#module-ensemblefs.merging_strategies.base_merger">ensemblefs.merging_strategies.base_merger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy"><code class="docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.__init__"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.merge"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_set_based"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.is_set_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_rank_based"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.base_merger.MergingStrategy._validate_input"><code class="docutils literal notranslate"><span class="pre">MergingStrategy._validate_input()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.merging_strategies.html#module-ensemblefs.merging_strategies.borda_merger">ensemblefs.merging_strategies.borda_merger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger"><code class="docutils literal notranslate"><span class="pre">BordaMerger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.name"><code class="docutils literal notranslate"><span class="pre">BordaMerger.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.__init__"><code class="docutils literal notranslate"><span class="pre">BordaMerger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.merge"><code class="docutils literal notranslate"><span class="pre">BordaMerger.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger._validate_input"><code class="docutils literal notranslate"><span class="pre">BordaMerger._validate_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.is_rank_based"><code class="docutils literal notranslate"><span class="pre">BordaMerger.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.is_set_based"><code class="docutils literal notranslate"><span class="pre">BordaMerger.is_set_based()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.merging_strategies.html#module-ensemblefs.merging_strategies.union_of_intersections_merger">ensemblefs.merging_strategies.union_of_intersections_merger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.name"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger._validate_input"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger._validate_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_rank_based"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_set_based"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.is_set_based()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.merging_strategies.html#module-ensemblefs.merging_strategies">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy"><code class="docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy.__init__"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy._validate_input"><code class="docutils literal notranslate"><span class="pre">MergingStrategy._validate_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy.is_rank_based"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy.is_set_based"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.is_set_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.MergingStrategy.merge"><code class="docutils literal notranslate"><span class="pre">MergingStrategy.merge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger"><code class="docutils literal notranslate"><span class="pre">BordaMerger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger.__init__"><code class="docutils literal notranslate"><span class="pre">BordaMerger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger._validate_input"><code class="docutils literal notranslate"><span class="pre">BordaMerger._validate_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger.is_rank_based"><code class="docutils literal notranslate"><span class="pre">BordaMerger.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger.is_set_based"><code class="docutils literal notranslate"><span class="pre">BordaMerger.is_set_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger.merge"><code class="docutils literal notranslate"><span class="pre">BordaMerger.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.BordaMerger.name"><code class="docutils literal notranslate"><span class="pre">BordaMerger.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger.__init__"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger._validate_input"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger._validate_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger.is_rank_based"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.is_rank_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger.is_set_based"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.is_set_based()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger.merge"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.merging_strategies.html#ensemblefs.merging_strategies.UnionOfIntersectionsMerger.name"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ensemblefs.metrics.html">ensemblefs.metrics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.metrics.html#module-ensemblefs.metrics.performance_metrics">ensemblefs.metrics.performance_metrics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.__init__"><code class="docutils literal notranslate"><span class="pre">BaseMetric.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric._initialize_models"><code class="docutils literal notranslate"><span class="pre">BaseMetric._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">BaseMetric.train_and_predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.compute"><code class="docutils literal notranslate"><span class="pre">BaseMetric.compute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric"><code class="docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.__init__"><code class="docutils literal notranslate"><span class="pre">RegressionMetric.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.compute"><code class="docutils literal notranslate"><span class="pre">RegressionMetric.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric._metric_func"><code class="docutils literal notranslate"><span class="pre">RegressionMetric._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric._initialize_models"><code class="docutils literal notranslate"><span class="pre">RegressionMetric._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">RegressionMetric.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score"><code class="docutils literal notranslate"><span class="pre">R2Score</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score.__init__"><code class="docutils literal notranslate"><span class="pre">R2Score.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score._metric_func"><code class="docutils literal notranslate"><span class="pre">R2Score._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score._initialize_models"><code class="docutils literal notranslate"><span class="pre">R2Score._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score.compute"><code class="docutils literal notranslate"><span class="pre">R2Score.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.R2Score.train_and_predict"><code class="docutils literal notranslate"><span class="pre">R2Score.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.__init__"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError._metric_func"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError._initialize_models"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.compute"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.train_and_predict"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.__init__"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError._metric_func"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError._initialize_models"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.compute"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.train_and_predict"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric.__init__"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric.compute"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric._metric_func"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric._initialize_models"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss"><code class="docutils literal notranslate"><span class="pre">LogLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.__init__"><code class="docutils literal notranslate"><span class="pre">LogLoss.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss._metric_func"><code class="docutils literal notranslate"><span class="pre">LogLoss._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss._initialize_models"><code class="docutils literal notranslate"><span class="pre">LogLoss._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.compute"><code class="docutils literal notranslate"><span class="pre">LogLoss.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.train_and_predict"><code class="docutils literal notranslate"><span class="pre">LogLoss.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score"><code class="docutils literal notranslate"><span class="pre">F1Score</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score.__init__"><code class="docutils literal notranslate"><span class="pre">F1Score.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score._metric_func"><code class="docutils literal notranslate"><span class="pre">F1Score._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score._initialize_models"><code class="docutils literal notranslate"><span class="pre">F1Score._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score.compute"><code class="docutils literal notranslate"><span class="pre">F1Score.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.F1Score.train_and_predict"><code class="docutils literal notranslate"><span class="pre">F1Score.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.__init__"><code class="docutils literal notranslate"><span class="pre">Accuracy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy._metric_func"><code class="docutils literal notranslate"><span class="pre">Accuracy._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models"><code class="docutils literal notranslate"><span class="pre">Accuracy._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.compute"><code class="docutils literal notranslate"><span class="pre">Accuracy.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict"><code class="docutils literal notranslate"><span class="pre">Accuracy.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore"><code class="docutils literal notranslate"><span class="pre">PrecisionScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.__init__"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.compute"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore"><code class="docutils literal notranslate"><span class="pre">RecallScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.__init__"><code class="docutils literal notranslate"><span class="pre">RecallScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore._metric_func"><code class="docutils literal notranslate"><span class="pre">RecallScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">RecallScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.compute"><code class="docutils literal notranslate"><span class="pre">RecallScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">RecallScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.metrics.html#module-ensemblefs.metrics.stability_metrics">ensemblefs.metrics.stability_metrics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.stability_metrics.compute_stability_metrics"><code class="docutils literal notranslate"><span class="pre">compute_stability_metrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ensemblefs.metrics.html#module-ensemblefs.metrics">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.BaseMetric.__init__"><code class="docutils literal notranslate"><span class="pre">BaseMetric.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.BaseMetric._initialize_models"><code class="docutils literal notranslate"><span class="pre">BaseMetric._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.BaseMetric.compute"><code class="docutils literal notranslate"><span class="pre">BaseMetric.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.BaseMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">BaseMetric.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score"><code class="docutils literal notranslate"><span class="pre">R2Score</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score.__init__"><code class="docutils literal notranslate"><span class="pre">R2Score.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score._initialize_models"><code class="docutils literal notranslate"><span class="pre">R2Score._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score._metric_func"><code class="docutils literal notranslate"><span class="pre">R2Score._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score.compute"><code class="docutils literal notranslate"><span class="pre">R2Score.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.R2Score.train_and_predict"><code class="docutils literal notranslate"><span class="pre">R2Score.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError.__init__"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError._initialize_models"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError._metric_func"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError.compute"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanAbsoluteError.train_and_predict"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError.__init__"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError._initialize_models"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError._metric_func"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError.compute"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.MeanSquaredError.train_and_predict"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss"><code class="docutils literal notranslate"><span class="pre">LogLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss.__init__"><code class="docutils literal notranslate"><span class="pre">LogLoss.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss._initialize_models"><code class="docutils literal notranslate"><span class="pre">LogLoss._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss._metric_func"><code class="docutils literal notranslate"><span class="pre">LogLoss._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss.compute"><code class="docutils literal notranslate"><span class="pre">LogLoss.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.LogLoss.train_and_predict"><code class="docutils literal notranslate"><span class="pre">LogLoss.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy.__init__"><code class="docutils literal notranslate"><span class="pre">Accuracy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy._initialize_models"><code class="docutils literal notranslate"><span class="pre">Accuracy._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy._metric_func"><code class="docutils literal notranslate"><span class="pre">Accuracy._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy.compute"><code class="docutils literal notranslate"><span class="pre">Accuracy.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.Accuracy.train_and_predict"><code class="docutils literal notranslate"><span class="pre">Accuracy.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore"><code class="docutils literal notranslate"><span class="pre">PrecisionScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore.__init__"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore._metric_func"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore.compute"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.PrecisionScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore"><code class="docutils literal notranslate"><span class="pre">RecallScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore.__init__"><code class="docutils literal notranslate"><span class="pre">RecallScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">RecallScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore._metric_func"><code class="docutils literal notranslate"><span class="pre">RecallScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore.compute"><code class="docutils literal notranslate"><span class="pre">RecallScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ensemblefs.metrics.html#ensemblefs.metrics.RecallScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">RecallScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-ensemblefs.feature_selection_pipeline">
+<span id="ensemblefs-feature-selection-pipeline-module"></span><h2>ensemblefs.feature_selection_pipeline module<a class="headerlink" href="#module-ensemblefs.feature_selection_pipeline" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.feature_selection_pipeline.</span></span><span class="sig-name descname"><span class="pre">FeatureSelectionPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the feature selection pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – DataFrame including a ‘target’ column.</p></li>
+<li><p><strong>fs_methods</strong> – List of feature selection methods (classes or strings).</p></li>
+<li><p><strong>merging_strategy</strong> – Merging strategy (class or string).</p></li>
+<li><p><strong>num_repeats</strong> – Number of repeats for the pipeline.</p></li>
+<li><p><strong>num_features_to_select</strong> – Desired number of features to select.
+(For rank-based merging, this must be provided.)</p></li>
+<li><p><strong>metrics</strong> – List of performance metrics (classes or strings).</p></li>
+<li><p><strong>task</strong> – ‘classification’ or ‘regression’.</p></li>
+<li><p><strong>min_group_size</strong> – Minimum number of methods in each subgroup.</p></li>
+<li><p><strong>fill</strong> – If True, ensures exactly num_features_to_select features.</p></li>
+<li><p><strong>random_state</strong> – Seed for reproducibility.</p></li>
+<li><p><strong>n_jobs</strong> – Number of parallel jobs (-1 uses all processors).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is invalid or if num_features_to_select is missing for rank-based merging.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_validate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._validate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">
+<span class="sig-name descname"><span class="pre">_generate_subgroup_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._generate_subgroup_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names" title="Link to this definition"></a></dt>
+<dd><p>Generates all unique combinations of feature selection method names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>min_group_size</strong> – Minimum size of each combination.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples containing method names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run" title="Link to this definition"></a></dt>
+<dd><p>Runs the complete feature selection pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>The merged features from the best group,</p></li>
+<li><p>The index of the best repeat,</p></li>
+<li><p>The best subgroup (tuple of method names).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._pipeline_run_for_repeat">
+<span class="sig-name descname"><span class="pre">_pipeline_run_for_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._pipeline_run_for_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._pipeline_run_for_repeat" title="Link to this definition"></a></dt>
+<dd><p>Executes feature selection pipeline for a single repeat index <cite>i</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none">
+<span class="sig-name descname"><span class="pre">_replace_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._replace_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none" title="Link to this definition"></a></dt>
+<dd><p>Replaces groups containing None with lists of -inf.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metrics</strong> – List of metric lists per group.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cleaned list with no None values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed">
+<span class="sig-name descname"><span class="pre">_set_random_seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._set_random_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data">
+<span class="sig-name descname"><span class="pre">_split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset">
+<span class="sig-name descname"><span class="pre">_compute_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_subset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset" title="Link to this definition"></a></dt>
+<dd><p>Computes feature subsets and returns a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging">
+<span class="sig-name descname"><span class="pre">_compute_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_merging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging" title="Link to this definition"></a></dt>
+<dd><p>Merges feature subsets and returns a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features">
+<span class="sig-name descname"><span class="pre">_merge_group_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._merge_group_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features" title="Link to this definition"></a></dt>
+<dd><p>Merges features for a specific group of methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> – Current repeat index.</p></li>
+<li><p><strong>group</strong> – Tuple of method names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Merged features as produced by the merging strategy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics">
+<span class="sig-name descname"><span class="pre">_compute_performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_performance_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics" title="Link to this definition"></a></dt>
+<dd><p>Computes performance metrics using all metric methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of averaged metric values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics">
+<span class="sig-name descname"><span class="pre">_compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_features_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics" title="Link to this definition"></a></dt>
+<dd><p>Computes and stores performance and stability metrics for each subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_data</strong> – Training dataset.</p></li>
+<li><p><strong>test_data</strong> – Test dataset.</p></li>
+<li><p><strong>result_dicts</strong> – List of dictionaries to store metrics.</p></li>
+<li><p><strong>idx</strong> – Current repeat index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated result_dicts with computed metrics.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_calculate_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._calculate_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means" title="Link to this definition"></a></dt>
+<dd><p>Calculates the mean metrics for each subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_dicts</strong> – List of dictionaries with metrics.</p></li>
+<li><p><strong>group_names</strong> – List of subgroup names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of lists containing mean metrics per group.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_compute_pareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_pareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto" title="Link to this definition"></a></dt>
+<dd><p>Performs Pareto analysis to identify the best-performing group or repeat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> – List of metric lists.</p></li>
+<li><p><strong>names</strong> – List of corresponding names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the best-performing group or repeat.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_extract_repeat_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._extract_repeat_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics" title="Link to this definition"></a></dt>
+<dd><p>Extracts metrics across repeats for a given group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> – The subgroup name.</p></li>
+<li><p><strong>result_dicts</strong> – Dictionaries with metrics per repeat.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2D list of metrics with each row corresponding to a repeat.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class">
+<span class="sig-name descname"><span class="pre">_load_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instantiate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._load_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class" title="Link to this definition"></a></dt>
+<dd><p>Loads a class or returns an instance if already provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – A string identifier or an instance of a feature selector/merging strategy.</p></li>
+<li><p><strong>instantiate</strong> – If True, instantiates the class with extracted parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The class or its instance.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If input is not a valid identifier or instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ensemblefs.utils">
+<span id="ensemblefs-utils-module"></span><h2>ensemblefs.utils module<a class="headerlink" href="#module-ensemblefs.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ensemblefs.utils.dynamic_import">
+<span class="sig-prename descclassname"><span class="pre">ensemblefs.utils.</span></span><span class="sig-name descname"><span class="pre">dynamic_import</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span></span></span><a class="reference internal" href="_modules/ensemblefs/utils.html#dynamic_import"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.utils.dynamic_import" title="Link to this definition"></a></dt>
+<dd><p>Dynamically imports a class based on its full class path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>class_path</strong> – Full dot-separated path to the class (e.g., ‘ensemblefs.module.ClassName’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The class object specified by class_path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ensemblefs.utils.get_class_info">
+<span class="sig-prename descclassname"><span class="pre">ensemblefs.utils.</span></span><span class="sig-name descname"><span class="pre">get_class_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/utils.html#get_class_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.utils.get_class_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the class object and its expected parameters based on a string identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identifier</strong> – A string representing a class identifier defined in <cite>class_path_mapping</cite>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the class object and a list of expected parameter names.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the identifier is not found in <cite>class_path_mapping</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ensemblefs.utils.extract_params">
+<span class="sig-prename descclassname"><span class="pre">ensemblefs.utils.</span></span><span class="sig-name descname"><span class="pre">extract_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/utils.html#extract_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.utils.extract_params" title="Link to this definition"></a></dt>
+<dd><p>Extracts and returns the initialization parameters required by the class,
+based on the class signature and attributes of the provided instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls</strong> – The class object to be instantiated.</p></li>
+<li><p><strong>instance</strong> – The instance from which attribute values are extracted.</p></li>
+<li><p><strong>params</strong> – A list of parameter names expected by the class.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary of parameters (name-value pairs) for instantiating the class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ensemblefs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ensemblefs" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.</span></span><span class="sig-name descname"><span class="pre">FeatureSelectionPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the feature selection pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – DataFrame including a ‘target’ column.</p></li>
+<li><p><strong>fs_methods</strong> – List of feature selection methods (classes or strings).</p></li>
+<li><p><strong>merging_strategy</strong> – Merging strategy (class or string).</p></li>
+<li><p><strong>num_repeats</strong> – Number of repeats for the pipeline.</p></li>
+<li><p><strong>num_features_to_select</strong> – Desired number of features to select.
+(For rank-based merging, this must be provided.)</p></li>
+<li><p><strong>metrics</strong> – List of performance metrics (classes or strings).</p></li>
+<li><p><strong>task</strong> – ‘classification’ or ‘regression’.</p></li>
+<li><p><strong>min_group_size</strong> – Minimum number of methods in each subgroup.</p></li>
+<li><p><strong>fill</strong> – If True, ensures exactly num_features_to_select features.</p></li>
+<li><p><strong>random_state</strong> – Seed for reproducibility.</p></li>
+<li><p><strong>n_jobs</strong> – Number of parallel jobs (-1 uses all processors).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the task is invalid or if num_features_to_select is missing for rank-based merging.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._calculate_means">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_calculate_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._calculate_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._calculate_means" title="Link to this definition"></a></dt>
+<dd><p>Calculates the mean metrics for each subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_dicts</strong> – List of dictionaries with metrics.</p></li>
+<li><p><strong>group_names</strong> – List of subgroup names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of lists containing mean metrics per group.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._compute_merging">
+<span class="sig-name descname"><span class="pre">_compute_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_merging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._compute_merging" title="Link to this definition"></a></dt>
+<dd><p>Merges feature subsets and returns a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._compute_metrics">
+<span class="sig-name descname"><span class="pre">_compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_features_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._compute_metrics" title="Link to this definition"></a></dt>
+<dd><p>Computes and stores performance and stability metrics for each subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_data</strong> – Training dataset.</p></li>
+<li><p><strong>test_data</strong> – Test dataset.</p></li>
+<li><p><strong>result_dicts</strong> – List of dictionaries to store metrics.</p></li>
+<li><p><strong>idx</strong> – Current repeat index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated result_dicts with computed metrics.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._compute_pareto">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_compute_pareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_pareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._compute_pareto" title="Link to this definition"></a></dt>
+<dd><p>Performs Pareto analysis to identify the best-performing group or repeat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> – List of metric lists.</p></li>
+<li><p><strong>names</strong> – List of corresponding names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the best-performing group or repeat.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._compute_performance_metrics">
+<span class="sig-name descname"><span class="pre">_compute_performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_performance_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._compute_performance_metrics" title="Link to this definition"></a></dt>
+<dd><p>Computes performance metrics using all metric methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of averaged metric values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._compute_subset">
+<span class="sig-name descname"><span class="pre">_compute_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_subset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._compute_subset" title="Link to this definition"></a></dt>
+<dd><p>Computes feature subsets and returns a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._extract_repeat_metrics">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_extract_repeat_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._extract_repeat_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._extract_repeat_metrics" title="Link to this definition"></a></dt>
+<dd><p>Extracts metrics across repeats for a given group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> – The subgroup name.</p></li>
+<li><p><strong>result_dicts</strong> – Dictionaries with metrics per repeat.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2D list of metrics with each row corresponding to a repeat.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._generate_subgroup_names">
+<span class="sig-name descname"><span class="pre">_generate_subgroup_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._generate_subgroup_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._generate_subgroup_names" title="Link to this definition"></a></dt>
+<dd><p>Generates all unique combinations of feature selection method names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>min_group_size</strong> – Minimum size of each combination.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples containing method names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._load_class">
+<span class="sig-name descname"><span class="pre">_load_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instantiate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._load_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._load_class" title="Link to this definition"></a></dt>
+<dd><p>Loads a class or returns an instance if already provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – A string identifier or an instance of a feature selector/merging strategy.</p></li>
+<li><p><strong>instantiate</strong> – If True, instantiates the class with extracted parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The class or its instance.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If input is not a valid identifier or instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._merge_group_features">
+<span class="sig-name descname"><span class="pre">_merge_group_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._merge_group_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._merge_group_features" title="Link to this definition"></a></dt>
+<dd><p>Merges features for a specific group of methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> – Current repeat index.</p></li>
+<li><p><strong>group</strong> – Tuple of method names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Merged features as produced by the merging strategy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._pipeline_run_for_repeat">
+<span class="sig-name descname"><span class="pre">_pipeline_run_for_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._pipeline_run_for_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._pipeline_run_for_repeat" title="Link to this definition"></a></dt>
+<dd><p>Executes feature selection pipeline for a single repeat index <cite>i</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._replace_none">
+<span class="sig-name descname"><span class="pre">_replace_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._replace_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._replace_none" title="Link to this definition"></a></dt>
+<dd><p>Replaces groups containing None with lists of -inf.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metrics</strong> – List of metric lists per group.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cleaned list with no None values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._set_random_seed">
+<span class="sig-name descname"><span class="pre">_set_random_seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._set_random_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._set_random_seed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._split_data">
+<span class="sig-name descname"><span class="pre">_split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._split_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline._validate_task">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_validate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline._validate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline._validate_task" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.FeatureSelectionPipeline.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/feature_selection_pipeline.html#FeatureSelectionPipeline.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.FeatureSelectionPipeline.run" title="Link to this definition"></a></dt>
+<dd><p>Runs the complete feature selection pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>The merged features from the best group,</p></li>
+<li><p>The index of the best repeat,</p></li>
+<li><p>The best subgroup (tuple of method names).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arthur Babey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

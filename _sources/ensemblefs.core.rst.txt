@@ -1,0 +1,45 @@
+ensemblefs.core package
+=======================
+
+Submodules
+----------
+
+ensemblefs.core.data\_processor module
+--------------------------------------
+
+.. automodule:: ensemblefs.core.data_processor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.core.feature module
+------------------------------
+
+.. automodule:: ensemblefs.core.feature
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.core.novovicova module
+---------------------------------
+
+.. automodule:: ensemblefs.core.novovicova
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensemblefs.core.pareto module
+-----------------------------
+
+.. automodule:: ensemblefs.core.pareto
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: ensemblefs.core
+   :members:
+   :show-inheritance:
+   :undoc-members:
