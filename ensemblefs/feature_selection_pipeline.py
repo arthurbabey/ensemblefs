@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
+from joblib import Parallel, delayed
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
@@ -128,40 +129,77 @@ class FeatureSelectionPipeline:
               - The index of the best repeat,
               - The best subgroup (tuple of method names).
         """
-        self._set_random_seed()
 
-        # Initialize list of dictionaries for metrics (last dict reserved for stability)
-        num_metrics = len(self.metrics) + 1
+        # Reset internal state so that `run()` always starts fresh
+        self.FS_subsets = {}
+        self.merged_features = {}
+        num_metrics = len(self.metrics) + 1  # +1 for stability
         result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]] = [
             {} for _ in range(num_metrics)
         ]
+        self.fs_methods = [
+            self._load_class(m, instantiate=True) for m in self.fs_methods
+        ]
 
-        for i in tqdm(range(self.num_repeats), desc="Pipeline Progress"):
-            train_data, test_data = self._split_data(
-                test_size=0.20, random_state=self.random_state + i
-            )
-            self._compute_subset(train_data, i)
-            self._compute_merging(i, verbose=verbose)
-            result_dicts = self._compute_metrics(train_data, test_data, result_dicts, i)
+        # Run parallel execution
+        parallel_results = Parallel(n_jobs=self.n_jobs)(
+            delayed(self._pipeline_run_for_repeat)(i, verbose)
+            for i in range(self.num_repeats)
+        )
 
+        # Sort results by repeat index
+        parallel_results.sort(key=lambda x: x[0])  # Now, x[0] is the repeat index
+
+        # Merge results in a fixed order
+        self.FS_subsets = {}
+        self.merged_features = {}
+
+        for (
+            _,
+            partial_fs_subsets,
+            partial_merged_features,
+            partial_result_dicts,
+        ) in parallel_results:
+            self.FS_subsets.update(partial_fs_subsets)
+            self.merged_features.update(partial_merged_features)
+            for dict_idx in range(num_metrics):
+                for key in sorted(partial_result_dicts[dict_idx].keys()):
+                    result_dicts[dict_idx][key] = partial_result_dicts[dict_idx][key]
+
+        # Compute Pareto analysis as usual
         means_list = self._calculate_means(result_dicts, self.subgroup_names)
         means_list = self._replace_none(means_list)
-
-        # Append diversity measure (number of methods in the subgroup)
-        metrics_with_diversity = [
-            mean + [len(group)] for mean, group in zip(means_list, self.subgroup_names)
-        ]
-        best_group = self._compute_pareto(metrics_with_diversity, self.subgroup_names)
+        best_group = self._compute_pareto(means_list, self.subgroup_names)
         best_group_metrics = self._extract_repeat_metrics(best_group, *result_dicts)
         best_group_metrics = self._replace_none(best_group_metrics)
         best_repeat = self._compute_pareto(
             best_group_metrics, [str(i) for i in range(self.num_repeats)]
         )
+
         return (
             self.merged_features[(int(best_repeat), best_group)],
             int(best_repeat),
             best_group,
         )
+
+    def _pipeline_run_for_repeat(self, i: int, verbose: bool):
+        """
+        Executes feature selection pipeline for a single repeat index `i`.
+        """
+        seed = self.random_state + i
+        random.seed(seed)
+        np.random.seed(seed)
+
+        train_data, test_data = self._split_data(test_size=0.20, random_state=seed)
+
+        fs_subsets_local = self._compute_subset(train_data, i)
+        merged_features_local = self._compute_merging(fs_subsets_local, i, verbose)
+        local_result_dicts = self._compute_metrics(
+            fs_subsets_local, merged_features_local, train_data, test_data, i
+        )
+
+        # Return repeat index as the first element
+        return i, fs_subsets_local, merged_features_local, local_result_dicts
 
     def _replace_none(self, metrics: List[List[Optional[float]]]) -> List[List[float]]:
         """
@@ -187,30 +225,25 @@ class FeatureSelectionPipeline:
         np.random.seed(seed)
         random.seed(seed)
 
-    def _split_data(
-        self, test_size: float, random_state: int
-    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def _split_data(self, test_size: float, random_state: int):
         stratify = self.data["target"] if self.task == "classification" else None
         return train_test_split(
             self.data, test_size=test_size, random_state=random_state, stratify=stratify
         )
 
-    def _compute_subset(self, train_data: pd.DataFrame, idx: int) -> None:
+    def _compute_subset(self, train_data, idx):
         """
-        Computes feature subsets using each feature selection method.
-
-        Args:
-            train_data: Training dataset.
-            idx: Current repeat index.
+        Computes feature subsets and returns a dictionary.
         """
         X_train = train_data.drop("target", axis=1)
         y_train = train_data["target"]
         feature_names = X_train.columns.tolist()
 
+        fs_subsets_local = {}
         for fs_method in self.fs_methods:
             method_name = fs_method.name
             scores, indices = fs_method.select_features(X_train, y_train)
-            self.FS_subsets[(idx, method_name)] = [
+            fs_subsets_local[(idx, method_name)] = [
                 Feature(
                     name,
                     score=scores[i] if scores is not None else None,
@@ -218,23 +251,22 @@ class FeatureSelectionPipeline:
                 )
                 for i, name in enumerate(feature_names)
             ]
+        return fs_subsets_local
 
-    def _compute_merging(self, idx: int, verbose: bool = False) -> None:
+    def _compute_merging(self, fs_subsets_local, idx, verbose=False):
         """
-        Merges feature subsets for each subgroup.
-
-        Args:
-            idx: Current repeat index.
-            verbose: If True, prints warnings when no merged features are produced.
+        Merges feature subsets and returns a dictionary.
         """
+        merged_features_local = {}
         for group in self.subgroup_names:
-            merged = self._merge_group_features(idx, group)
+            merged = self._merge_group_features(fs_subsets_local, idx, group)
             if merged:
-                self.merged_features[(idx, group)] = merged
+                merged_features_local[(idx, group)] = merged
             elif verbose:
                 print(f"Warning: {group} produced no merged features.")
+        return merged_features_local
 
-    def _merge_group_features(self, idx: int, group: Tuple[str, ...]) -> Any:
+    def _merge_group_features(self, fs_subsets_local, idx, group):
         """
         Merges features for a specific group of methods.
 
@@ -245,10 +277,11 @@ class FeatureSelectionPipeline:
         Returns:
             Merged features as produced by the merging strategy.
         """
-        group_features = [
-            [feature for feature in self.FS_subsets[(idx, method)] if feature.selected]
-            for method in group
-        ]
+        group_features = []
+        for method in group:
+            features = [f for f in fs_subsets_local[(idx, method)] if f.selected]
+            group_features.append(features)
+
         return self.merging_strategy.merge(
             group_features, self.num_features_to_select, fill=self.fill
         )
@@ -271,12 +304,8 @@ class FeatureSelectionPipeline:
         ]
 
     def _compute_metrics(
-        self,
-        train_data: pd.DataFrame,
-        test_data: pd.DataFrame,
-        result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]],
-        idx: int,
-    ) -> List[Dict[Tuple[int, Tuple[str, ...]], float]]:
+        self, fs_subsets_local, merged_features_local, train_data, test_data, idx
+    ):
         """
         Computes and stores performance and stability metrics for each subgroup.
 
@@ -289,37 +318,34 @@ class FeatureSelectionPipeline:
         Returns:
             Updated result_dicts with computed metrics.
         """
+        num_metrics = len(self.metrics) + 1
+        local_result_dicts = [{} for _ in range(num_metrics)]
+
         for group in self.subgroup_names:
             key = (idx, group)
-            if key not in self.merged_features:
+            if key not in merged_features_local:
                 continue
 
-            features = list(self.merged_features[key])
-            X_train_subset, y_train = train_data[features], train_data["target"]
-            X_test_subset, y_test = test_data[features], test_data["target"]
+            selected_feats = list(merged_features_local[key])
+            X_train_subset = train_data[selected_feats]
+            y_train = train_data["target"]
+            X_test_subset = test_data[selected_feats]
+            y_test = test_data["target"]
 
-            metrics_vals = self._compute_performance_metrics(
+            metric_vals = self._compute_performance_metrics(
                 X_train_subset, y_train, X_test_subset, y_test
             )
-            for i, val in enumerate(metrics_vals):
-                result_dicts[i][key] = val
+            for m_idx, val in enumerate(metric_vals):
+                local_result_dicts[m_idx][key] = val
 
-            features_stability = [
-                [
-                    feature.name
-                    for feature in self.FS_subsets[(idx, method)]
-                    if feature.selected
-                ]
+            fs_lists = [
+                [f.name for f in fs_subsets_local[(idx, method)] if f.selected]
                 for method in group
             ]
-            stability = (
-                compute_stability_metrics(features_stability)
-                if features_stability
-                else 0
-            )
-            result_dicts[len(metrics_vals)][key] = stability
+            stability = compute_stability_metrics(fs_lists) if fs_lists else 0
+            local_result_dicts[len(metric_vals)][key] = stability
 
-        return result_dicts
+        return local_result_dicts
 
     @staticmethod
     def _calculate_means(
