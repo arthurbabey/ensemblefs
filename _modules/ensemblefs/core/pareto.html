@@ -75,10 +75,10 @@
 
 
 <div class="viewcode-block" id="ParetoAnalysis">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParetoAnalysis</span><span class="p">:</span>
 <div class="viewcode-block" id="ParetoAnalysis.__init__">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">group_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the ParetoAnalysis with the provided dataset and group names.</span>
@@ -100,7 +100,7 @@
 
 
 <div class="viewcode-block" id="ParetoAnalysis.group_dominate_count">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.group_dominate_count">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">group_dominate_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the number of groups dominated by the specified group.</span>
@@ -124,7 +124,7 @@
 
 
 <div class="viewcode-block" id="ParetoAnalysis.group_isdominated_count">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.group_isdominated_count">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">group_isdominated_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the number of groups that dominate the specified group.</span>
@@ -148,7 +148,7 @@
 
 
 <div class="viewcode-block" id="ParetoAnalysis.compute_dominance">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_dominance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the dominance scores for all groups. For each group, the scalar score is defined as:</span>
@@ -164,7 +164,7 @@
 
 
 <div class="viewcode-block" id="ParetoAnalysis.get_results">
-<a class="viewcode-back" href="../../../ensemblefs.core.html#ensemblefs.core.pareto.ParetoAnalysis.get_results">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#ensemblefs.core.pareto.ParetoAnalysis.get_results">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the sorted results based on the scalar dominance score in descending order.</span>

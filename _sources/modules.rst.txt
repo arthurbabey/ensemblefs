@@ -1,7 +1,0 @@
-ensemblefs
-==========
-
-.. toctree::
-   :maxdepth: 4
-
-   ensemblefs
