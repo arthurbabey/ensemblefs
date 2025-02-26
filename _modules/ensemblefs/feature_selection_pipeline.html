@@ -216,6 +216,9 @@
 <span class="sd">              - The best subgroup (tuple of method names).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="c1"># set seeds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_random_seed</span><span class="p">()</span>
+
         <span class="c1"># Reset internal state so that `run()` always starts fresh</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">FS_subsets</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">merged_features</span> <span class="o">=</span> <span class="p">{}</span>
