@@ -130,6 +130,9 @@ class FeatureSelectionPipeline:
               - The best subgroup (tuple of method names).
         """
 
+        # set seeds
+        self._set_random_seed()
+
         # Reset internal state so that `run()` always starts fresh
         self.FS_subsets = {}
         self.merged_features = {}
