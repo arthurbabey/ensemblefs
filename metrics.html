@@ -52,9 +52,6 @@
 <li class="toctree-l2"><a class="reference internal" href="feature_selection_pipeline.html">Feature Selection Pipeline</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Metrics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric.name"><code class="docutils literal notranslate"><span class="pre">BaseMetric.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric.task"><code class="docutils literal notranslate"><span class="pre">BaseMetric.task</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric.models"><code class="docutils literal notranslate"><span class="pre">BaseMetric.models</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric.__init__"><code class="docutils literal notranslate"><span class="pre">BaseMetric.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric._initialize_models"><code class="docutils literal notranslate"><span class="pre">BaseMetric._initialize_models()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.BaseMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">BaseMetric.train_and_predict()</span></code></a></li>
@@ -101,12 +98,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric.train_and_predict"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric.train_and_predict()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.__init__"><code class="docutils literal notranslate"><span class="pre">Accuracy.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy._metric_func"><code class="docutils literal notranslate"><span class="pre">Accuracy._metric_func()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models"><code class="docutils literal notranslate"><span class="pre">Accuracy._initialize_models()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.compute"><code class="docutils literal notranslate"><span class="pre">Accuracy.compute()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict"><code class="docutils literal notranslate"><span class="pre">Accuracy.train_and_predict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss"><code class="docutils literal notranslate"><span class="pre">LogLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss.__init__"><code class="docutils literal notranslate"><span class="pre">LogLoss.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss._metric_func"><code class="docutils literal notranslate"><span class="pre">LogLoss._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss._initialize_models"><code class="docutils literal notranslate"><span class="pre">LogLoss._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss.compute"><code class="docutils literal notranslate"><span class="pre">LogLoss.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.LogLoss.train_and_predict"><code class="docutils literal notranslate"><span class="pre">LogLoss.train_and_predict()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.F1Score"><code class="docutils literal notranslate"><span class="pre">F1Score</span></code></a><ul>
@@ -117,6 +114,31 @@
 <li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.F1Score.train_and_predict"><code class="docutils literal notranslate"><span class="pre">F1Score.train_and_predict()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.__init__"><code class="docutils literal notranslate"><span class="pre">Accuracy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy._metric_func"><code class="docutils literal notranslate"><span class="pre">Accuracy._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models"><code class="docutils literal notranslate"><span class="pre">Accuracy._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.compute"><code class="docutils literal notranslate"><span class="pre">Accuracy.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict"><code class="docutils literal notranslate"><span class="pre">Accuracy.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore"><code class="docutils literal notranslate"><span class="pre">PrecisionScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.__init__"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">PrecisionScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.compute"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">PrecisionScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore"><code class="docutils literal notranslate"><span class="pre">RecallScore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore.__init__"><code class="docutils literal notranslate"><span class="pre">RecallScore.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore._metric_func"><code class="docutils literal notranslate"><span class="pre">RecallScore._metric_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore._initialize_models"><code class="docutils literal notranslate"><span class="pre">RecallScore._initialize_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore.compute"><code class="docutils literal notranslate"><span class="pre">RecallScore.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RecallScore.train_and_predict"><code class="docutils literal notranslate"><span class="pre">RecallScore.train_and_predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblefs.metrics.stability_metrics.compute_stability_metrics"><code class="docutils literal notranslate"><span class="pre">compute_stability_metrics()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -155,52 +177,15 @@
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">BaseMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#BaseMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base class for computing evaluation metrics.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.name" title="Link to this definition"></a></dt>
-<dd><p>The name of the metric.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.task">
-<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.task" title="Link to this definition"></a></dt>
-<dd><p>The type of task, either ‘classification’ or ‘regression’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.models">
-<span class="sig-name descname"><span class="pre">models</span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.models" title="Link to this definition"></a></dt>
-<dd><p>A dictionary of initialized models for the task.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, object]</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#BaseMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes the BaseMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – Metric name.</p></li>
-<li><p><strong>task</strong> (<em>str</em>) – Task type (‘classification’ or ‘regression’).</p></li>
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
 </ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If task is not ‘classification’ or ‘regression’.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -208,35 +193,24 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#BaseMetric._initialize_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#BaseMetric.train_and_predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -244,25 +218,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.BaseMetric.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#BaseMetric.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.BaseMetric.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the metric.</p>
-<p>This method must be implemented in child classes.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -277,10 +247,12 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RegressionMetric.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#RegressionMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RegressionMetric.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes RegressionMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -288,21 +260,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RegressionMetric.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#RegressionMetric.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RegressionMetric.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the regression metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,35 +288,24 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RegressionMetric._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RegressionMetric._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RegressionMetric.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RegressionMetric.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -355,14 +316,15 @@
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.R2Score">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">R2Score</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#R2Score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.R2Score" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RegressionMetric" title="ensemblefs.metrics.performance_metrics.RegressionMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a></p>
-<p>R2 Score metric.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.R2Score.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#R2Score.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.R2Score.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes RegressionMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -376,35 +338,27 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.R2Score._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.R2Score._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.R2Score.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.R2Score.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the regression metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -412,21 +366,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.R2Score.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.R2Score.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -437,14 +388,15 @@
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanAbsoluteError">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">MeanAbsoluteError</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#MeanAbsoluteError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanAbsoluteError" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RegressionMetric" title="ensemblefs.metrics.performance_metrics.RegressionMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a></p>
-<p>Mean Absolute Error metric.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanAbsoluteError.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#MeanAbsoluteError.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes RegressionMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -458,35 +410,27 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanAbsoluteError._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanAbsoluteError._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanAbsoluteError.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the regression metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -494,21 +438,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanAbsoluteError.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -519,14 +460,15 @@
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanSquaredError">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">MeanSquaredError</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#MeanSquaredError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanSquaredError" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.RegressionMetric" title="ensemblefs.metrics.performance_metrics.RegressionMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a></p>
-<p>Mean Squared Error metric.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanSquaredError.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#MeanSquaredError.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanSquaredError.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes RegressionMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -540,35 +482,27 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanSquaredError._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanSquaredError._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanSquaredError.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanSquaredError.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the regression metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -576,21 +510,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.MeanSquaredError.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.MeanSquaredError.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -605,10 +536,12 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.ClassificationMetric.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#ClassificationMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes ClassificationMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -616,21 +549,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.ClassificationMetric.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#ClassificationMetric.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the classification metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -644,35 +577,24 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.ClassificationMetric._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.ClassificationMetric.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -680,81 +602,71 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">Accuracy</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">LogLoss</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#LogLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric" title="ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></p>
-<p>Accuracy metric.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes ClassificationMetric.</p>
-<dl class="field-list simple">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#LogLoss.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy._metric_func">
-<span class="sig-name descname"><span class="pre">_metric_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy._metric_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy._metric_func" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss._metric_func">
+<span class="sig-name descname"><span class="pre">_metric_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#LogLoss._metric_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss._metric_func" title="Link to this definition"></a></dt>
 <dd><p>Metric function to be overridden by subclasses.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy._initialize_models">
-<span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss._initialize_models">
+<span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss._initialize_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.compute">
-<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the classification metric.</p>
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss.compute" title="Link to this definition"></a></dt>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict">
-<span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.LogLoss.train_and_predict">
+<span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.LogLoss.train_and_predict" title="Link to this definition"></a></dt>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -765,14 +677,15 @@
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.F1Score">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">F1Score</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#F1Score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.F1Score" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric" title="ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></p>
-<p>F1 Score metric.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.F1Score.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#F1Score.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.F1Score.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes ClassificationMetric.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Metric name.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -786,35 +699,27 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.F1Score._initialize_models">
 <span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.F1Score._initialize_models" title="Link to this definition"></a></dt>
-<dd><p>Initializes task-specific models.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping model names to model instances.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, object]</p>
-</dd>
-</dl>
+<dd><p>Initialize task-specific models.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.F1Score.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.F1Score.compute" title="Link to this definition"></a></dt>
-<dd><p>Computes the classification metric.</p>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Computed metric value.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -822,25 +727,252 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.F1Score.train_and_predict">
 <span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.F1Score.train_and_predict" title="Link to this definition"></a></dt>
-<dd><p>Trains models and generates predictions.</p>
+<dd><p>Train all models and generate predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_train</strong> (<em>np.ndarray</em>) – Training feature data.</p></li>
-<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Training labels.</p></li>
-<li><p><strong>X_test</strong> (<em>np.ndarray</em>) – Test feature data.</p></li>
-<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Test labels.</p></li>
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing predictions and probabilities.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[str, Dict[str, Union[np.ndarray, None]]]</p>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">Accuracy</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric" title="ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy._metric_func">
+<span class="sig-name descname"><span class="pre">_metric_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#Accuracy._metric_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy._metric_func" title="Link to this definition"></a></dt>
+<dd><p>Metric function to be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy._initialize_models">
+<span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize task-specific models.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.compute" title="Link to this definition"></a></dt>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Computed metric value.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict">
+<span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict" title="Link to this definition"></a></dt>
+<dd><p>Train all models and generate predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">PrecisionScore</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#PrecisionScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric" title="ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#PrecisionScore.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func">
+<span class="sig-name descname"><span class="pre">_metric_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#PrecisionScore._metric_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func" title="Link to this definition"></a></dt>
+<dd><p>Metric function to be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore._initialize_models">
+<span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore._initialize_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize task-specific models.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.compute" title="Link to this definition"></a></dt>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Computed metric value.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.PrecisionScore.train_and_predict">
+<span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.PrecisionScore.train_and_predict" title="Link to this definition"></a></dt>
+<dd><p>Train all models and generate predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.performance_metrics.</span></span><span class="sig-name descname"><span class="pre">RecallScore</span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#RecallScore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ensemblefs.metrics.performance_metrics.ClassificationMetric" title="ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#RecallScore.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Metric name.</p></li>
+<li><p><strong>task</strong> – Task type (‘classification’ or ‘regression’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore._metric_func">
+<span class="sig-name descname"><span class="pre">_metric_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/performance_metrics.html#RecallScore._metric_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore._metric_func" title="Link to this definition"></a></dt>
+<dd><p>Metric function to be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore._initialize_models">
+<span class="sig-name descname"><span class="pre">_initialize_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">RandomForestClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LogisticRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingClassifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RandomForestRegressor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">LinearRegression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">GradientBoostingRegressor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore._initialize_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize task-specific models.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore.compute" title="Link to this definition"></a></dt>
+<dd><p>Compute the metric. Must be implemented in child classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Computed metric value.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in subclasses.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ensemblefs.metrics.performance_metrics.RecallScore.train_and_predict">
+<span class="sig-name descname"><span class="pre">train_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ensemblefs.metrics.performance_metrics.RecallScore.train_and_predict" title="Link to this definition"></a></dt>
+<dd><p>Train all models and generate predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training data.</p></li>
+<li><p><strong>y_train</strong> – Training labels.</p></li>
+<li><p><strong>X_test</strong> – Test data.</p></li>
+<li><p><strong>y_test</strong> – Test labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing predictions and probabilities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function" id="module-ensemblefs.metrics.stability_metrics">
+<dt class="sig sig-object py" id="ensemblefs.metrics.stability_metrics.compute_stability_metrics">
+<span class="sig-prename descclassname"><span class="pre">ensemblefs.metrics.stability_metrics.</span></span><span class="sig-name descname"><span class="pre">compute_stability_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/ensemblefs/metrics/stability_metrics.html#compute_stability_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ensemblefs.metrics.stability_metrics.compute_stability_metrics" title="Link to this definition"></a></dt>
+<dd><p>Computes stability metrics using StabilityNovovicova.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>features_list</strong> – A list of lists, where each sublist contains selected feature names.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed stability measure SH(S).</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

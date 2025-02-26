@@ -81,12 +81,16 @@
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#X"><strong>X</strong></a>
  
 </div>
 <h2 id="_">_</h2>
@@ -101,6 +105,26 @@
 </li>
         <li><a href="core.html#ensemblefs.core.pareto.ParetoAnalysis.__init__">(ensemblefs.core.pareto.ParetoAnalysis method)</a>
 </li>
+        <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__">(ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.__init__">(ensemblefs.feature_selectors.base_selector.FeatureSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.__init__">(ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.__init__">(ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.__init__">(ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.__init__">(ensemblefs.feature_selectors.svm_selector.SVMSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.__init__">(ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.__init__">(ensemblefs.merging_strategies.base_merger.MergingStrategy method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.__init__">(ensemblefs.merging_strategies.borda_merger.BordaMerger method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.__init__">(ensemblefs.metrics.performance_metrics.Accuracy method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.__init__">(ensemblefs.metrics.performance_metrics.BaseMetric method)</a>
@@ -109,24 +133,48 @@
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score.__init__">(ensemblefs.metrics.performance_metrics.F1Score method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.__init__">(ensemblefs.metrics.performance_metrics.LogLoss method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.__init__">(ensemblefs.metrics.performance_metrics.MeanAbsoluteError method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.__init__">(ensemblefs.metrics.performance_metrics.MeanSquaredError method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.__init__">(ensemblefs.metrics.performance_metrics.PrecisionScore method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score.__init__">(ensemblefs.metrics.performance_metrics.R2Score method)</a>
+</li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.__init__">(ensemblefs.metrics.performance_metrics.RecallScore method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.__init__">(ensemblefs.metrics.performance_metrics.RegressionMetric method)</a>
 </li>
       </ul></li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means">_calculate_means() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline static method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging">_compute_merging() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics">_compute_metrics() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto">_compute_pareto() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline static method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics">_compute_performance_metrics() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset">_compute_subset() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._drop_columns">_drop_columns() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._drop_missing_values">_drop_missing_values() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables">_encode_categorical_variables() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics">_extract_repeat_metrics() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline static method)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._fill_nan">_fill_nan() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset">_filtered_time_dataset() (ensemblefs.core.data_processor.DataProcessor method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">_generate_subgroup_names() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
 </li>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.Accuracy._initialize_models">_initialize_models() (ensemblefs.metrics.performance_metrics.Accuracy method)</a>
 
@@ -137,20 +185,28 @@
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score._initialize_models">(ensemblefs.metrics.performance_metrics.F1Score method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss._initialize_models">(ensemblefs.metrics.performance_metrics.LogLoss method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError._initialize_models">(ensemblefs.metrics.performance_metrics.MeanAbsoluteError method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError._initialize_models">(ensemblefs.metrics.performance_metrics.MeanSquaredError method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore._initialize_models">(ensemblefs.metrics.performance_metrics.PrecisionScore method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score._initialize_models">(ensemblefs.metrics.performance_metrics.R2Score method)</a>
+</li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore._initialize_models">(ensemblefs.metrics.performance_metrics.RecallScore method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric._initialize_models">(ensemblefs.metrics.performance_metrics.RegressionMetric method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class">_load_class() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._load_data">_load_data() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata">_merge_data_and_metadata() (ensemblefs.core.data_processor.DataProcessor method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features">_merge_group_features() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
 </li>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.Accuracy._metric_func">_metric_func() (ensemblefs.metrics.performance_metrics.Accuracy method)</a>
 
@@ -159,20 +215,44 @@
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score._metric_func">(ensemblefs.metrics.performance_metrics.F1Score method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss._metric_func">(ensemblefs.metrics.performance_metrics.LogLoss method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError._metric_func">(ensemblefs.metrics.performance_metrics.MeanAbsoluteError method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError._metric_func">(ensemblefs.metrics.performance_metrics.MeanSquaredError method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func">(ensemblefs.metrics.performance_metrics.PrecisionScore method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score._metric_func">(ensemblefs.metrics.performance_metrics.R2Score method)</a>
+</li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore._metric_func">(ensemblefs.metrics.performance_metrics.RecallScore method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric._metric_func">(ensemblefs.metrics.performance_metrics.RegressionMetric method)</a>
 </li>
       </ul></li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._pipeline_run_for_repeat">_pipeline_run_for_repeat() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._rename_target_column">_rename_target_column() (ensemblefs.core.data_processor.DataProcessor method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none">_replace_none() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features">_scale_numerical_features() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._set_random_seed">_set_random_seed() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data">_split_data() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
+</li>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy._validate_input">_validate_input() (ensemblefs.merging_strategies.base_merger.MergingStrategy method)</a>
+
+      <ul>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger._validate_input">(ensemblefs.merging_strategies.borda_merger.BordaMerger method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger._validate_input">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger method)</a>
+</li>
+      </ul></li>
       <li><a href="core.html#ensemblefs.core.novovicova.StabilityNovovicova._validate_inputs">_validate_inputs() (ensemblefs.core.novovicova.StabilityNovovicova static method)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task">_validate_task() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -191,6 +271,10 @@
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric">BaseMetric (class in ensemblefs.metrics.performance_metrics)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger">BordaMerger (class in ensemblefs.merging_strategies.borda_merger)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="C">C</h2>
@@ -207,11 +291,17 @@
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score.compute">(ensemblefs.metrics.performance_metrics.F1Score method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.compute">(ensemblefs.metrics.performance_metrics.LogLoss method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.compute">(ensemblefs.metrics.performance_metrics.MeanAbsoluteError method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.compute">(ensemblefs.metrics.performance_metrics.MeanSquaredError method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.compute">(ensemblefs.metrics.performance_metrics.PrecisionScore method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score.compute">(ensemblefs.metrics.performance_metrics.R2Score method)</a>
+</li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.compute">(ensemblefs.metrics.performance_metrics.RecallScore method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.compute">(ensemblefs.metrics.performance_metrics.RegressionMetric method)</a>
 </li>
@@ -220,7 +310,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#ensemblefs.core.pareto.ParetoAnalysis.compute_dominance">compute_dominance() (ensemblefs.core.pareto.ParetoAnalysis method)</a>
 </li>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.compute_scores">compute_scores() (ensemblefs.feature_selectors.base_selector.FeatureSelector method)</a>
+
+      <ul>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.compute_scores">(ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.compute_scores">(ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.compute_scores">(ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.compute_scores">(ensemblefs.feature_selectors.svm_selector.SVMSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.compute_scores">(ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector method)</a>
+</li>
+      </ul></li>
       <li><a href="core.html#ensemblefs.core.novovicova.StabilityNovovicova.compute_stability">compute_stability() (ensemblefs.core.novovicova.StabilityNovovicova method)</a>
+</li>
+      <li><a href="metrics.html#ensemblefs.metrics.stability_metrics.compute_stability_metrics">compute_stability_metrics() (in module ensemblefs.metrics.stability_metrics)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -257,8 +363,6 @@
         <li><a href="core.html#module-ensemblefs.core.novovicova">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ensemblefs.core.pareto
 
@@ -267,10 +371,89 @@
 </li>
       </ul></li>
       <li>
+    ensemblefs.feature_selection_pipeline
+
+      <ul>
+        <li><a href="feature_selection_pipeline.html#module-ensemblefs.feature_selection_pipeline">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.feature_selectors.base_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.base_selector">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.feature_selectors.f_statistic_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.f_statistic_selector">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.feature_selectors.mutual_info_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.mutual_info_selector">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    ensemblefs.feature_selectors.random_forest_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.random_forest_selector">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.feature_selectors.svm_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.svm_selector">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.feature_selectors.xgboost_selector
+
+      <ul>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.xgboost_selector">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.merging_strategies.base_merger
+
+      <ul>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.base_merger">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.merging_strategies.borda_merger
+
+      <ul>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.borda_merger">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.merging_strategies.union_of_intersections_merger
+
+      <ul>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.union_of_intersections_merger">module</a>
+</li>
+      </ul></li>
+      <li>
     ensemblefs.metrics.performance_metrics
 
       <ul>
         <li><a href="metrics.html#module-ensemblefs.metrics.performance_metrics">module</a>
+</li>
+      </ul></li>
+      <li>
+    ensemblefs.metrics.stability_metrics
+
+      <ul>
+        <li><a href="metrics.html#module-ensemblefs.metrics.stability_metrics">module</a>
 </li>
       </ul></li>
   </ul></td>
@@ -281,11 +464,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score">F1Score (class in ensemblefs.metrics.performance_metrics)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#ensemblefs.core.feature.Feature">Feature (class in ensemblefs.core.feature)</a>
 </li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline">FeatureSelectionPipeline (class in ensemblefs.feature_selection_pipeline)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector">FeatureSelector (class in ensemblefs.feature_selectors.base_selector)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor.flatten_time">flatten_time() (ensemblefs.core.data_processor.DataProcessor method)</a>
+</li>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector">FStatisticSelector (class in ensemblefs.feature_selectors.f_statistic_selector)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -306,6 +495,38 @@
   </ul></td>
 </tr></table>
 
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_rank_based">is_rank_based() (ensemblefs.merging_strategies.base_merger.MergingStrategy method)</a>
+
+      <ul>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.is_rank_based">(ensemblefs.merging_strategies.borda_merger.BordaMerger method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_rank_based">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.is_set_based">is_set_based() (ensemblefs.merging_strategies.base_merger.MergingStrategy method)</a>
+
+      <ul>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.is_set_based">(ensemblefs.merging_strategies.borda_merger.BordaMerger method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_set_based">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss">LogLoss (class in ensemblefs.metrics.performance_metrics)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -313,7 +534,15 @@
 </li>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError">MeanSquaredError (class in ensemblefs.metrics.performance_metrics)</a>
 </li>
-      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.models">models (ensemblefs.metrics.performance_metrics.BaseMetric attribute)</a>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy.merge">merge() (ensemblefs.merging_strategies.base_merger.MergingStrategy method)</a>
+
+      <ul>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.merge">(ensemblefs.merging_strategies.borda_merger.BordaMerger method)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger method)</a>
+</li>
+      </ul></li>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy">MergingStrategy (class in ensemblefs.merging_strategies.base_merger)</a>
 </li>
       <li>
     module
@@ -327,17 +556,57 @@
 </li>
         <li><a href="core.html#module-ensemblefs.core.pareto">ensemblefs.core.pareto</a>
 </li>
+        <li><a href="feature_selection_pipeline.html#module-ensemblefs.feature_selection_pipeline">ensemblefs.feature_selection_pipeline</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.base_selector">ensemblefs.feature_selectors.base_selector</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.f_statistic_selector">ensemblefs.feature_selectors.f_statistic_selector</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.mutual_info_selector">ensemblefs.feature_selectors.mutual_info_selector</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.random_forest_selector">ensemblefs.feature_selectors.random_forest_selector</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.svm_selector">ensemblefs.feature_selectors.svm_selector</a>
+</li>
+        <li><a href="feature_selectors.html#module-ensemblefs.feature_selectors.xgboost_selector">ensemblefs.feature_selectors.xgboost_selector</a>
+</li>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.base_merger">ensemblefs.merging_strategies.base_merger</a>
+</li>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.borda_merger">ensemblefs.merging_strategies.borda_merger</a>
+</li>
+        <li><a href="mergers.html#module-ensemblefs.merging_strategies.union_of_intersections_merger">ensemblefs.merging_strategies.union_of_intersections_merger</a>
+</li>
         <li><a href="metrics.html#module-ensemblefs.metrics.performance_metrics">ensemblefs.metrics.performance_metrics</a>
 </li>
+        <li><a href="metrics.html#module-ensemblefs.metrics.stability_metrics">ensemblefs.metrics.stability_metrics</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector">MutualInfoSelector (class in ensemblefs.feature_selectors.mutual_info_selector)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.name">name (ensemblefs.metrics.performance_metrics.BaseMetric attribute)</a>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.name">name (ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector attribute)</a>
+
+      <ul>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.name">(ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector attribute)</a>
 </li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.name">(ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector attribute)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.name">(ensemblefs.feature_selectors.svm_selector.SVMSelector attribute)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.name">(ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector attribute)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger.name">(ensemblefs.merging_strategies.borda_merger.BordaMerger attribute)</a>
+</li>
+        <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.name">(ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -348,6 +617,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore">PrecisionScore (class in ensemblefs.metrics.performance_metrics)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.data_processor.DataProcessor.preprocess_data">preprocess_data() (ensemblefs.core.data_processor.DataProcessor method)</a>
 </li>
   </ul></td>
@@ -358,9 +629,15 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score">R2Score (class in ensemblefs.metrics.performance_metrics)</a>
 </li>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector">RandomForestSelector (class in ensemblefs.feature_selectors.random_forest_selector)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore">RecallScore (class in ensemblefs.metrics.performance_metrics)</a>
+</li>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric">RegressionMetric (class in ensemblefs.metrics.performance_metrics)</a>
+</li>
+      <li><a href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline.run">run() (ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -368,13 +645,29 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core.html#ensemblefs.core.feature.Feature.set_score">set_score() (ensemblefs.core.feature.Feature method)</a>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector.select_features">select_features() (ensemblefs.feature_selectors.base_selector.FeatureSelector method)</a>
+
+      <ul>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector.select_features">(ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector method)</a>
 </li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector.select_features">(ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector.select_features">(ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector.select_features">(ensemblefs.feature_selectors.svm_selector.SVMSelector method)</a>
+</li>
+        <li><a href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector.select_features">(ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#ensemblefs.core.feature.Feature.set_score">set_score() (ensemblefs.core.feature.Feature method)</a>
+</li>
       <li><a href="core.html#ensemblefs.core.feature.Feature.set_selected">set_selected() (ensemblefs.core.feature.Feature method)</a>
 </li>
       <li><a href="core.html#ensemblefs.core.novovicova.StabilityNovovicova">StabilityNovovicova (class in ensemblefs.core.novovicova)</a>
+</li>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector">SVMSelector (class in ensemblefs.feature_selectors.svm_selector)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -382,8 +675,6 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.task">task (ensemblefs.metrics.performance_metrics.BaseMetric attribute)</a>
-</li>
       <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.train_and_predict">train_and_predict() (ensemblefs.metrics.performance_metrics.Accuracy method)</a>
 
       <ul>
@@ -393,15 +684,37 @@
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score.train_and_predict">(ensemblefs.metrics.performance_metrics.F1Score method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.train_and_predict">(ensemblefs.metrics.performance_metrics.LogLoss method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.train_and_predict">(ensemblefs.metrics.performance_metrics.MeanAbsoluteError method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.train_and_predict">(ensemblefs.metrics.performance_metrics.MeanSquaredError method)</a>
 </li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.train_and_predict">(ensemblefs.metrics.performance_metrics.PrecisionScore method)</a>
+</li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score.train_and_predict">(ensemblefs.metrics.performance_metrics.R2Score method)</a>
+</li>
+        <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.train_and_predict">(ensemblefs.metrics.performance_metrics.RecallScore method)</a>
 </li>
         <li><a href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.train_and_predict">(ensemblefs.metrics.performance_metrics.RegressionMetric method)</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger">UnionOfIntersectionsMerger (class in ensemblefs.merging_strategies.union_of_intersections_merger)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector">XGBoostSelector (class in ensemblefs.feature_selectors.xgboost_selector)</a>
+</li>
   </ul></td>
 </tr></table>
 

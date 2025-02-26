@@ -96,25 +96,15 @@
 <div class="viewcode-block" id="BaseMetric">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BaseMetric</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for computing evaluation metrics.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        name (str): The name of the metric.</span>
-<span class="sd">        task (str): The type of task, either &#39;classification&#39; or &#39;regression&#39;.</span>
-<span class="sd">        models (Dict[str, object]): A dictionary of initialized models for the task.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for computing evaluation metrics.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BaseMetric.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the BaseMetric.</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): Metric name.</span>
-<span class="sd">            task (str): Task type (&#39;classification&#39; or &#39;regression&#39;).</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If task is not &#39;classification&#39; or &#39;regression&#39;.</span>
+<span class="sd">            name: Metric name.</span>
+<span class="sd">            task: Task type (&#39;classification&#39; or &#39;regression&#39;).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">}:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Task must be &#39;classification&#39; or &#39;regression&#39;.&quot;</span><span class="p">)</span>
@@ -139,11 +129,7 @@
             <span class="n">GradientBoostingRegressor</span><span class="p">,</span>
         <span class="p">],</span>
     <span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes task-specific models.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Dict[str, object]: Dictionary mapping model names to model instances.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize task-specific models.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(),</span>
@@ -167,17 +153,17 @@
         <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Trains models and generates predictions.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Train all models and generate predictions.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            X_train (np.ndarray): Training feature data.</span>
-<span class="sd">            y_train (np.ndarray): Training labels.</span>
-<span class="sd">            X_test (np.ndarray): Test feature data.</span>
-<span class="sd">            y_test (np.ndarray): Test labels.</span>
+<span class="sd">            X_train: Training data.</span>
+<span class="sd">            y_train: Training labels.</span>
+<span class="sd">            X_test: Test data.</span>
+<span class="sd">            y_test: Test labels.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Dict[str, Dict[str, Union[np.ndarray, None]]]:</span>
-<span class="sd">                A dictionary containing predictions and probabilities.</span>
+<span class="sd">            Dictionary containing predictions and probabilities.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -204,18 +190,17 @@
         <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the metric.</span>
-
-<span class="sd">        This method must be implemented in child classes.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the metric. Must be implemented in child classes.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            X_train (np.ndarray): Training feature data.</span>
-<span class="sd">            y_train (np.ndarray): Training labels.</span>
-<span class="sd">            X_test (np.ndarray): Test feature data.</span>
-<span class="sd">            y_test (np.ndarray): Test labels.</span>
+<span class="sd">            X_train: Training data.</span>
+<span class="sd">            y_train: Training labels.</span>
+<span class="sd">            X_test: Test data.</span>
+<span class="sd">            y_test: Test labels.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            float: Computed metric value.</span>
+<span class="sd">            Computed metric value.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            NotImplementedError: If not implemented in subclasses.</span>
@@ -233,11 +218,6 @@
 <div class="viewcode-block" id="RegressionMetric.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes RegressionMetric.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): Metric name.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">)</span></div>
 
 
@@ -250,17 +230,6 @@
         <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the regression metric.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            X_train (np.ndarray): Training feature data.</span>
-<span class="sd">            y_train (np.ndarray): Training labels.</span>
-<span class="sd">            X_test (np.ndarray): Test feature data.</span>
-<span class="sd">            y_test (np.ndarray): Test labels.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float: Computed metric value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_and_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_metric_func</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;predictions&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
@@ -279,8 +248,6 @@
 <div class="viewcode-block" id="R2Score">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.R2Score">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">R2Score</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;R2 Score metric.&quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="R2Score.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.R2Score.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -298,8 +265,6 @@
 <div class="viewcode-block" id="MeanAbsoluteError">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MeanAbsoluteError</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean Absolute Error metric.&quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="MeanAbsoluteError.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -317,8 +282,6 @@
 <div class="viewcode-block" id="MeanSquaredError">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MeanSquaredError</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean Squared Error metric.&quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="MeanSquaredError.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -341,11 +304,6 @@
 <div class="viewcode-block" id="ClassificationMetric.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes ClassificationMetric.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): Metric name.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span></div>
 
 
@@ -358,17 +316,6 @@
         <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the classification metric.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            X_train (np.ndarray): Training feature data.</span>
-<span class="sd">            y_train (np.ndarray): Training labels.</span>
-<span class="sd">            X_test (np.ndarray): Test feature data.</span>
-<span class="sd">            y_test (np.ndarray): Test labels.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float: Computed metric value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_and_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
             <span class="p">[</span>
@@ -392,11 +339,47 @@
 
 
 
+<div class="viewcode-block" id="LogLoss">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.LogLoss">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LogLoss</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
+<div class="viewcode-block" id="LogLoss.__init__">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.LogLoss.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Log Loss&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LogLoss._metric_func">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.LogLoss._metric_func">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_metric_func</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="F1Score">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">F1Score</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
+<div class="viewcode-block" id="F1Score.__init__">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;F1 Score&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="F1Score._metric_func">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score._metric_func">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_metric_func</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="Accuracy">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.Accuracy">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Accuracy</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Accuracy metric.&quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="Accuracy.__init__">
 <a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.Accuracy.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -413,23 +396,40 @@
 
 
 
-<div class="viewcode-block" id="F1Score">
-<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">F1Score</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;F1 Score metric.&quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="F1Score.__init__">
-<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score.__init__">[docs]</a>
+<div class="viewcode-block" id="PrecisionScore">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrecisionScore</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
+<div class="viewcode-block" id="PrecisionScore.__init__">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;F1 Score&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Precision Score&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="F1Score._metric_func">
-<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.F1Score._metric_func">[docs]</a>
+<div class="viewcode-block" id="PrecisionScore._metric_func">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore._metric_func">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_metric_func</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RecallScore">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.RecallScore">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RecallScore</span><span class="p">(</span><span class="n">ClassificationMetric</span><span class="p">):</span>
+<div class="viewcode-block" id="RecallScore.__init__">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.RecallScore.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Recall Score&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RecallScore._metric_func">
+<a class="viewcode-back" href="../../../metrics.html#ensemblefs.metrics.performance_metrics.RecallScore._metric_func">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_metric_func</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>
