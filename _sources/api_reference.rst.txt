@@ -9,3 +9,4 @@ API Reference
    mergers
    feature_selectors
    feature_selection_pipeline
+   metrics
