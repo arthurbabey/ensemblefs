@@ -2,6 +2,8 @@ from typing import Dict, Union
 
 import numpy as np
 from sklearn.ensemble import (
+    ExtraTreesClassifier,
+    ExtraTreesRegressor,
     GradientBoostingClassifier,
     GradientBoostingRegressor,
     RandomForestClassifier,
@@ -43,10 +45,10 @@ class BaseMetric:
         Union[
             RandomForestClassifier,
             LogisticRegression,
-            GradientBoostingClassifier,
+            ExtraTreesClassifier,
             RandomForestRegressor,
             LinearRegression,
-            GradientBoostingRegressor,
+            ExtraTreesRegressor,
         ],
     ]:
         """Initialize task-specific models."""
@@ -54,12 +56,12 @@ class BaseMetric:
             "classification": {
                 "Random Forest": RandomForestClassifier(),
                 "Logistic Regression": LogisticRegression(max_iter=1000),
-                "Gradient Boosting": GradientBoostingClassifier(),
+                "Gradient Boosting": ExtraTreesClassifier(),
             },
             "regression": {
                 "Random Forest": RandomForestRegressor(),
                 "Linear Regression": LinearRegression(),
-                "Gradient Boosting": GradientBoostingRegressor(),
+                "Gradient Boosting": ExtraTreesRegressor(),
             },
         }[self.task]
 

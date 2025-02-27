@@ -145,7 +145,14 @@ class FeatureSelectionPipeline:
         ]
 
         # Run parallel execution
-        parallel_results = Parallel(n_jobs=self.n_jobs)(
+        n_jobs = (
+            self.n_jobs
+            if self.n_jobs is not None and self.n_jobs != -1
+            else self.num_repeats
+        )
+        n_jobs = min(n_jobs, self.num_repeats)
+
+        parallel_results = Parallel(n_jobs=n_jobs)(
             delayed(self._pipeline_run_for_repeat)(i, verbose)
             for i in range(self.num_repeats)
         )
