@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
-from joblib import Parallel, delayed
+from joblib import Parallel, delayed, parallel_backend
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
@@ -144,7 +144,7 @@ class FeatureSelectionPipeline:
             self._load_class(m, instantiate=True) for m in self.fs_methods
         ]
 
-        # Run parallel execution
+        # Ensure we don't allocate more jobs than repeats
         n_jobs = (
             self.n_jobs
             if self.n_jobs is not None and self.n_jobs != -1
@@ -152,10 +152,13 @@ class FeatureSelectionPipeline:
         )
         n_jobs = min(n_jobs, self.num_repeats)
 
-        parallel_results = Parallel(n_jobs=n_jobs)(
-            delayed(self._pipeline_run_for_repeat)(i, verbose)
-            for i in range(self.num_repeats)
-        )
+        with parallel_backend(
+            "loky", inner_max_num_threads=1
+        ):  # Prevents oversubscription
+            parallel_results = Parallel(n_jobs=n_jobs)(
+                delayed(self._pipeline_run_for_repeat)(i, verbose)
+                for i in range(self.num_repeats)
+            )
 
         # Sort results by repeat index
         parallel_results.sort(key=lambda x: x[0])  # Now, x[0] is the repeat index

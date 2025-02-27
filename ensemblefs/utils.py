@@ -42,15 +42,15 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
     ),
     "random_forest_selector": (
         "ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector",
-        ["task", "num_features_to_select", "random_state", "n_jobs"],
+        ["task", "num_features_to_select", "random_state"],
     ),
     "mutual_info_selector": (
         "ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector",
-        ["task", "num_features_to_select", "n_jobs"],
+        ["task", "num_features_to_select"],
     ),
     "rfe_rf_selector": (
         "ensemblefs.feature_selectors.rfe_rf_selector.RFERFSelector",
-        ["task", "num_features_to_select", "n_jobs"],
+        ["task", "num_features_to_select"],
     ),
     "svm_selector": (
         "ensemblefs.feature_selectors.svm_selector.SVMSelector",
@@ -58,11 +58,11 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
     ),
     "xgboost_selector": (
         "ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector",
-        ["task", "num_features_to_select", "random_state", "n_jobs"],
+        ["task", "num_features_to_select", "random_state"],
     ),
     "mrmr_selector": (
         "ensemblefs.feature_selectors.mrmr_selector.MRMRSelector",
-        ["task", "num_features_to_select", "n_jobs"],
+        ["task", "num_features_to_select"],
     ),
     "lasso_selector": (
         "ensemblefs.feature_selectors.lasso_selector.LassoSelector",

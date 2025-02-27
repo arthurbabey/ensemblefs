@@ -54,14 +54,14 @@ class BaseMetric:
         """Initialize task-specific models."""
         return {
             "classification": {
-                "Random Forest": RandomForestClassifier(),
+                "Random Forest": RandomForestClassifier(n_jobs=1),
                 "Logistic Regression": LogisticRegression(max_iter=1000),
-                "Gradient Boosting": ExtraTreesClassifier(),
+                "Gradient Boosting": ExtraTreesClassifier(n_jobs=1),
             },
             "regression": {
-                "Random Forest": RandomForestRegressor(),
-                "Linear Regression": LinearRegression(),
-                "Gradient Boosting": ExtraTreesRegressor(),
+                "Random Forest": RandomForestRegressor(n_jobs=1),
+                "Linear Regression": LinearRegression(n_jobs=1),
+                "Gradient Boosting": ExtraTreesRegressor(n_jobs=1),
             },
         }[self.task]
 
