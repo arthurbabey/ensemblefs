@@ -134,14 +134,14 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize task-specific models.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(),</span>
+                <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
                 <span class="s2">&quot;Logistic Regression&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
-                <span class="s2">&quot;Gradient Boosting&quot;</span><span class="p">:</span> <span class="n">ExtraTreesClassifier</span><span class="p">(),</span>
+                <span class="s2">&quot;Gradient Boosting&quot;</span><span class="p">:</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="p">},</span>
             <span class="s2">&quot;regression&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestRegressor</span><span class="p">(),</span>
-                <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
-                <span class="s2">&quot;Gradient Boosting&quot;</span><span class="p">:</span> <span class="n">ExtraTreesRegressor</span><span class="p">(),</span>
+                <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                <span class="s2">&quot;Gradient Boosting&quot;</span><span class="p">:</span> <span class="n">ExtraTreesRegressor</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
             <span class="p">},</span>
         <span class="p">}[</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">]</span></div>
 
