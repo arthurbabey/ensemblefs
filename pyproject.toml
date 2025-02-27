@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ensemblefs"
-version = "0.1.0"
+version = "0.0.1"
 description = "Customizable Ensemble Feature Selection pipeline using Multi-Objective Optimization"
 readme = "README.md"
 authors = [
