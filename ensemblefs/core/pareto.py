@@ -12,14 +12,12 @@ class ParetoAnalysis:
         """
         if not data:
             raise ValueError("Data cannot be empty.")
-        self.data: List[List[float]] = data
-        self.num_groups: int = len(data)
-        self.num_metrics: int = len(data[0])
-        self.group_names: List[str] = group_names
+        self.data = data
+        self.num_groups = len(data)
+        self.num_metrics = len(data[0])
+        self.group_names = group_names
         # Each result contains: [group_name, dominate_count, is_dominated_count, scalar score]
-        self.results: List[List[Union[str, int]]] = [
-            [0] * 4 for _ in range(self.num_groups)
-        ]
+        self.results = [[0] * 4 for _ in range(self.num_groups)]
 
     def group_dominate_count(self, group_index: int) -> int:
         """

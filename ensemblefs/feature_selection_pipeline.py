@@ -9,7 +9,10 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 from .core import Feature, ParetoAnalysis
-from .metrics.stability_metrics import compute_stability_metrics
+from .metrics.stability_metrics import (
+    compute_diversity_agreement,
+    compute_stability_metrics,
+)
 from .utils import extract_params, get_class_info
 
 
@@ -136,7 +139,7 @@ class FeatureSelectionPipeline:
         # Reset internal state so that `run()` always starts fresh
         self.FS_subsets = {}
         self.merged_features = {}
-        num_metrics = len(self.metrics) + 1  # +1 for stability
+        num_metrics = len(self.metrics) + 2  # +1 for stability + 1 for agreement
         result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]] = [
             {} for _ in range(num_metrics)
         ]
@@ -331,7 +334,8 @@ class FeatureSelectionPipeline:
         Returns:
             Updated result_dicts with computed metrics.
         """
-        num_metrics = len(self.metrics) + 1
+        num_metrics = len(self.metrics) + 2  # + 1 for stability + 1 for agreement
+
         local_result_dicts = [{} for _ in range(num_metrics)]
 
         for group in self.subgroup_names:
@@ -355,8 +359,13 @@ class FeatureSelectionPipeline:
                 [f.name for f in fs_subsets_local[(idx, method)] if f.selected]
                 for method in group
             ]
+
             stability = compute_stability_metrics(fs_lists) if fs_lists else 0
-            local_result_dicts[len(metric_vals)][key] = stability
+            agreement = (
+                compute_diversity_agreement(fs_lists, selected_feats) if fs_lists else 0
+            )
+            local_result_dicts[len(metric_vals)][key] = agreement
+            local_result_dicts[len(metric_vals) + 1][key] = stability
 
         return local_result_dicts
 
