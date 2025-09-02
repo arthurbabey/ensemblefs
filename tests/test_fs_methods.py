@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pytest
 from sklearn.datasets import make_classification, make_regression
 
-from ensemblefs.feature_selectors import *
+from moosefs.feature_selectors import *
 
 
 @pytest.fixture

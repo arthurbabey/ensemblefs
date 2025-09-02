@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 import pytest
 
-from ensemblefs.core.data_processor import DataProcessor
+from moosefs.core.data_processor import DataProcessor
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

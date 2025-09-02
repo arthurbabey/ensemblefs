@@ -5,7 +5,7 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from ensemblefs.core.pareto import ParetoAnalysis
+from moosefs.core.pareto import ParetoAnalysis
 
 
 # ------------------------------------------------------------------ helpers

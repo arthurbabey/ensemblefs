@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from ensemblefs.feature_selection_pipeline import FeatureSelectionPipeline
+from moosefs.feature_selection_pipeline import FeatureSelectionPipeline
 
 
 @pytest.fixture

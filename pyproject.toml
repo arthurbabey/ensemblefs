@@ -3,9 +3,9 @@ requires = ["hatchling>=1.4.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ensemblefs"
+name = "moose-fs"
 version = "0.0.1"
-description = "Customizable Ensemble Feature Selection pipeline using Multi-Objective Optimization"
+description = "MOOSE-FS: Multi-Objective Optimized Ensemble Feature Selection"
 readme = "README.md"
 authors = [
     { name = "Arthur Babey", email = "arthur.babey@heig-vd.ch" }
@@ -47,6 +47,7 @@ efs-pipeline = "scripts.main:main"
 
 [tool.hatch.build.targets.wheel]
 include = [
+    "moosefs/**",
     "ensemblefs/**",
     "scripts/**",
     "README.md",
