@@ -1,0 +1,66 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: docs-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_deploy:
+    name: Build Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[docs,build]"
+
+      - name: Ensure root directory is included in PYTHONPATH
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          echo $PYTHONPATH
+
+      - name: Build package
+        run: |
+          python -m build
+
+      - name: Clean build directory
+        run: |
+          rm -rf docs/build/* || true
+
+      - name: Build docs (sphinx)
+        if: ${{ hashFiles('docs/source/conf.py') != '' }}
+        run: |
+          export PYTHONPATH=$(pwd)
+          echo "Building docs with PYTHONPATH: $PYTHONPATH"
+          sphinx-build -b html docs/source docs/build/html -v
+
+      - name: Deploy to GitHub Pages
+        if: ${{ hashFiles('docs/source/conf.py') != '' && github.event_name == 'push' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build/html
+
+      - name: Verify Imports
+        run: |
+          python -c "import moosefs.core.pareto; print('moosefs.core.pareto imported successfully')"
+          python -c "import moosefs.feature_selection_pipeline; print('moosefs.feature_selection_pipeline imported successfully')"
+
