@@ -46,15 +46,11 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
     ),
     "mutual_info_selector": (
         "ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector",
-        ["task", "num_features_to_select"],
-    ),
-    "rfe_rf_selector": (
-        "ensemblefs.feature_selectors.rfe_rf_selector.RFERFSelector",
-        ["task", "num_features_to_select"],
+        ["task", "num_features_to_select", "random_state"],
     ),
     "svm_selector": (
         "ensemblefs.feature_selectors.svm_selector.SVMSelector",
-        ["task", "num_features_to_select", "random_state"],
+        ["task", "num_features_to_select"],
     ),
     "xgboost_selector": (
         "ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector",
@@ -68,6 +64,14 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
         "ensemblefs.feature_selectors.lasso_selector.LassoSelector",
         ["task", "num_features_to_select", "random_state"],
     ),
+    "elastic_net_selector": (
+        "ensemblefs.feature_selectors.elastic_net_selector.ElasticNetSelector",
+        ["task", "num_features_to_select", "random_state"],
+    ),
+    "variance_selector": (
+        "ensemblefs.feature_selectors.variance_selectors.VarianceSelector",
+        ["task", "num_features_to_select"],
+    ),
     "borda_merger": (
         "ensemblefs.merging_strategies.borda_merger.BordaMerger",
         [],
@@ -75,6 +79,22 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
     "union_of_intersections_merger": (
         "ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger",
         [],
+    ),
+    "borda_merger": (
+        "ensemblefs.merging_strategies.borda_merger.BordaMerger",
+        [],
+    ),
+    "l2_norm_merger": (
+        "ensemblefs.merging_strategies.l2_norm_merger.L2NormMerger",
+        [],
+    ),
+    "arithmetic_mean_merger": (
+        "ensemblefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger",
+        [],
+    ),
+    "consensus_merger": (
+        "ensemblefs.merging_strategies.consensus_merger.ConsensusMerger",
+        ["k", "fill"],
     ),
 }
 

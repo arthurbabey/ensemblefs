@@ -6,7 +6,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pytest
 
 from ensemblefs.core.feature import Feature
-from ensemblefs.merging_strategies import BordaMerger, UnionOfIntersectionsMerger
+from ensemblefs.merging_strategies import (
+    BordaMerger,
+    UnionOfIntersectionsMerger,
+    L2NormMerger,
+    ArithmeticMeanMerger,
+)
 
 
 @pytest.fixture
@@ -17,6 +22,16 @@ def union_of_intersections():
 @pytest.fixture
 def borda_merger():
     return BordaMerger()
+
+
+@pytest.fixture
+def l2norm_merger():
+    return L2NormMerger()
+
+
+@pytest.fixture
+def arithmetic_mean_merger():
+    return ArithmeticMeanMerger()
 
 
 def subset_to_Feature(subset):
@@ -90,7 +105,7 @@ def test_borda_basic_functionality(borda_merger):
         [Feature("A", 11), Feature("B", 6), Feature("C", 4)],
     ]
     result = borda_merger.merge(subsets, num_features_to_select=3)
-    assert result == ["A", "B", "C"]  # Expected ranking based on scores
+    assert result == ["A", "B", "C"]
 
 
 def test_borda_empty_input(borda_merger):
@@ -102,7 +117,7 @@ def test_borda_empty_input(borda_merger):
 def test_borda_single_score_list(borda_merger):
     subsets = [[Feature("A", 10), Feature("B", 8), Feature("C", 6)]]
     result = borda_merger.merge(subsets, num_features_to_select=3)
-    assert result == ["A", "B", "C"]  # Single list should return names in order
+    assert result == ["A", "B", "C"]
 
 
 def test_borda_multiple_scores(borda_merger):
@@ -112,7 +127,7 @@ def test_borda_multiple_scores(borda_merger):
         [Feature("A", 8), Feature("B", 6), Feature("C", 7)],
     ]
     result = borda_merger.merge(subsets, num_features_to_select=3)
-    assert result == ["A", "B", "C"]  # Expected merged ranking
+    assert result == ["A", "B", "C"]
 
 
 def test_borda_k_features(borda_merger):
@@ -122,7 +137,7 @@ def test_borda_k_features(borda_merger):
         [Feature("A", 11), Feature("B", 6), Feature("C", 4)],
     ]
     result = borda_merger.merge(subsets, num_features_to_select=2)
-    assert result == ["A", "B"]  # Top 2 features
+    assert result == ["A", "B"]
 
 
 def test_borda_symmetry_property(borda_merger):
@@ -131,7 +146,7 @@ def test_borda_symmetry_property(borda_merger):
         [Feature("A", 7), Feature("B", 10), Feature("C", 6)],
     ]
     result = borda_merger.merge(subsets, num_features_to_select=3)
-    assert result == ["A", "B", "C"]  # Symmetry test: A and B tie for top spots
+    assert result == ["A", "B", "C"]
 
 
 def test_borda_big(borda_merger):
@@ -161,23 +176,176 @@ def test_borda_big(borda_merger):
         Feature(name="J", score=1),
     ]
 
-    # rank for features 1 :
-    # J = 1, D = 2, A =3, G = 4, C = 5, F = 6, I = 7, B = 8, H = 9, E = 10
-
-    # rank for features 2 :
-    # F = 1, G = 2, I = 3, A = 4, B = 5, C = 6, D = 7, E = 8, H = 9, J = 10
-
-    # mean borda Rank
-    # A = 3.5, B = 6.5, C = 5.5, D = 4.5, E = 9, F = 3.5, G = 3, H = 9, I = 5, J = 5.5
-
-    # ranking from low to high rank
-    # G, A, F, D, I, C, J, B, E, H
     expected_result = ["G", "A", "F", "D", "I", "C", "J", "B", "E", "H"]
 
     subsets = [features1, features2]
-
-    # Call the merge function
     result = borda_merger.merge(subsets, num_features_to_select=10)
+    assert result == expected_result
 
-    # Assert the result matches the expected output
+
+def test_l2norm_basic_functionality(l2norm_merger):
+    subsets = [
+        [Feature("A", 1), Feature("B", 2), Feature("C", 3)],
+        [Feature("A", 3), Feature("B", 2), Feature("C", 1)],
+    ]
+    result = l2norm_merger.merge(subsets, num_features_to_select=3)
+    assert result == ["A", "C", "B"]
+
+
+def test_l2norm_empty_input(l2norm_merger):
+    subsets = []
+    with pytest.raises(ValueError):
+        l2norm_merger.merge(subsets, num_features_to_select=3)
+
+
+def test_l2norm_single_score_list(l2norm_merger):
+    subsets = [[Feature("A", 10), Feature("B", 8), Feature("C", 6)]]
+    result = l2norm_merger.merge(subsets, num_features_to_select=3)
+    assert result == ["A", "B", "C"]
+
+
+def test_l2norm_symmetry_property(l2norm_merger):
+    subsets1 = [
+        [Feature("A", 1), Feature("B", 2), Feature("C", 3)],
+        [Feature("A", 3), Feature("B", 2), Feature("C", 1)],
+    ]
+    subsets2 = [
+        [Feature("A", 3), Feature("B", 2), Feature("C", 1)],
+        [Feature("A", 1), Feature("B", 2), Feature("C", 3)],
+    ]
+    result1 = l2norm_merger.merge(subsets1, num_features_to_select=3)
+    result2 = l2norm_merger.merge(subsets2, num_features_to_select=3)
+    assert result1 == result2
+
+
+def test_l2norm_k_features(l2norm_merger):
+    subsets = [
+        [Feature("A", 1), Feature("B", 2), Feature("C", 3)],
+        [Feature("A", 3), Feature("B", 2), Feature("C", 1)],
+    ]
+    result = l2norm_merger.merge(subsets, num_features_to_select=2)
+    assert result == ["A", "C"]
+
+
+def test_l2norm_big(l2norm_merger):
+    features1 = [
+        Feature(name="A", score=8),
+        Feature(name="B", score=3),
+        Feature(name="C", score=6),
+        Feature(name="D", score=9),
+        Feature(name="E", score=1),
+        Feature(name="F", score=5),
+        Feature(name="G", score=7),
+        Feature(name="H", score=2),
+        Feature(name="I", score=4),
+        Feature(name="J", score=10),
+    ]
+
+    features2 = [
+        Feature(name="A", score=7),
+        Feature(name="B", score=6),
+        Feature(name="C", score=5),
+        Feature(name="D", score=4),
+        Feature(name="E", score=3),
+        Feature(name="F", score=10),
+        Feature(name="G", score=9),
+        Feature(name="H", score=2),
+        Feature(name="I", score=8),
+        Feature(name="J", score=1),
+    ]
+
+    expected_result = ["G", "F", "A", "J", "D", "I", "C", "B", "E", "H"]
+
+    subsets = [features1, features2]
+    result = l2norm_merger.merge(subsets, num_features_to_select=10)
+    assert result == expected_result
+
+
+def test_arithmetic_mean_basic_functionality(arithmetic_mean_merger):
+    subsets = [
+        [Feature("A", 10), Feature("B", 8), Feature("C", 6)],
+        [Feature("A", 9), Feature("B", 7), Feature("C", 5)],
+        [Feature("A", 8), Feature("B", 6), Feature("C", 7)],
+    ]
+    result = arithmetic_mean_merger.merge(subsets, num_features_to_select=3)
+    assert result == ["A", "B", "C"]
+
+
+def test_arithmetic_mean_empty_input(arithmetic_mean_merger):
+    subsets = []
+    with pytest.raises(ValueError):
+        arithmetic_mean_merger.merge(subsets, num_features_to_select=3)
+
+
+def test_arithmetic_mean_single_score_list(arithmetic_mean_merger):
+    subsets = [[Feature("A", 10), Feature("B", 8), Feature("C", 6)]]
+    result = arithmetic_mean_merger.merge(subsets, num_features_to_select=3)
+    assert result == ["A", "B", "C"]
+
+
+def test_arithmetic_mean_multiple_scores(arithmetic_mean_merger):
+    subsets = [
+        [Feature("A", 90), Feature("B", 70), Feature("C", 50)],
+        [Feature("A", 80), Feature("B", 60), Feature("C", 40)],
+        [Feature("A", 85), Feature("B", 65), Feature("C", 55)],
+    ]
+    result = arithmetic_mean_merger.merge(subsets, num_features_to_select=3)
+    assert result == ["A", "B", "C"]
+
+
+def test_arithmetic_mean_k_features(arithmetic_mean_merger):
+    subsets = [
+        [Feature("A", 10), Feature("B", 8), Feature("C", 6)],
+        [Feature("A", 9), Feature("B", 7), Feature("C", 5)],
+        [Feature("A", 11), Feature("B", 6), Feature("C", 4)],
+    ]
+    result = arithmetic_mean_merger.merge(subsets, num_features_to_select=2)
+    assert result == ["A", "B"]
+
+
+def test_arithmetic_mean_symmetry_property(arithmetic_mean_merger):
+    subsets1 = [
+        [Feature("A", 10), Feature("B", 7), Feature("C", 6)],
+        [Feature("A", 7), Feature("B", 10), Feature("C", 6)],
+    ]
+    subsets2 = [
+        [Feature("A", 7), Feature("B", 10), Feature("C", 6)],
+        [Feature("A", 10), Feature("B", 7), Feature("C", 6)],
+    ]
+    result1 = arithmetic_mean_merger.merge(subsets1, num_features_to_select=3)
+    result2 = arithmetic_mean_merger.merge(subsets2, num_features_to_select=3)
+    assert result1 == result2
+
+
+def test_arithmetic_mean_big(arithmetic_mean_merger):
+    features1 = [
+        Feature(name="A", score=8),
+        Feature(name="B", score=3),
+        Feature(name="C", score=6),
+        Feature(name="D", score=9),
+        Feature(name="E", score=1),
+        Feature(name="F", score=5),
+        Feature(name="G", score=7),
+        Feature(name="H", score=2),
+        Feature(name="I", score=4),
+        Feature(name="J", score=10),
+    ]
+
+    features2 = [
+        Feature(name="A", score=7),
+        Feature(name="B", score=6),
+        Feature(name="C", score=5),
+        Feature(name="D", score=4),
+        Feature(name="E", score=3),
+        Feature(name="F", score=10),
+        Feature(name="G", score=9),
+        Feature(name="H", score=2),
+        Feature(name="I", score=8),
+        Feature(name="J", score=1),
+    ]
+
+    expected_result = ["G", "A", "F", "D", "I", "C", "J", "B", "E", "H"]
+
+    subsets = [features1, features2]
+    result = arithmetic_mean_merger.merge(subsets, num_features_to_select=10)
     assert result == expected_result
