@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from ensemblefs.metrics import (
+from moosefs.metrics import (
     Accuracy,
     F1Score,
     LogLoss,

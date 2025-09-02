@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import pytest
 
-from ensemblefs.core.feature import Feature
+from moosefs.core.feature import Feature
 
 
 @pytest.fixture

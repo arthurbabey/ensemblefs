@@ -2,14 +2,21 @@ import argparse
 import csv
 import os
 import shutil
+import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+# Ensure project root is on sys.path when running as `python scripts/main.py`
+_THIS_DIR = Path(__file__).parent
+_REPO_ROOT = _THIS_DIR.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 import pandas as pd
 import yaml
 
-from ensemblefs import FeatureSelectionPipeline
-from ensemblefs.core import DataProcessor
+from moosefs import FeatureSelectionPipeline
+from moosefs.core import DataProcessor
 from scripts.utils import (
     read_config,
     validate_experience_config,

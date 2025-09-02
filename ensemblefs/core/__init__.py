@@ -1,6 +1,2 @@
-from .data_processor import DataProcessor
-from .feature import Feature
-from .novovicova import StabilityNovovicova
-from .pareto import ParetoAnalysis
+from moosefs.core import *  # noqa
 
-__all__ = ["DataProcessor", "Feature", "StabilityNovovicova", "ParetoAnalysis"]

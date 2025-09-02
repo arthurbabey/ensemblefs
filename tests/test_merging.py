@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import pytest
 
-from ensemblefs.core.feature import Feature
-from ensemblefs.merging_strategies import (
+from moosefs.core.feature import Feature
+from moosefs.merging_strategies import (
     BordaMerger,
     UnionOfIntersectionsMerger,
     L2NormMerger,

@@ -1,11 +1,11 @@
-# ensemblefs
+# MOOSE-FS
 
 [![tests](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml)  
 [Documentation](https://arthurbabey.github.io/ensemblefs/)
 
 ## Overview
 
-**ensemblefs** is a feature selection library that leverages an ensemble-based approach to optimize both predictive performance and stability. By combining multiple feature selection methods, merging strategies, and evaluation metrics, it provides a highly flexible and tunable pipeline for both classification and regression tasks. The package automates feature selection across multiple iterations and uses Pareto optimization to identify the best feature subsets.
+MOOSE-FS is a feature selection library that leverages an ensemble-based approach to optimize both predictive performance and stability. By combining multiple feature selection methods, merging strategies, and evaluation metrics, it provides a highly flexible and tunable pipeline for both classification and regression tasks. The package automates feature selection across multiple iterations and uses Pareto optimization to identify the best feature subsets.
 
 Users can define their feature selection process by:
 - Selecting feature selection methods from predefined options or implementing custom ones.
@@ -49,7 +49,7 @@ pip install .
 
 ### 1. Feature Selection Pipeline
 
-The core of **ensemblefs** is the `FeatureSelectionPipeline`, which provides a fully configurable workflow for feature selection. Users can specify:
+The core of MOOSE-FS is the `FeatureSelectionPipeline`, which provides a fully configurable workflow for feature selection. Users can specify:
 - Feature selection methods
 - Merging strategy
 - Evaluation metrics
@@ -60,7 +60,7 @@ The core of **ensemblefs** is the `FeatureSelectionPipeline`, which provides a f
 #### Example Usage
 
 ```python
-from ensemblefs import FeatureSelectionPipeline
+from moosefs import FeatureSelectionPipeline
 
 fs_methods = ["f_statistic_selector", "random_forest_selector", "svm_selector"]
 merging_strategy = "union_of_intersections_merger"
@@ -79,7 +79,7 @@ This will run feature selection, merge results using the chosen strategy, and re
 
 ### 2. Extensibility
 
-**ensemblefs** is designed to be easily extended. Users can implement custom:
+MOOSE-FS is designed to be easily extended. Users can implement custom:
 - **Feature selection methods**: Define a new feature selector class and integrate it into the pipeline.
 - **Merging strategies**: Implement a custom strategy to aggregate selected features.
 - **Metrics**: Add new evaluation metrics tailored to specific tasks.
@@ -141,7 +141,13 @@ The results are saved in a structured directory under `results/example_experimen
 
 ## Contributing
 
-Contributions are welcome! If you have ideas for improving **ensemblefs**, feel free to open an issue or submit a pull request.
+Contributions are welcome! If you have ideas for improving MOOSE-FS, feel free to open an issue or submit a pull request.
+
+## Migration Note
+
+- The package has been renamed: use `import moosefs` instead of `import ensemblefs`.
+- Distribution name on PyPI is now `moose-fs`.
+- Backward-compat shim remains available for a transition period: `import ensemblefs` emits a DeprecationWarning and re-exports the public API from `moosefs`.
 
 ---
 

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from ensemblefs.core.novovicova import StabilityNovovicova
+from moosefs.core.novovicova import StabilityNovovicova
 
 
 def test_empty_input():

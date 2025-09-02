@@ -8,7 +8,7 @@ import pytest
 # Ensure the project root is in sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from ensemblefs.feature_selection_pipeline import FeatureSelectionPipeline
+from moosefs.feature_selection_pipeline import FeatureSelectionPipeline
 
 
 @pytest.fixture
