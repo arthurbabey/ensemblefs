@@ -1,12 +1,13 @@
 Metrics
 =======
 
-.. automodule:: ensemblefs.metrics.performance_metrics
+.. automodule:: moosefs.metrics.performance_metrics
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: ensemblefs.metrics.stability_metrics
+.. automodule:: moosefs.metrics.stability_metrics
     :members:
     :undoc-members:
     :show-inheritance:
+

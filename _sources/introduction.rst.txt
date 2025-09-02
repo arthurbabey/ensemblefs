@@ -1,21 +1,22 @@
-Introduction to ensemblefs
-=========================================
+Introduction to MOOSE-FS
+=========================
 
-ensemblefs is a Python library designed to enhance feature selection processes by leveraging the strengths of various ensemble techniques. This library aims to provide users with robust tools to improve model accuracy and interpretability in machine learning tasks.
+MOOSE-FS is a Python library designed to enhance feature selection by leveraging an ensemble of methods and multi‑objective optimization. It aims to provide robust, reproducible, and tunable pipelines for feature selection in both classification and regression tasks.
 
-Why Use ensemblefs?
----------------------------------
+Why Use MOOSE-FS?
+-----------------
 
-ensemblefs combines multiple feature selection algorithms to form a strong decision basis, reducing the likelihood of overfitting and improving the stability of the feature selection process.
+MOOSE-FS combines multiple feature selection algorithms to form a stronger decision basis, reducing overfitting risk and improving the stability of selected features.
 
 Features
 --------
 
-- **Robustness**: Combines several feature selection methods to reduce variance.
-- **Flexibility**: Easy integration with existing machine learning pipelines.
-- **Customizability**: Allows customization of the ensemble methods used.
+- Robustness: Ensemble across selectors and repeats.
+- Flexibility: Works with built‑in and custom selectors/mergers/metrics.
+- Customizability: Extend via simple base classes.
 
 Getting Started
 ---------------
 
-To get started with ensemblefs, visit the :doc:`installation` section to set up the library, and then check the :doc:`usage` guide to learn how to integrate it into your projects.
+To get started with MOOSE-FS, visit the :doc:`installation` section, then see :doc:`usage` for an example pipeline.
+

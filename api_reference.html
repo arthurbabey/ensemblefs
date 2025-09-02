@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; ensemblefs 0.1.0 documentation</title>
+  <title>API Reference &mdash; MOOSE-FS 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -32,7 +32,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            ensemblefs
+            MOOSE-FS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,7 +43,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to MOOSE-FS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
@@ -62,7 +62,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ensemblefs</a>
+          <a href="index.html">MOOSE-FS</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -86,44 +86,54 @@
 <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="core.html">Core Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="core.html#ensemblefs.core.data_processor.DataProcessor"><code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#ensemblefs.core.feature.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#ensemblefs.core.novovicova.StabilityNovovicova"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#ensemblefs.core.pareto.ParetoAnalysis"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#moosefs.core.data_processor.DataProcessor"><code class="docutils literal notranslate"><span class="pre">DataProcessor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#moosefs.core.feature.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#moosefs.core.novovicova.StabilityNovovicova"><code class="docutils literal notranslate"><span class="pre">StabilityNovovicova</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#moosefs.core.pareto.ParetoAnalysis"><code class="docutils literal notranslate"><span class="pre">ParetoAnalysis</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="mergers.html">Mergers Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mergers.html#ensemblefs.merging_strategies.base_merger.MergingStrategy"><code class="docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="mergers.html#ensemblefs.merging_strategies.borda_merger.BordaMerger"><code class="docutils literal notranslate"><span class="pre">BordaMerger</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="mergers.html#ensemblefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy"><code class="docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.borda_merger.BordaMerger"><code class="docutils literal notranslate"><span class="pre">BordaMerger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger"><code class="docutils literal notranslate"><span class="pre">UnionOfIntersectionsMerger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.l2_norm_merger.L2NormMerger"><code class="docutils literal notranslate"><span class="pre">L2NormMerger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger"><code class="docutils literal notranslate"><span class="pre">ArithmeticMeanMerger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html#moosefs.merging_strategies.consensus_merger.ConsensusMerger"><code class="docutils literal notranslate"><span class="pre">ConsensusMerger</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="feature_selectors.html">Feature Selectors Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.base_selector.FeatureSelector"><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.f_statistic_selector.FStatisticSelector"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.mutual_info_selector.MutualInfoSelector"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.random_forest_selector.RandomForestSelector"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.svm_selector.SVMSelector"><code class="docutils literal notranslate"><span class="pre">SVMSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#ensemblefs.feature_selectors.xgboost_selector.XGBoostSelector"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.base_selector.FeatureSelector"><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.f_statistic_selector.FStatisticSelector"><code class="docutils literal notranslate"><span class="pre">FStatisticSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.mutual_info_selector.MutualInfoSelector"><code class="docutils literal notranslate"><span class="pre">MutualInfoSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.random_forest_selector.RandomForestSelector"><code class="docutils literal notranslate"><span class="pre">RandomForestSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.svm_selector.SVMSelector"><code class="docutils literal notranslate"><span class="pre">SVMSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.xgboost_selector.XGBoostSelector"><code class="docutils literal notranslate"><span class="pre">XGBoostSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.lasso_selector.LassoSelector"><code class="docutils literal notranslate"><span class="pre">LassoSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.elastic_net_selector.ElasticNetSelector"><code class="docutils literal notranslate"><span class="pre">ElasticNetSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.variance_selectors.VarianceSelector"><code class="docutils literal notranslate"><span class="pre">VarianceSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.mrmr_selector.MRMRSelector"><code class="docutils literal notranslate"><span class="pre">MRMRSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selectors.html#moosefs.feature_selectors.default_variance.variance_selector_default"><code class="docutils literal notranslate"><span class="pre">variance_selector_default()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="feature_selection_pipeline.html">Feature Selection Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="feature_selection_pipeline.html#ensemblefs.feature_selection_pipeline.FeatureSelectionPipeline"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_pipeline.html#moosefs.feature_selection_pipeline.FeatureSelectionPipeline"><code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.RegressionMetric"><code class="docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.R2Score"><code class="docutils literal notranslate"><span class="pre">R2Score</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.MeanAbsoluteError"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.MeanSquaredError"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.ClassificationMetric"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.LogLoss"><code class="docutils literal notranslate"><span class="pre">LogLoss</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.F1Score"><code class="docutils literal notranslate"><span class="pre">F1Score</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.PrecisionScore"><code class="docutils literal notranslate"><span class="pre">PrecisionScore</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.performance_metrics.RecallScore"><code class="docutils literal notranslate"><span class="pre">RecallScore</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html#ensemblefs.metrics.stability_metrics.compute_stability_metrics"><code class="docutils literal notranslate"><span class="pre">compute_stability_metrics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.BaseMetric"><code class="docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.RegressionMetric"><code class="docutils literal notranslate"><span class="pre">RegressionMetric</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.R2Score"><code class="docutils literal notranslate"><span class="pre">R2Score</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.MeanAbsoluteError"><code class="docutils literal notranslate"><span class="pre">MeanAbsoluteError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.MeanSquaredError"><code class="docutils literal notranslate"><span class="pre">MeanSquaredError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.ClassificationMetric"><code class="docutils literal notranslate"><span class="pre">ClassificationMetric</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.LogLoss"><code class="docutils literal notranslate"><span class="pre">LogLoss</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.F1Score"><code class="docutils literal notranslate"><span class="pre">F1Score</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.PrecisionScore"><code class="docutils literal notranslate"><span class="pre">PrecisionScore</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.performance_metrics.RecallScore"><code class="docutils literal notranslate"><span class="pre">RecallScore</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.stability_metrics.compute_stability_metrics"><code class="docutils literal notranslate"><span class="pre">compute_stability_metrics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.stability_metrics._jaccard"><code class="docutils literal notranslate"><span class="pre">_jaccard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#moosefs.metrics.stability_metrics.diversity_agreement"><code class="docutils literal notranslate"><span class="pre">diversity_agreement()</span></code></a></li>
 </ul>
 </li>
 </ul>

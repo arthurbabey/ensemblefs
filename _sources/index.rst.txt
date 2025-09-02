@@ -1,10 +1,7 @@
-.. EnsembleFeatureSelection documentation master file, created by
-   sphinx-quickstart on Mon Jun 24 15:10:03 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. MOOSE-FS documentation master file
 
-Welcome to ensemblefs's documentation!
-====================================================
+Welcome to MOOSE-FS's documentation!
+====================================
 
 Contents:
 
@@ -15,3 +12,4 @@ Contents:
    installation
    usage
    api_reference
+

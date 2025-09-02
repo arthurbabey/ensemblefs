@@ -1,27 +1,23 @@
 Core Module
 ===========
 
-.. automodule:: ensemblefs.core.data_processor
+.. automodule:: moosefs.core.data_processor
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: ensemblefs.core.feature
+.. automodule:: moosefs.core.feature
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: ensemblefs.core.metrics
+.. automodule:: moosefs.core.novovicova
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: ensemblefs.core.novovicova
+.. automodule:: moosefs.core.pareto
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: ensemblefs.core.pareto
-   :members:
-   :undoc-members:
-   :show-inheritance:

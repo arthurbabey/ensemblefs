@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; ensemblefs 0.1.0 documentation</title>
+  <title>Usage &mdash; MOOSE-FS 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -32,7 +32,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            ensemblefs
+            MOOSE-FS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,13 +43,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to MOOSE-FS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuring-the-pipeline">Configuring the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-pipeline">Running the Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#extendability">Extendability</a></li>
 </ul>
 </li>
@@ -62,7 +60,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ensemblefs</a>
+          <a href="index.html">MOOSE-FS</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -84,54 +82,44 @@
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>The <strong>ensemblefs</strong> package provides a customizable, ensemble-based feature selection method using multi-objective optimization to identify the most stable and high-performing feature subsets from a dataset. The core of this functionality is encapsulated within the <cite>FeatureSelectionPipeline</cite> class, which orchestrates the entire selection process.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">moosefs</span></code> package provides a customizable, ensemble‑based feature selection pipeline that balances predictive performance and stability. The core entry is <code class="docutils literal notranslate"><span class="pre">FeatureSelectionPipeline</span></code>.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
-<p>To start using the <strong>ensemblefs</strong> package, you first need to import the main pipeline class and configure it with the feature selection methods and merging strategy of your choice.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelectionPipeline</span>
-</pre></div>
-</div>
-</section>
-<section id="configuring-the-pipeline">
-<h2>Configuring the Pipeline<a class="headerlink" href="#configuring-the-pipeline" title="Link to this heading"></a></h2>
-<p>The <cite>FeatureSelectionPipeline</cite> allows for flexible configuration with various built-in feature selection methods, as well as custom methods and merging strategies. Here’s an example of setting up a pipeline:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define your feature selectors</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.feature_selectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestSelector</span><span class="p">,</span> <span class="n">MutualInfoSelector</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">moosefs</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelectionPipeline</span>
 
-<span class="c1"># Import the merger strategy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.merging_strategies</span><span class="w"> </span><span class="kn">import</span> <span class="n">BordaMerger</span>
+<span class="c1"># data is a pandas.DataFrame with a &#39;target&#39; column</span>
+<span class="n">fs_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f_statistic_selector&quot;</span><span class="p">,</span> <span class="s2">&quot;random_forest_selector&quot;</span><span class="p">,</span> <span class="s2">&quot;svm_selector&quot;</span><span class="p">]</span>
+<span class="n">merging_strategy</span> <span class="o">=</span> <span class="s2">&quot;union_of_intersections_merger&quot;</span>
 
-<span class="c1"># Create an instance of the pipeline</span>
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">FeatureSelectionPipeline</span><span class="p">(</span>
-    <span class="n">fs_methods</span><span class="o">=</span><span class="p">[</span><span class="n">RandomForestSelector</span><span class="p">(),</span> <span class="n">MutualInfoSelector</span><span class="p">()],</span>
-    <span class="n">merger</span><span class="o">=</span><span class="n">BordaMerger</span><span class="p">(),</span>
-    <span class="n">min_fs_methods</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">max_fs_methods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-    <span class="n">repeats</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">fs_methods</span><span class="o">=</span><span class="n">fs_methods</span><span class="p">,</span>
+    <span class="n">merging_strategy</span><span class="o">=</span><span class="n">merging_strategy</span><span class="p">,</span>
+    <span class="n">num_repeats</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">task</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span>
+    <span class="n">num_features_to_select</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="n">best</span><span class="p">,</span> <span class="n">repeat</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="running-the-pipeline">
-<h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Link to this heading"></a></h2>
-<p>Once configured, you can run the pipeline on your dataset to perform feature selection. The pipeline evaluates combinations of feature selectors, computes performance and stability metrics, and employs Pareto dominance to determine optimal feature subsets.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming &#39;X&#39; and &#39;y&#39; are your features and target variable respectively</span>
-<span class="n">best_features</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected features:&quot;</span><span class="p">,</span> <span class="n">best_features</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This example demonstrates the use of RandomForest and Mutual Information selectors with a Borda merger strategy, but you can easily substitute these with any other built-in selectors or custom ones derived from the provided base classes.</p>
 </section>
 <section id="extendability">
 <h2>Extendability<a class="headerlink" href="#extendability" title="Link to this heading"></a></h2>
-<p>You can also extend the functionality by creating custom feature selectors,  mergers and metrics. Inherit from the base classes found under <cite>feature_selectors</cite> and <cite>merging_strategies</cite> or <cite>base_metrics</cite> directories and implement the necessary methods as per your requirements.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ensemblefs.feature_selectors.base_selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSelector</span>
+<p>Custom selectors can subclass <code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code> and implement <code class="docutils literal notranslate"><span class="pre">compute_scores</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moosefs.feature_selectors.base_selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureSelector</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">CustomSelector</span><span class="p">(</span><span class="n">BaseSelector</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">select_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="c1"># Implement your feature selection logic here</span>
-        <span class="k">pass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MySelector</span><span class="p">(</span><span class="n">FeatureSelector</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MySelector&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># return a 1D numpy array of per‑feature scores</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>

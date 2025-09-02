@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ensemblefs.core.data_processor &mdash; ensemblefs 0.1.0 documentation</title>
+  <title>moosefs.core.data_processor &mdash; MOOSE-FS 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -29,7 +29,7 @@
           
           
           <a href="../../../index.html" class="icon icon-home">
-            ensemblefs
+            MOOSE-FS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -40,7 +40,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to ensemblefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to MOOSE-FS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_reference.html">API Reference</a></li>
@@ -52,7 +52,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">ensemblefs</a>
+          <a href="../../../index.html">MOOSE-FS</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -61,7 +61,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ensemblefs.core.data_processor</li>
+      <li class="breadcrumb-item active">moosefs.core.data_processor</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -70,18 +70,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ensemblefs.core.data_processor</h1><div class="highlight"><pre>
+  <h1>Source code for moosefs.core.data_processor</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <div class="viewcode-block" id="DataProcessor">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DataProcessor</span><span class="p">:</span>
 <div class="viewcode-block" id="DataProcessor.__init__">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">categorical_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -112,7 +113,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor.preprocess_data">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.preprocess_data">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor.preprocess_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">preprocess_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
@@ -149,7 +150,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._load_data">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._load_data">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._load_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_load_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">index_col</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -178,7 +179,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._merge_data_and_metadata">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._merge_data_and_metadata">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._merge_data_and_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_merge_data_and_metadata</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -198,7 +199,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._rename_target_column">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._rename_target_column">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._rename_target_column">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_rename_target_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rename the target column in the data frame to &#39;target&#39;.</span>
@@ -215,7 +216,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._drop_columns">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._drop_columns">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._drop_columns">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_drop_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Drop specified columns from the data frame.</span>
@@ -232,7 +233,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._drop_missing_values">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._drop_missing_values">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._drop_missing_values">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_drop_missing_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Drop missing values by dropping rows with NaNs.</span>
@@ -247,7 +248,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._encode_categorical_variables">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._encode_categorical_variables">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._encode_categorical_variables">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_encode_categorical_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Encode categorical variables using label encoding and store the mappings.</span>
@@ -270,7 +271,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor.get_label_mapping">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.get_label_mapping">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor.get_label_mapping">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_label_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve the label encoding mapping for a specific column.</span>
@@ -289,7 +290,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._scale_numerical_features">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._scale_numerical_features">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._scale_numerical_features">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_scale_numerical_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Scale numerical features using standard scaling.</span>
@@ -308,7 +309,7 @@
 
 
 <div class="viewcode-block" id="DataProcessor._filtered_time_dataset">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._filtered_time_dataset">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._filtered_time_dataset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_filtered_time_dataset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -330,31 +331,65 @@
 
 
 <div class="viewcode-block" id="DataProcessor._fill_nan">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor._fill_nan">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_nan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._fill_nan">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_nan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">knn_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>          <span class="c1"># forwarded only if method == &quot;knn&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Fill NaN values in the DataFrame based on the specified method.</span>
+<span class="sd">        Fill NaN values in *df* according to *method*.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            df: The DataFrame to fill NaN values in.</span>
-<span class="sd">            method: The strategy to use for filling NaNs. Currently supports &quot;mean&quot;.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        df : pd.DataFrame</span>
+<span class="sd">            The data whose missing values should be filled.</span>
+<span class="sd">        method : {&quot;mean&quot;, &quot;knn&quot;}, default &quot;mean&quot;</span>
+<span class="sd">            Imputation strategy:</span>
+<span class="sd">            - &quot;mean&quot; : column-wise mean for numeric, mode for categoricals.</span>
+<span class="sd">            - &quot;knn&quot;  : KNNImputer for numeric, mode for categoricals.</span>
+<span class="sd">        **knn_kwargs : Any</span>
+<span class="sd">            Extra keyword arguments passed straight to</span>
+<span class="sd">            ``sklearn.impute.KNNImputer`` when *method* == &quot;knn&quot;.</span>
+<span class="sd">            Example: ``n_neighbors=5, weights=&quot;distance&quot;``.</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            The DataFrame with NaN values filled.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            A copy of *df* with NaNs imputed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># avoid mutating the caller’s frame</span>
+
+        <span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">categorical_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
-            <span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+            <span class="c1"># numeric</span>
             <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-            <span class="n">categorical_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_cols</span><span class="p">:</span>
-                <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;knn&quot;</span><span class="p">:</span>
+            <span class="c1"># numeric via sklearn KNN</span>
+            <span class="k">if</span> <span class="n">numeric_cols</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;KNN imputation requires at least one numeric column.&quot;</span><span class="p">)</span>
+            <span class="n">imputer</span> <span class="o">=</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="o">**</span><span class="n">knn_kwargs</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]),</span>
+                <span class="n">columns</span><span class="o">=</span><span class="n">numeric_cols</span><span class="p">,</span>
+                <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method: </span><span class="si">{</span><span class="n">method</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># categoricals: always use mode (most frequent)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_cols</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
         <span class="k">return</span> <span class="n">df</span></div>
 
 
 <div class="viewcode-block" id="DataProcessor.flatten_time">
-<a class="viewcode-back" href="../../../core.html#ensemblefs.core.data_processor.DataProcessor.flatten_time">[docs]</a>
+<a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor.flatten_time">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">flatten_time</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
@@ -363,6 +398,7 @@
         <span class="n">time_dependent_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">min_num_timepoints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">fill_nan_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Flatten dataset based on time-dependent columns, optionally filtering by minimum time points and filling NaNs.</span>
@@ -412,7 +448,7 @@
             <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">flattened_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">target_column</span><span class="p">])</span>
-        <span class="n">flattened_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_nan</span><span class="p">(</span><span class="n">flattened_df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">fill_nan_method</span><span class="p">)</span>
+        <span class="n">flattened_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_nan</span><span class="p">(</span><span class="n">flattened_df</span><span class="p">,</span> <span class="n">fill_nan_method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">flattened_df</span></div>
 </div>
 

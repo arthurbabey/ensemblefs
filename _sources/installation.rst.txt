@@ -1,33 +1,27 @@
 Installation
 ============
 
-How to Install ensemblefs
----------------------------------------
+Install from PyPI
+-----------------
 
+.. code-block:: bash
 
-You can build and install the package from source, you can follow these steps. First, clone the repository and navigate to the project root directory:
+    pip install moose-fs
+
+Install from Source
+-------------------
 
 .. code-block:: bash
 
     git clone https://github.com/arthurbabey/ensemblefs.git
     cd ensemblefs
-
-Then, install the package using `pip`:
-
-.. code-block:: bash
-
     pip install .
 
-This will build and install the package locally in your environment.
-
-If you prefer to install the package in **editable** mode (allowing code changes to take effect without reinstalling), you can use:
+Editable/development installs:
 
 .. code-block:: bash
 
     pip install -e .
-
-If you want to help in the development of the package and run the tests, you can install the package with the development dependencies:
-
-.. code-block:: bash
-
+    # optional extras
     pip install -e .[dev]
+
