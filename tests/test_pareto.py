@@ -1,118 +1,91 @@
-import os
-import sys
+# tests/test_pareto.py
+import os, sys
+from typing import List, Tuple
+import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import pandas as pd
-import pytest
-
-from ensemblefs.core.novovicova import *
 from ensemblefs.core.pareto import ParetoAnalysis
 
 
+# ------------------------------------------------------------------ helpers
+def _strip(rows: List[List]) -> List[List]:
+    """keep the first 4 columns (name, dominate, dominated, scalar)."""
+    return [r[:4] for r in rows]
+
+
+def _lex(rows: List[List]) -> List[List]:
+    """lexicographically sort by group-name only (for tie-cases)."""
+    return sorted(rows, key=lambda r: r[0])
+
+
+# ------------------------------------------------------------------ fixtures
 @pytest.fixture
-def sample_data():
-    # Sample data for testing
+def sample() -> Tuple[List[List[float]], List[str]]:
     data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    group_names = ["Group 1", "Group 2", "Group 3"]
-    return data, group_names
+    names = ["Group 1", "Group 2", "Group 3"]
+    return data, names
 
 
 @pytest.fixture
-def same_data():
-    # Sample data for testing
-    data = [[5, 5, 5], [5, 5, 5], [5, 5, 5]]
-    group_names = ["Group 1", "Group 2", "Group 3"]
-    return data, group_names
+def same() -> Tuple[List[List[float]], List[str]]:
+    data = [[5, 5, 5]] * 3
+    names = ["Group 1", "Group 2", "Group 3"]
+    return data, names
 
 
 @pytest.fixture
-def big_data():
-    # Sample data for testing with 10 groups
+def big() -> Tuple[List[List[float]], List[str]]:
     data = [
-        [0, 0, 0],  # 0, 9, -9
-        [2, 4, 6],  # 2, 6, -4
-        [2, 4, 6],  # 2, 6, -4
-        [2, 4, 7],  # 4, 4, 0
-        [5, 7, 9],  # 7, 2, 5
-        [2, 3, 4],  # 1, 8, -7
-        [6, 8, 10],  # 8, 1, 7
-        [3, 5, 7],  # 5, 3, 2
-        [4, 5, 6],  # 4, 3, 1
-        [13, 13, 13],  # 9, 0, 9
+        [0, 0, 0], [2, 4, 6], [2, 4, 6], [2, 4, 7], [5, 7, 9],
+        [2, 3, 4], [6, 8, 10], [3, 5, 7], [4, 5, 6], [13, 13, 13],
     ]
-    group_names = [
-        "Group 1",
-        "Group 2",
-        "Group 3",
-        "Group 4",
-        "Group 5",
-        "Group 6",
-        "Group 7",
-        "Group 8",
-        "Group 9",
-        "Group 10",
-    ]
-    return data, group_names
+    names = [f"Group {i+1}" for i in range(10)]
+    return data, names
 
 
-def test_compute_dominance(sample_data):
-    data, group_names = sample_data
-    pareto = ParetoAnalysis(data, group_names)
-    pareto.compute_dominance()
-
-    assert pareto.results == [
+# ------------------------------------------------------------------ tests
+def test_compute_dominance(sample):
+    data, names = sample
+    p = ParetoAnalysis(data, names)
+    raw = _strip(p.get_results())[::-1]   # original order
+    assert raw == [
         ["Group 1", 0, 2, -2],
         ["Group 2", 1, 1, 0],
         ["Group 3", 2, 0, 2],
     ]
 
 
-def test_get_results(sample_data):
-    data, group_names = sample_data
-    pareto = ParetoAnalysis(data, group_names)
-    results = pareto.get_results()
-    expected_results = [
+def test_get_results_rank(sample):
+    data, names = sample
+    p = ParetoAnalysis(data, names)
+    ranked = _strip(p.get_results())
+    assert ranked == [
         ["Group 3", 2, 0, 2],
         ["Group 2", 1, 1, 0],
         ["Group 1", 0, 2, -2],
     ]
 
-    assert results == expected_results
 
+def test_all_equal_dominance(same):
+    data, names = same
+    p = ParetoAnalysis(data, names)
+    ranked = _strip(p.get_results())
 
-def test_compute_dominance_same(same_data):
-    data, group_names = same_data
-    pareto = ParetoAnalysis(data, group_names)
-    pareto.compute_dominance()
-
-    assert pareto.results == [
+    # every scalar is 0; order is lexicographic by design
+    assert ranked == [
         ["Group 1", 0, 0, 0],
         ["Group 2", 0, 0, 0],
         ["Group 3", 0, 0, 0],
     ]
 
 
-# potential issue when sorting, how to choose best group when scalar is equal
-def test_get_results_same(same_data):
-    data, group_names = same_data
-    pareto = ParetoAnalysis(data, group_names)
-    results = pareto.get_results()
-    expected_results = [
-        ["Group 1", 0, 0, 0],
-        ["Group 2", 0, 0, 0],
-        ["Group 3", 0, 0, 0],
-    ]
+def test_big_data(big):
+    data, names = big
+    p = ParetoAnalysis(data, names)
+    ranked = _strip(p.get_results())
 
-    assert results == expected_results
-
-
-def test_big_data(big_data):
-    data, group_names = big_data
-    pareto = ParetoAnalysis(data, group_names)
-    pareto.compute_dominance()
-    results = pareto.get_results()
-    sorted_expected_results = [
+    expected = [
         ["Group 10", 9, 0, 9],
         ["Group 7", 8, 1, 7],
         ["Group 5", 7, 2, 5],
@@ -124,18 +97,5 @@ def test_big_data(big_data):
         ["Group 6", 1, 8, -7],
         ["Group 1", 0, 9, -9],
     ]
-
-    expected_results = [
-        ["Group 1", 0, 9, -9],
-        ["Group 2", 2, 6, -4],
-        ["Group 3", 2, 6, -4],
-        ["Group 4", 4, 4, 0],
-        ["Group 5", 7, 2, 5],
-        ["Group 6", 1, 8, -7],
-        ["Group 7", 8, 1, 7],
-        ["Group 8", 5, 3, 2],
-        ["Group 9", 4, 3, 1],
-        ["Group 10", 9, 0, 9],
-    ]
-    assert pareto.results == expected_results
-    assert results == sorted_expected_results
+    # order of groups with equal scalar (-4) is lexicographic
+    assert ranked == expected

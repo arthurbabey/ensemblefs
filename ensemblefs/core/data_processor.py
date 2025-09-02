@@ -2,7 +2,8 @@ from typing import Dict, List, Optional, Union
 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-
+from sklearn.impute import KNNImputer
+from typing import Any
 
 class DataProcessor:
     def __init__(
@@ -221,25 +222,59 @@ class DataProcessor:
         )
         return filtered_df.sort_values(clone_column)
 
-    def _fill_nan(self, df: pd.DataFrame, method: str = "mean") -> pd.DataFrame:
+    def _fill_nan(
+        self,
+        df: pd.DataFrame,
+        method: str = "mean",
+        **knn_kwargs: Any,          # forwarded only if method == "knn"
+    ) -> pd.DataFrame:
         """
-        Fill NaN values in the DataFrame based on the specified method.
+        Fill NaN values in *df* according to *method*.
 
-        Args:
-            df: The DataFrame to fill NaN values in.
-            method: The strategy to use for filling NaNs. Currently supports "mean".
+        Parameters
+        ----------
+        df : pd.DataFrame
+            The data whose missing values should be filled.
+        method : {"mean", "knn"}, default "mean"
+            Imputation strategy:
+            - "mean" : column-wise mean for numeric, mode for categoricals.
+            - "knn"  : KNNImputer for numeric, mode for categoricals.
+        **knn_kwargs : Any
+            Extra keyword arguments passed straight to
+            ``sklearn.impute.KNNImputer`` when *method* == "knn".
+            Example: ``n_neighbors=5, weights="distance"``.
 
-        Returns:
-            The DataFrame with NaN values filled.
+        Returns
+        -------
+        pd.DataFrame
+            A copy of *df* with NaNs imputed.
         """
+        df = df.copy()  # avoid mutating the caller’s frame
+
+        numeric_cols = df.select_dtypes(include="number").columns
+        categorical_cols = df.select_dtypes(include="category").columns
+
         if method == "mean":
-            numeric_cols = df.select_dtypes(include="number").columns
+            # numeric
             df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
-            categorical_cols = df.select_dtypes(include="category").columns
-            for col in categorical_cols:
-                df[col] = df[col].fillna(df[col].mode()[0])
+        elif method == "knn":
+            # numeric via sklearn KNN
+            if numeric_cols.empty:
+                raise ValueError("KNN imputation requires at least one numeric column.")
+            imputer = KNNImputer(**knn_kwargs)
+            df[numeric_cols] = pd.DataFrame(
+                imputer.fit_transform(df[numeric_cols]),
+                columns=numeric_cols,
+                index=df.index,
+            )
         else:
-            raise ValueError(f"Unknown method: {method}")
+            raise ValueError(f"Unknown method: {method!r}")
+
+        # categoricals: always use mode (most frequent)
+        for col in categorical_cols:
+            if df[col].isna().any():
+                df[col] = df[col].fillna(df[col].mode(dropna=True)[0])
+
         return df
 
     def flatten_time(
@@ -250,6 +285,7 @@ class DataProcessor:
         time_dependent_columns: List[str],
         min_num_timepoints: Optional[int] = None,
         fill_nan_method: str = "mean",
+        **kwargs: Any,
     ) -> pd.DataFrame:
         """
         Flatten dataset based on time-dependent columns, optionally filtering by minimum time points and filling NaNs.
@@ -299,5 +335,5 @@ class DataProcessor:
             .sort_index()
         )
         flattened_df = flattened_df.dropna(subset=[self.target_column])
-        flattened_df = self._fill_nan(flattened_df, method=fill_nan_method)
+        flattened_df = self._fill_nan(flattened_df, fill_nan_method, **kwargs)
         return flattened_df

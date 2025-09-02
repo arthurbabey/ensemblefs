@@ -27,6 +27,9 @@ def pipeline_args():
         "f_statistic_selector",
         "random_forest_selector",
         "mutual_info_selector",
+        "lasso_selector",
+        "xgboost_selector",
+        "svm_selector",
     ]
     merging_strategy = "union_of_intersections_merger"
     num_repeats = 3
@@ -34,7 +37,7 @@ def pipeline_args():
     num_features_to_select = 10
     task = "classification"
     metrics = ["logloss", "f1_score", "accuracy"]
-    n_jobs = 4  # Test with parallelism
+    n_jobs = 3  # Test with parallelism
 
     return {
         "data": data.copy(),
@@ -72,5 +75,4 @@ def test_pipeline_reproducibility_different_instances(pipeline_args):
     result1 = pipeline1.run()
     result2 = pipeline2.run()
     result3 = pipeline3.run()
-
     assert result1 == result2 == result3, "Different instances yield different results"

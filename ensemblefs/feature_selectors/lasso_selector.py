@@ -44,7 +44,7 @@ class LassoSelector(FeatureSelector):
             y = y.ravel()
 
         # set default alpha to 0.05 if not provided in kwargs
-        model = Lasso(alpha=self.kwargs.pop("alpha", 0.05), **self.kwargs)
+        model = Lasso(alpha=self.kwargs.pop("alpha", 0.05))
         model.fit(X, y)
         scores = np.abs(model.coef_)
         return scores

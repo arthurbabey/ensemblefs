@@ -45,8 +45,7 @@ class XGBoostSelector(FeatureSelector):
         )
         if model_cls is None:
             raise ValueError("Task must be 'classification' or 'regression'.")
-
-        model = model_cls(**self.kwargs)
+        model = model_cls()
         model.fit(X, y)
         scores = model.feature_importances_
         return scores

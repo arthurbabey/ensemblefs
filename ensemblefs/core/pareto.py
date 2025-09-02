@@ -1,88 +1,89 @@
-from typing import List, Union
+from typing import List, Union, Any
+import numpy as np
 
 
 class ParetoAnalysis:
-    def __init__(self, data: List[List[float]], group_names: List[str]) -> None:
-        """
-        Initializes the ParetoAnalysis with the provided dataset and group names.
+    """
+    Standard dominance ranking **plus** a utopia-distance tie-break.
 
-        Args:
-            data: A two-dimensional list where each sublist represents the metrics for a group.
-            group_names: Names corresponding to each group.
-        """
+    * First compute the usual scalar score
+        scalar = (# groups I dominate) − (# groups that dominate me)
+    * When two or more groups share the top scalar, scale their metric
+      vectors to [0, 1] **within the tied set** and pick the one whose
+      Euclidean distance to the utopia point (1, …, 1) is smallest.
+    """
+
+    # ------------------------------------------------------------------ #
+    # construction                                                       #
+    # ------------------------------------------------------------------ #
+    def __init__(self, data: List[List[float]], group_names: List[str]) -> None:
         if not data:
             raise ValueError("Data cannot be empty.")
-        self.data: List[List[float]] = data
-        self.num_groups: int = len(data)
-        self.num_metrics: int = len(data[0])
-        self.group_names: List[str] = group_names
-        # Each result contains: [group_name, dominate_count, is_dominated_count, scalar score]
-        self.results: List[List[Union[str, int]]] = [
-            [0] * 4 for _ in range(self.num_groups)
+        self.data = data
+        self.group_names = group_names
+        self.num_groups, self.num_metrics = len(data), len(data[0])
+
+        # Each row will hold:
+        #   0  group name
+        #   1  dominate_count
+        #   2  is_dominated_count
+        #   3  scalar = 1 − 2
+        #   4  metrics vector  ← NEW column used only for tie-break
+        self.results: List[List[Union[str, int, List[float]]]] = [
+            [g, 0, 0, 0, vec]                  # vec = data[i]
+            for g, vec in zip(group_names, data)
         ]
 
-    def group_dominate_count(self, group_index: int) -> int:
-        """
-        Calculates the number of groups dominated by the specified group.
+    # ------------------------------------------------------------------ #
+    # dominance helpers                                                  #
+    # ------------------------------------------------------------------ #
+    def _dominate_count(self, i: int) -> int:
+        g = self.data[i]
+        return sum(
+            all(g[m] >= o[m] for m in range(self.num_metrics)) and
+            any(g[m] > o[m] for m in range(self.num_metrics))
+            for j, o in enumerate(self.data) if j != i
+        )
 
-        Args:
-            group_index: Index of the group in the data list.
+    def _is_dominated_count(self, i: int) -> int:
+        g = self.data[i]
+        return sum(
+            all(g[m] <= o[m] for m in range(self.num_metrics)) and
+            any(g[m] < o[m] for m in range(self.num_metrics))
+            for j, o in enumerate(self.data) if j != i
+        )
 
-        Returns:
-            Count of groups that the specified group dominates.
-        """
-        group = self.data[group_index]
-        dominate_count = 0
-        for other_index, other_group in enumerate(self.data):
-            if other_index == group_index:
-                continue
-            if all(group[i] >= other_group[i] for i in range(self.num_metrics)) and any(
-                group[i] > other_group[i] for i in range(self.num_metrics)
-            ):
-                dominate_count += 1
-        return dominate_count
-
-    def group_isdominated_count(self, group_index: int) -> int:
-        """
-        Calculates the number of groups that dominate the specified group.
-
-        Args:
-            group_index: Index of the group in the data list.
-
-        Returns:
-            Count of groups that dominate the specified group.
-        """
-        group = self.data[group_index]
-        dominated_count = 0
-        for other_index, other_group in enumerate(self.data):
-            if other_index == group_index:
-                continue
-            if all(group[i] <= other_group[i] for i in range(self.num_metrics)) and any(
-                group[i] < other_group[i] for i in range(self.num_metrics)
-            ):
-                dominated_count += 1
-        return dominated_count
-
-    def compute_dominance(self) -> None:
-        """
-        Computes the dominance scores for all groups. For each group, the scalar score is defined as:
-            scalar = dominate_count - is_dominated_count
-        """
-        for idx in range(self.num_groups):
-            self.results[idx][0] = self.group_names[idx]
-            dominate = self.group_dominate_count(idx)
-            dominated = self.group_isdominated_count(idx)
-            self.results[idx][1] = dominate
-            self.results[idx][2] = dominated
-            self.results[idx][3] = dominate - dominated
-
+    # ------------------------------------------------------------------ #
+    # public API                                                         #
+    # ------------------------------------------------------------------ #
     def get_results(self) -> List[List[Union[str, int]]]:
-        """
-        Returns the sorted results based on the scalar dominance score in descending order.
+        # 1) scalar dominance
+        for i in range(self.num_groups):
+            dom = self._dominate_count(i)
+            sub = self._is_dominated_count(i)
+            self.results[i][1:4] = [dom, sub, dom - sub]
 
-        Returns:
-            Sorted results: each entry includes [group_name, dominate_count, is_dominated_count, scalar score].
-        """
-        self.compute_dominance()
-        sorted_results = sorted(self.results, key=lambda x: x[3], reverse=True)
-        return sorted_results
+        # 2) initial sort: scalar desc  then lexicographic name
+        self.results.sort(key=lambda r: (-r[3], tuple(r[0])))
+
+        # 3) tie-break on utopia distance
+        top_scalar = self.results[0][3]
+        tied_rows = [r for r in self.results if r[3] == top_scalar]
+
+        if len(tied_rows) > 1:
+            tied_data = np.vstack([r[4] for r in tied_rows], dtype=float)
+
+            mins, maxs = tied_data.min(0), tied_data.max(0)
+            span = np.where(maxs - mins == 0, 1, maxs - mins)
+            scaled = (tied_data - mins) / span                     # 0-1 per metric
+            dists = np.linalg.norm(1.0 - scaled, axis=1)           # to utopia (1,…,1)
+
+            best_local_idx = int(dists.argmin())                   # index inside tied_rows
+            best_row = tied_rows[best_local_idx]
+
+            # place best_row at position 0, keep relative order of the rest
+            self.results.remove(best_row)
+            self.results.insert(0, best_row)
+
+        # strip the metrics vector column before returning (keep original layout)
+        return [row[:4] for row in self.results]

@@ -209,7 +209,7 @@ class LogLoss(ClassificationMetric):
     def _metric_func(
         self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: np.ndarray
     ) -> float:
-        return log_loss(y_true, y_proba)
+        return -log_loss(y_true, y_proba)
 
 
 class F1Score(ClassificationMetric):
