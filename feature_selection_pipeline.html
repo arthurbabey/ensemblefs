@@ -109,29 +109,31 @@
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.feature_selection_pipeline.</span></span><span class="sig-name descname"><span class="pre">FeatureSelectionPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>End-to-end pipeline for ensemble feature selection.</p>
+<p>Orchestrates feature scoring, merging, metric evaluation, and Pareto-based
+selection across repeated runs and method subgroups.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merging_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['logloss',</span> <span class="pre">'f1_score',</span> <span class="pre">'accuracy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes the feature selection pipeline.</p>
+<dd><p>Initialize the pipeline.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – DataFrame including a ‘target’ column.</p></li>
-<li><p><strong>fs_methods</strong> – List of feature selection methods (classes or strings).</p></li>
-<li><p><strong>merging_strategy</strong> – Merging strategy (class or string).</p></li>
+<li><p><strong>fs_methods</strong> – Feature selectors (identifiers or instances).</p></li>
+<li><p><strong>merging_strategy</strong> – Merging strategy (identifier or instance).</p></li>
 <li><p><strong>num_repeats</strong> – Number of repeats for the pipeline.</p></li>
-<li><p><strong>num_features_to_select</strong> – Desired number of features to select.
-(For rank-based merging, this must be provided.)</p></li>
-<li><p><strong>metrics</strong> – List of performance metrics (classes or strings).</p></li>
+<li><p><strong>num_features_to_select</strong> – Desired number of features to select.</p></li>
+<li><p><strong>metrics</strong> – Metric functions (identifiers or instances).</p></li>
 <li><p><strong>task</strong> – ‘classification’ or ‘regression’.</p></li>
 <li><p><strong>min_group_size</strong> – Minimum number of methods in each subgroup.</p></li>
-<li><p><strong>fill</strong> – If True, ensures exactly num_features_to_select features.</p></li>
+<li><p><strong>fill</strong> – If True, enforce exact size after merging.</p></li>
 <li><p><strong>random_state</strong> – Seed for reproducibility.</p></li>
-<li><p><strong>n_jobs</strong> – Number of parallel jobs (-1 uses all processors).</p></li>
+<li><p><strong>n_jobs</strong> – Parallel jobs (use num_repeats when -1 or None).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the task is invalid or if num_features_to_select is missing for rank-based merging.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If task is invalid or required parameters are missing.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -139,33 +141,41 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_validate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._validate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._validate_task" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Validate task string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task</strong> – Expected ‘classification’ or ‘regression’.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._set_seed">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_set_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._set_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._set_seed" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Seed numpy/python RNGs for reproducibility.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names">
 <span class="sig-name descname"><span class="pre">_generate_subgroup_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._generate_subgroup_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._generate_subgroup_names" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generate all selector-name combinations with minimum size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>min_group_size</strong> – Minimum subgroup size.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples of selector names.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline.run" title="Link to this definition"></a></dt>
-<dd><p>Runs the complete feature selection pipeline.</p>
+<dd><p>Execute the pipeline and return best merged features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p>The merged features from the best group,</p></li>
-<li><p>The index of the best repeat,</p></li>
-<li><p>The best subgroup (tuple of method names).</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing</p>
+<dd class="field-odd"><p>(merged_features, best_repeat_idx, best_group_names).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -173,19 +183,19 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._pipeline_run_for_repeat">
 <span class="sig-name descname"><span class="pre">_pipeline_run_for_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._pipeline_run_for_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._pipeline_run_for_repeat" title="Link to this definition"></a></dt>
-<dd><p>Executes feature selection pipeline for a single repeat index i.</p>
+<dd><p>Execute one repeat and return partial results tuple.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none">
 <span class="sig-name descname"><span class="pre">_replace_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._replace_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._replace_none" title="Link to this definition"></a></dt>
-<dd><p>Replaces groups containing None with lists of -inf.</p>
+<dd><p>Replace any group with None with a list of -inf.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>metrics</strong> – List of metric lists per group.</p>
+<dd class="field-odd"><p><strong>metrics</strong> – Per-group metric lists.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Cleaned list with no None values.</p>
+<dd class="field-even"><p>Same shape with None replaced by -inf rows.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -193,33 +203,34 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data">
 <span class="sig-name descname"><span class="pre">_split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._split_data" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Split data into train/test using stratification when classification.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset">
 <span class="sig-name descname"><span class="pre">_compute_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_subset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_subset" title="Link to this definition"></a></dt>
-<dd><p>Computes feature subsets and returns a dictionary.</p>
+<dd><p>Compute selected Feature objects per method for this repeat.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging">
 <span class="sig-name descname"><span class="pre">_compute_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_merging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_merging" title="Link to this definition"></a></dt>
-<dd><p>Merges feature subsets and returns a dictionary.</p>
+<dd><p>Merge per-group features and return mapping for this repeat.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features">
 <span class="sig-name descname"><span class="pre">_merge_group_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._merge_group_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._merge_group_features" title="Link to this definition"></a></dt>
-<dd><p>Merges features for a specific group of methods.</p>
+<dd><p>Merge features for a specific group of methods.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>idx</strong> – Current repeat index.</p></li>
-<li><p><strong>group</strong> – Tuple of method names.</p></li>
+<li><p><strong>idx</strong> – Repeat index.</p></li>
+<li><p><strong>group</strong> – Tuple of selector names.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Merged features as produced by the merging strategy.</p>
+<dd class="field-even"><p>Merged features (type depends on strategy).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,10 +238,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics">
 <span class="sig-name descname"><span class="pre">_compute_performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_performance_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_performance_metrics" title="Link to this definition"></a></dt>
-<dd><p>Computes performance metrics using all metric methods.</p>
+<dd><p>Compute performance metrics using configured metric methods.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of averaged metric values.</p>
+<dd class="field-odd"><p>Averaged metric values per configured metric.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -238,18 +249,19 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics">
 <span class="sig-name descname"><span class="pre">_compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_subsets_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_features_local</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_metrics" title="Link to this definition"></a></dt>
-<dd><p>Computes and stores performance and stability metrics for each subgroup.</p>
+<dd><p>Compute and collect performance and stability metrics for subgroups.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>train_data</strong> – Training dataset.</p></li>
-<li><p><strong>test_data</strong> – Test dataset.</p></li>
-<li><p><strong>result_dicts</strong> – List of dictionaries to store metrics.</p></li>
-<li><p><strong>idx</strong> – Current repeat index.</p></li>
+<li><p><strong>fs_subsets_local</strong> – Local selected Feature lists per (repeat, method).</p></li>
+<li><p><strong>merged_features_local</strong> – Merged features per (repeat, group).</p></li>
+<li><p><strong>train_data</strong> – Training dataframe.</p></li>
+<li><p><strong>test_data</strong> – Test dataframe.</p></li>
+<li><p><strong>idx</strong> – Repeat index.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Updated result_dicts with computed metrics.</p>
+<dd class="field-even"><p>List of per-metric dicts keyed by (repeat, group).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,16 +269,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_calculate_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._calculate_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._calculate_means" title="Link to this definition"></a></dt>
-<dd><p>Calculates the mean metrics for each subgroup.</p>
+<dd><p>Calculate mean metrics per subgroup across repeats.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>result_dicts</strong> – List of dictionaries with metrics.</p></li>
-<li><p><strong>group_names</strong> – List of subgroup names.</p></li>
+<li><p><strong>result_dicts</strong> – Per-metric dicts keyed by (repeat, group).</p></li>
+<li><p><strong>group_names</strong> – Subgroup names to summarize.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of lists containing mean metrics per group.</p>
+<dd class="field-even"><p>List of [means per metric] for each subgroup.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -274,43 +286,32 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_compute_pareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._compute_pareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._compute_pareto" title="Link to this definition"></a></dt>
-<dd><p>Performs Pareto analysis to identify the best-performing group or repeat.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>groups</strong> – List of metric lists.</p></li>
-<li><p><strong>names</strong> – List of corresponding names.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The name of the best-performing group or repeat.</p>
-</dd>
-</dl>
+<dd><p>Return the name of the winner using Pareto analysis.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics">
 <span class="sig-name descname"><span class="pre">_extract_repeat_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">result_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._extract_repeat_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._extract_repeat_metrics" title="Link to this definition"></a></dt>
-<dd><p>Return a row per repeat, even if the group had no metrics for that repeat.
-Missing values stay as None and will be turned into -inf by _replace_none().</p>
+<dd><p>Return a row per repeat for the given group.</p>
+<p>Missing values remain as None and are later replaced by -inf.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class">
 <span class="sig-name descname"><span class="pre">_load_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instantiate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/moosefs/feature_selection_pipeline.html#FeatureSelectionPipeline._load_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.feature_selection_pipeline.FeatureSelectionPipeline._load_class" title="Link to this definition"></a></dt>
-<dd><p>Loads a class or returns an instance if already provided.</p>
+<dd><p>Resolve identifiers to classes/instances and optionally instantiate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> – A string identifier or an instance of a feature selector/merging strategy.</p></li>
-<li><p><strong>instantiate</strong> – If True, instantiates the class with extracted parameters.</p></li>
+<li><p><strong>input</strong> – Identifier or instance of a selector/merger/metric.</p></li>
+<li><p><strong>instantiate</strong> – If True, instantiate using extracted parameters.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The class or its instance.</p>
+<dd class="field-even"><p>Class or instance.</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If input is not a valid identifier or instance.</p>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">input</span></code> is invalid.</p>
 </dd>
 </dl>
 </dd></dl>

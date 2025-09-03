@@ -73,20 +73,20 @@
   <h1>Source code for moosefs.metrics.stability_metrics</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">moosefs.core.novovicova</span><span class="w"> </span><span class="kn">import</span> <span class="n">StabilityNovovicova</span>
 
 
 <div class="viewcode-block" id="compute_stability_metrics">
 <a class="viewcode-back" href="../../../metrics.html#moosefs.metrics.stability_metrics.compute_stability_metrics">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_stability_metrics</span><span class="p">(</span><span class="n">features_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes stability metrics using StabilityNovovicova.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute stability SH(S) across selections.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        features_list: A list of lists, where each sublist contains selected feature names.</span>
+<span class="sd">        features_list: Selected feature names per selector.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The computed stability measure SH(S).</span>
+<span class="sd">        Stability in [0, 1].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">StabilityNovovicova</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span><span class="o">.</span><span class="n">compute_stability</span><span class="p">()</span></div>
 
@@ -95,7 +95,7 @@
 <div class="viewcode-block" id="_jaccard">
 <a class="viewcode-back" href="../../../metrics.html#moosefs.metrics.stability_metrics._jaccard">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">_jaccard</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">b</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Jaccard similarity; handles empty sets.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return Jaccard similarity, handling empty sets as 1.0 if both empty.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span> <span class="k">else</span> <span class="mf">1.0</span></div>
 
 
@@ -107,19 +107,15 @@
     <span class="n">merged</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Diversity-Agreement score in **[0, 1]** (larger = better).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Blend diversity and agreement into a single score.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    selectors : list[list[str]]</span>
-<span class="sd">        Each inner list is the feature subset selected by one method.</span>
-<span class="sd">    merged : list[str]</span>
-<span class="sd">        The merged/core features for the group (union-of-intersections, Borda, …).</span>
-<span class="sd">    alpha : float, default 0.5</span>
-<span class="sd">        Weight of the *agreement* part.</span>
-<span class="sd">        • alpha = 0 → pure diversity  </span>
-<span class="sd">        • alpha = 1 → pure agreement</span>
+<span class="sd">    Args:</span>
+<span class="sd">        selectors: List of selected feature lists (one per selector).</span>
+<span class="sd">        merged: Merged/core feature names for the group.</span>
+<span class="sd">        alpha: Weight on agreement (0 → pure diversity, 1 → pure agreement).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Score in [0, 1] (higher is better).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>

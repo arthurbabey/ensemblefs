@@ -79,14 +79,19 @@
 <div class="viewcode-block" id="MergingStrategy">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MergingStrategy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for merging strategies.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base for merging strategies.</span>
+
+<span class="sd">    Strategies can be &quot;set-based&quot; or &quot;rank-based&quot; depending on how they merge</span>
+<span class="sd">    the per-selector outputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MergingStrategy.__init__">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the strategy.</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            strategy_type: The type of merging strategy (&#39;set-based&#39; or &#39;rank-based&#39;).</span>
+<span class="sd">            strategy_type: Either &quot;set-based&quot; or &quot;rank-based&quot;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">=</span> <span class="n">strategy_type</span></div>
 
@@ -94,13 +99,17 @@
 <div class="viewcode-block" id="MergingStrategy.merge">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy.merge">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Merges input data according to the strategy (to be implemented by subclasses).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge input data according to the strategy.</span>
+
+<span class="sd">        Subclasses must implement this method.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data: The data to merge.</span>
-<span class="sd">            num_features_to_select: Number of top features to select.</span>
-<span class="sd">            **kwargs: Additional strategy-specific arguments.</span>
+<span class="sd">            data: List of Feature lists (one list per selector) or a single list.</span>
+<span class="sd">            num_features_to_select: Number of top features to return.</span>
+<span class="sd">            **kwargs: Strategy-specific options.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of merged features (or names depending on strategy).</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            NotImplementedError: If not implemented in a subclass.</span>
@@ -111,14 +120,14 @@
 <div class="viewcode-block" id="MergingStrategy.is_set_based">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy.is_set_based">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_set_based</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the strategy is set-based.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the strategy is set-based.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">==</span> <span class="s2">&quot;set-based&quot;</span></div>
 
 
 <div class="viewcode-block" id="MergingStrategy.is_rank_based">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.base_merger.MergingStrategy.is_rank_based">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_rank_based</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the strategy is rank-based.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the strategy is rank-based.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy_type</span> <span class="o">==</span> <span class="s2">&quot;rank-based&quot;</span></div>
 
 
@@ -127,14 +136,13 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_input</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">subsets</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]]]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Validates that subsets contain Feature objects.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate that ``subsets`` contains Feature objects.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            subsets: A list or list of lists containing Feature objects.</span>
+<span class="sd">            subsets: A list of Feature or a list of Feature lists.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If subsets are empty or contain invalid types.</span>
+<span class="sd">            ValueError: If empty or containing invalid types.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">subsets</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subsets cannot be empty.&quot;</span><span class="p">)</span>

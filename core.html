@@ -348,31 +348,42 @@ Example: <code class="docutils literal notranslate"><span class="pre">n_neighbor
 <dt class="sig sig-object py" id="moosefs.core.feature.Feature">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.core.feature.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/core/feature.html#Feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.feature.Feature" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Represents a feature with an optional score and selection status.</p>
+<p>Container for a single feature.</p>
+<p>Stores the feature name, an optional score, and whether it is selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Feature identifier (e.g., column name).</p></li>
+<li><p><strong>score</strong> – Optional importance/score for ranking.</p></li>
+<li><p><strong>selected</strong> – Whether the feature is selected.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.core.feature.Feature.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/core/feature.html#Feature.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.feature.Feature.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moosefs.core.feature.Feature.set_score">
+<span class="sig-name descname"><span class="pre">set_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/core/feature.html#Feature.set_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.feature.Feature.set_score" title="Link to this definition"></a></dt>
+<dd><p>Set the feature score.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – The name of the feature.</p></li>
-<li><p><strong>score</strong> – The score or importance of the feature (optional).</p></li>
-<li><p><strong>selected</strong> – Whether the feature has been selected.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>score</strong> – Importance/score value.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moosefs.core.feature.Feature.set_score">
-<span class="sig-name descname"><span class="pre">set_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/core/feature.html#Feature.set_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.feature.Feature.set_score" title="Link to this definition"></a></dt>
-<dd><p>Sets the feature score.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="moosefs.core.feature.Feature.set_selected">
 <span class="sig-name descname"><span class="pre">set_selected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/core/feature.html#Feature.set_selected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.feature.Feature.set_selected" title="Link to this definition"></a></dt>
-<dd><p>Sets the feature selection status.</p>
+<dd><p>Set the selected flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>selected</strong> – True if selected; otherwise False.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -418,21 +429,26 @@ Algorithms’ Stability.” IEEE International Conference on Data Mining Worksho
 <dt class="sig sig-object py" id="moosefs.core.pareto.ParetoAnalysis">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.core.pareto.</span></span><span class="sig-name descname"><span class="pre">ParetoAnalysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/core/pareto.html#ParetoAnalysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.pareto.ParetoAnalysis" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Standard dominance ranking <strong>plus</strong> a utopia-distance tie-break.</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>First compute the usual scalar score</dt><dd><p>scalar = (# groups I dominate) − (# groups that dominate me)</p>
-</dd>
-</dl>
-</li>
-<li><p>When two or more groups share the top scalar, scale their metric
-vectors to [0, 1] <strong>within the tied set</strong> and pick the one whose
-Euclidean distance to the utopia point (1, …, 1) is smallest.</p></li>
-</ul>
+<p>Rank groups by dominance and break ties using utopia distance.</p>
+<p>For each group, computes a scalar dominance score: dominated−is_dominated.
+If the top score ties, scales tied vectors to [0, 1] (within the tie) and
+picks the one closest to the utopia point (1, …, 1).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.core.pareto.ParetoAnalysis.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/core/pareto.html#ParetoAnalysis.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.pareto.ParetoAnalysis.__init__" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the analysis state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Metric vectors per group.</p></li>
+<li><p><strong>group_names</strong> – Display names for groups.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">data</span></code> is empty.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.core.pareto.ParetoAnalysis._dominate_count">
@@ -447,7 +463,13 @@ Euclidean distance to the utopia point (1, …, 1) is smallest.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.core.pareto.ParetoAnalysis.get_results">
 <span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/core/pareto.html#ParetoAnalysis.get_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.core.pareto.ParetoAnalysis.get_results" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Compute dominance and return ranked rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rows [name, dominate_count, is_dominated_count, scalar] sorted by rank.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

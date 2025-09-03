@@ -71,9 +71,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for moosefs.merging_strategies.l2_norm_merger</h1><div class="highlight"><pre>
-<span></span><span class="c1"># arithmetic_mean_merger.py  (or add below BordaMerger in the same module)</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..core.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">Feature</span>
@@ -83,7 +81,7 @@
 <div class="viewcode-block" id="L2NormMerger">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.l2_norm_merger.L2NormMerger">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">L2NormMerger</span><span class="p">(</span><span class="n">MergingStrategy</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rank-based merging strategy using the L2-norm (RMS) of scores.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rank-based merging using the L2-norm (RMS) of scores.&quot;&quot;&quot;</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;L2Norm&quot;</span>
 
@@ -102,7 +100,15 @@
         <span class="n">num_features_to_select</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the top‐k feature names after L2-norm aggregation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the top‑k feature names after L2-norm aggregation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            subsets: Feature lists (one list per selector).</span>
+<span class="sd">            num_features_to_select: Number of names to return.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Feature names sorted by aggregated L2 score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_input</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

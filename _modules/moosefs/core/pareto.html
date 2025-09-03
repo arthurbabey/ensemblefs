@@ -78,22 +78,25 @@
 <div class="viewcode-block" id="ParetoAnalysis">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.pareto.ParetoAnalysis">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParetoAnalysis</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Standard dominance ranking **plus** a utopia-distance tie-break.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rank groups by dominance and break ties using utopia distance.</span>
 
-<span class="sd">    * First compute the usual scalar score</span>
-<span class="sd">        scalar = (# groups I dominate) − (# groups that dominate me)</span>
-<span class="sd">    * When two or more groups share the top scalar, scale their metric</span>
-<span class="sd">      vectors to [0, 1] **within the tied set** and pick the one whose</span>
-<span class="sd">      Euclidean distance to the utopia point (1, …, 1) is smallest.</span>
+<span class="sd">    For each group, computes a scalar dominance score: dominated−is_dominated.</span>
+<span class="sd">    If the top score ties, scales tied vectors to [0, 1] (within the tie) and</span>
+<span class="sd">    picks the one closest to the utopia point (1, ..., 1).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># ------------------------------------------------------------------ #</span>
-    <span class="c1"># construction                                                       #</span>
-    <span class="c1"># ------------------------------------------------------------------ #</span>
 <div class="viewcode-block" id="ParetoAnalysis.__init__">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.pareto.ParetoAnalysis.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">group_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the analysis state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Metric vectors per group.</span>
+<span class="sd">            group_names: Display names for groups.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If ``data`` is empty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Data cannot be empty.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
@@ -112,9 +115,6 @@
         <span class="p">]</span></div>
 
 
-    <span class="c1"># ------------------------------------------------------------------ #</span>
-    <span class="c1"># dominance helpers                                                  #</span>
-    <span class="c1"># ------------------------------------------------------------------ #</span>
 <div class="viewcode-block" id="ParetoAnalysis._dominate_count">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.pareto.ParetoAnalysis._dominate_count">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_dominate_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -137,12 +137,14 @@
         <span class="p">)</span></div>
 
 
-    <span class="c1"># ------------------------------------------------------------------ #</span>
-    <span class="c1"># public API                                                         #</span>
-    <span class="c1"># ------------------------------------------------------------------ #</span>
 <div class="viewcode-block" id="ParetoAnalysis.get_results">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.pareto.ParetoAnalysis.get_results">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute dominance and return ranked rows.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Rows [name, dominate_count, is_dominated_count, scalar] sorted by rank.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 1) scalar dominance</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_groups</span><span class="p">):</span>
             <span class="n">dom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dominate_count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>

@@ -141,13 +141,16 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.base_merger.</span></span><span class="sig-name descname"><span class="pre">MergingStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class for merging strategies.</p>
+<p>Abstract base for merging strategies.</p>
+<p>Strategies can be “set-based” or “rank-based” depending on how they merge
+the per-selector outputs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategy_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize the strategy.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy_type</strong> – The type of merging strategy (‘set-based’ or ‘rank-based’).</p>
+<dd class="field-odd"><p><strong>strategy_type</strong> – Either “set-based” or “rank-based”.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -155,17 +158,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy.merge" title="Link to this definition"></a></dt>
-<dd><p>Merges input data according to the strategy (to be implemented by subclasses).</p>
+<dd><p>Merge input data according to the strategy.</p>
+<p>Subclasses must implement this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> – The data to merge.</p></li>
-<li><p><strong>num_features_to_select</strong> – Number of top features to select.</p></li>
-<li><p><strong>**kwargs</strong> – Additional strategy-specific arguments.</p></li>
+<li><p><strong>data</strong> – List of Feature lists (one list per selector) or a single list.</p></li>
+<li><p><strong>num_features_to_select</strong> – Number of top features to return.</p></li>
+<li><p><strong>**kwargs</strong> – Strategy-specific options.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>NotImplementedError</strong> – If not implemented in a subclass.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of merged features (or names depending on strategy).</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If not implemented in a subclass.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -173,25 +180,25 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy.is_set_based"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy.is_rank_based"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.base_merger.MergingStrategy._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/base_merger.html#MergingStrategy._validate_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.base_merger.MergingStrategy._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -202,7 +209,7 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.borda_merger.</span></span><span class="sig-name descname"><span class="pre">BordaMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/merging_strategies/borda_merger.html#BordaMerger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="moosefs.merging_strategies.base_merger.MergingStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></p>
-<p>Rank-based merging strategy using the Borda count method.</p>
+<p>Rank-based merging using the Borda count method.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Borda'</span></em><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger.name" title="Link to this definition"></a></dt>
@@ -211,10 +218,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/borda_merger.html#BordaMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger.__init__" title="Link to this definition"></a></dt>
-<dd><p>Initializes the BordaMerger with ‘rank-based’ type.</p>
+<dd><p>Initialize a rank-based merger.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – Additional arguments for the Borda count method.</p>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Forwarded to the Borda routine (if applicable).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -222,16 +229,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/borda_merger.html#BordaMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Merges subsets using the Borda count method.</p>
+<dd><p>Merge by Borda and return top-k names.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>subsets</strong> – List of subsets, where each subset contains Feature objects.</p></li>
-<li><p><strong>num_features_to_select</strong> – Number of top-ranked features to return.</p></li>
+<li><p><strong>subsets</strong> – Feature lists (one list per selector).</p></li>
+<li><p><strong>num_features_to_select</strong> – Number of names to return.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of selected feature names, sorted by merged Borda scores.</p>
+<dd class="field-even"><p>Feature names sorted by merged Borda scores.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -239,13 +246,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -253,13 +260,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.borda_merger.BordaMerger.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.borda_merger.BordaMerger.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 </dd></dl>
@@ -268,7 +275,7 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.union_of_intersections_merger.</span></span><span class="sig-name descname"><span class="pre">UnionOfIntersectionsMerger</span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/union_of_intersections_merger.html#UnionOfIntersectionsMerger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="moosefs.merging_strategies.base_merger.MergingStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></p>
-<p>Set-based merging strategy computing the union of pairwise subset intersections.</p>
+<p>Union of intersections across selector subsets.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnionOfIntersections'</span></em><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.name" title="Link to this definition"></a></dt>
@@ -277,9 +284,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/union_of_intersections_merger.html#UnionOfIntersectionsMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize the strategy.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy_type</strong> – The type of merging strategy (‘set-based’ or ‘rank-based’).</p>
+<dd class="field-odd"><p><strong>strategy_type</strong> – Either “set-based” or “rank-based”.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -287,21 +295,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/union_of_intersections_merger.html#UnionOfIntersectionsMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Merges input subsets by computing the union of pairwise subset intersections.</p>
+<dd><p>Merge by union of pairwise intersections.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>subsets</strong> – List of subsets, where each subset is a list of Feature objects.</p></li>
-<li><p><strong>num_features_to_select</strong> – Number of selected features (only used if <cite>fill=True</cite>).</p></li>
-<li><p><strong>fill</strong> – If True, ensures exactly <cite>num_features_to_select</cite> features. Otherwise, returns raw core set.</p></li>
-<li><p><strong>**kwargs</strong> – Additional strategy-specific arguments.</p></li>
+<li><p><strong>subsets</strong> – Feature lists (one list per selector).</p></li>
+<li><p><strong>num_features_to_select</strong> – Required when <code class="docutils literal notranslate"><span class="pre">fill=True</span></code>.</p></li>
+<li><p><strong>fill</strong> – If True, trim/pad output to requested size.</p></li>
+<li><p><strong>**kwargs</strong> – Unused.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A set of selected feature names.</p>
+<dd class="field-even"><p>Set of selected feature names.</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If input subsets are invalid or <cite>num_features_to_select</cite> is missing when <cite>fill=True</cite>.</p>
+<dd class="field-odd"><p><strong>ValueError</strong> – If inputs are invalid or size is missing when <code class="docutils literal notranslate"><span class="pre">fill=True</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -309,13 +317,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -323,13 +331,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 </dd></dl>
@@ -338,7 +346,7 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.l2_norm_merger.</span></span><span class="sig-name descname"><span class="pre">L2NormMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/merging_strategies/l2_norm_merger.html#L2NormMerger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="moosefs.merging_strategies.base_merger.MergingStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></p>
-<p>Rank-based merging strategy using the L2-norm (RMS) of scores.</p>
+<p>Rank-based merging using the L2-norm (RMS) of scores.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'L2Norm'</span></em><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger.name" title="Link to this definition"></a></dt>
@@ -347,9 +355,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/l2_norm_merger.html#L2NormMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize the strategy.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy_type</strong> – The type of merging strategy (‘set-based’ or ‘rank-based’).</p>
+<dd class="field-odd"><p><strong>strategy_type</strong> – Either “set-based” or “rank-based”.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -357,19 +366,30 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/l2_norm_merger.html#L2NormMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Return the top‐k feature names after L2-norm aggregation.</p>
+<dd><p>Return the top‑k feature names after L2-norm aggregation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subsets</strong> – Feature lists (one list per selector).</p></li>
+<li><p><strong>num_features_to_select</strong> – Number of names to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature names sorted by aggregated L2 score.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -377,13 +397,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.l2_norm_merger.L2NormMerger.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.l2_norm_merger.L2NormMerger.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 </dd></dl>
@@ -392,7 +412,7 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.arithmetic_mean_merger.</span></span><span class="sig-name descname"><span class="pre">ArithmeticMeanMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/merging_strategies/arithmetic_mean_merger.html#ArithmeticMeanMerger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="moosefs.merging_strategies.base_merger.MergingStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></p>
-<p>Rank-based merging strategy using the arithmetic mean of scores.</p>
+<p>Rank-based merging using the arithmetic mean of scores.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ArithmeticMean'</span></em><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.name" title="Link to this definition"></a></dt>
@@ -401,9 +421,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/arithmetic_mean_merger.html#ArithmeticMeanMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize the strategy.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy_type</strong> – The type of merging strategy (‘set-based’ or ‘rank-based’).</p>
+<dd class="field-odd"><p><strong>strategy_type</strong> – Either “set-based” or “rank-based”.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -411,19 +432,30 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/arithmetic_mean_merger.html#ArithmeticMeanMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Return the top‐k feature names after arithmetic-mean aggregation.</p>
+<dd><p>Return the top‑k feature names after arithmetic-mean aggregation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subsets</strong> – Feature lists (one list per selector).</p></li>
+<li><p><strong>num_features_to_select</strong> – Number of names to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature names sorted by mean score.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -431,13 +463,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.arithmetic_mean_merger.ArithmeticMeanMerger.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 </dd></dl>
@@ -446,16 +478,17 @@
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moosefs.merging_strategies.consensus_merger.</span></span><span class="sig-name descname"><span class="pre">ConsensusMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/moosefs/merging_strategies/consensus_merger.html#ConsensusMerger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#moosefs.merging_strategies.base_merger.MergingStrategy" title="moosefs.merging_strategies.base_merger.MergingStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">MergingStrategy</span></code></a></p>
-<p>Set-based merger that keeps features selected by at least <cite>k</cite>
-base selectors (global consensus ≥ k). If <cite>fill=True</cite>, the output
-is trimmed / padded to exactly <cite>num_features_to_select</cite> by using
-the summed, min-max–normalised scores as a tie-breaker.</p>
+<p>Set-based consensus merger with optional fill.</p>
+<p>Keeps features selected by at least <code class="docutils literal notranslate"><span class="pre">k</span></code> selectors. If <code class="docutils literal notranslate"><span class="pre">fill=True</span></code>,
+trims/pads to <code class="docutils literal notranslate"><span class="pre">num_features_to_select</span></code> using summed, per-selector
+min–max–normalized scores as a tie-breaker.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/consensus_merger.html#ConsensusMerger.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger.__init__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize the strategy.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy_type</strong> – The type of merging strategy (‘set-based’ or ‘rank-based’).</p>
+<dd class="field-odd"><p><strong>strategy_type</strong> – Either “set-based” or “rank-based”.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -463,17 +496,17 @@ the summed, min-max–normalised scores as a tie-breaker.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger.merge">
 <span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_features_to_select</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/moosefs/merging_strategies/consensus_merger.html#ConsensusMerger.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger.merge" title="Link to this definition"></a></dt>
-<dd><p>Merges input data according to the strategy (to be implemented by subclasses).</p>
+<dd><p>Merge by consensus threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> – The data to merge.</p></li>
-<li><p><strong>num_features_to_select</strong> – Number of top features to select.</p></li>
-<li><p><strong>**kwargs</strong> – Additional strategy-specific arguments.</p></li>
+<li><p><strong>subsets</strong> – Feature lists (one list per selector).</p></li>
+<li><p><strong>num_features_to_select</strong> – Required when <code class="docutils literal notranslate"><span class="pre">fill=True</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> – Unused.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>NotImplementedError</strong> – If not implemented in a subclass.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set of selected feature names.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -481,13 +514,13 @@ the summed, min-max–normalised scores as a tie-breaker.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger._validate_input">
 <span class="sig-name descname"><span class="pre">_validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="core.html#moosefs.core.feature.Feature" title="moosefs.core.feature.Feature"><span class="pre">Feature</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger._validate_input" title="Link to this definition"></a></dt>
-<dd><p>Validates that subsets contain Feature objects.</p>
+<dd><p>Validate that <code class="docutils literal notranslate"><span class="pre">subsets</span></code> contains Feature objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subsets</strong> – A list or list of lists containing Feature objects.</p>
+<dd class="field-odd"><p><strong>subsets</strong> – A list of Feature or a list of Feature lists.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If subsets are empty or contain invalid types.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If empty or containing invalid types.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -495,13 +528,13 @@ the summed, min-max–normalised scores as a tie-breaker.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger.is_rank_based">
 <span class="sig-name descname"><span class="pre">is_rank_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger.is_rank_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is rank-based.</p>
+<dd><p>Return True if the strategy is rank-based.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moosefs.merging_strategies.consensus_merger.ConsensusMerger.is_set_based">
 <span class="sig-name descname"><span class="pre">is_set_based</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moosefs.merging_strategies.consensus_merger.ConsensusMerger.is_set_based" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the strategy is set-based.</p>
+<dd><p>Return True if the strategy is set-based.</p>
 </dd></dl>
 
 </dd></dl>

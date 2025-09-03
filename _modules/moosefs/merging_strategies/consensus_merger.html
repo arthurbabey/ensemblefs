@@ -84,11 +84,11 @@
 <div class="viewcode-block" id="ConsensusMerger">
 <a class="viewcode-back" href="../../../mergers.html#moosefs.merging_strategies.consensus_merger.ConsensusMerger">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConsensusMerger</span><span class="p">(</span><span class="n">MergingStrategy</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Set-based merger that keeps features selected by at least `k`</span>
-<span class="sd">    base selectors (global consensus ≥ k). If `fill=True`, the output</span>
-<span class="sd">    is trimmed / padded to exactly `num_features_to_select` by using</span>
-<span class="sd">    the summed, min-max–normalised scores as a tie-breaker.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set-based consensus merger with optional fill.</span>
+
+<span class="sd">    Keeps features selected by at least ``k`` selectors. If ``fill=True``,</span>
+<span class="sd">    trims/pads to ``num_features_to_select`` using summed, per-selector</span>
+<span class="sd">    min–max–normalized scores as a tie-breaker.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ConsensusMerger.__init__">
@@ -109,6 +109,16 @@
         <span class="n">num_features_to_select</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge by consensus threshold.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            subsets: Feature lists (one list per selector).</span>
+<span class="sd">            num_features_to_select: Required when ``fill=True``.</span>
+<span class="sd">            **kwargs: Unused.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Set of selected feature names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_input</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="ow">and</span> <span class="n">num_features_to_select</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
