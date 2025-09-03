@@ -1,23 +1,23 @@
 from itertools import combinations
 from typing import List, Set
+
 from moosefs.core.novovicova import StabilityNovovicova
 
 
 def compute_stability_metrics(features_list: List[List[str]]) -> float:
-    """
-    Computes stability metrics using StabilityNovovicova.
+    """Compute stability SH(S) across selections.
 
     Args:
-        features_list: A list of lists, where each sublist contains selected feature names.
+        features_list: Selected feature names per selector.
 
     Returns:
-        The computed stability measure SH(S).
+        Stability in [0, 1].
     """
     return StabilityNovovicova(features_list).compute_stability()
 
 
 def _jaccard(a: Set[str], b: Set[str]) -> float:
-    """Jaccard similarity; handles empty sets."""
+    """Return Jaccard similarity, handling empty sets as 1.0 if both empty."""
     return len(a & b) / len(a | b) if a | b else 1.0
 
 
@@ -26,19 +26,15 @@ def diversity_agreement(
     merged: List[str],
     alpha: float = 0.5,
 ) -> float:
-    """
-    Diversity-Agreement score in **[0, 1]** (larger = better).
+    """Blend diversity and agreement into a single score.
 
-    Parameters
-    ----------
-    selectors : list[list[str]]
-        Each inner list is the feature subset selected by one method.
-    merged : list[str]
-        The merged/core features for the group (union-of-intersections, Borda, …).
-    alpha : float, default 0.5
-        Weight of the *agreement* part.
-        • alpha = 0 → pure diversity  
-        • alpha = 1 → pure agreement
+    Args:
+        selectors: List of selected feature lists (one per selector).
+        merged: Merged/core feature names for the group.
+        alpha: Weight on agreement (0 → pure diversity, 1 → pure agreement).
+
+    Returns:
+        Score in [0, 1] (higher is better).
     """
     k = len(selectors)
     if k < 2:

@@ -8,16 +8,15 @@ from .base_merger import MergingStrategy
 
 
 class BordaMerger(MergingStrategy):
-    """Rank-based merging strategy using the Borda count method."""
+    """Rank-based merging using the Borda count method."""
 
     name = "Borda"
 
     def __init__(self, **kwargs) -> None:
-        """
-        Initializes the BordaMerger with 'rank-based' type.
+        """Initialize a rank-based merger.
 
         Args:
-            **kwargs: Additional arguments for the Borda count method.
+            **kwargs: Forwarded to the Borda routine (if applicable).
         """
         super().__init__("rank-based")
         self.kwargs = kwargs
@@ -25,15 +24,14 @@ class BordaMerger(MergingStrategy):
     def merge(
         self, subsets: List[List[Feature]], num_features_to_select: int, **kwargs
     ) -> List[str]:
-        """
-        Merges subsets using the Borda count method.
+        """Merge by Borda and return top-k names.
 
         Args:
-            subsets: List of subsets, where each subset contains Feature objects.
-            num_features_to_select: Number of top-ranked features to return.
+            subsets: Feature lists (one list per selector).
+            num_features_to_select: Number of names to return.
 
         Returns:
-            A list of selected feature names, sorted by merged Borda scores.
+            Feature names sorted by merged Borda scores.
         """
         self._validate_input(subsets)
 

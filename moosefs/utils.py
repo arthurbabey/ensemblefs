@@ -100,14 +100,13 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
 
 
 def dynamic_import(class_path: str) -> type:
-    """
-    Dynamically imports a class based on its full class path.
+    """Import a class from a fully qualified path.
 
     Args:
-        class_path: Full dot-separated path to the class (e.g., 'moosefs.module.ClassName').
+        class_path: Dotted path, e.g. "moosefs.module.ClassName".
 
     Returns:
-        The class object specified by class_path.
+        The referenced class object.
     """
     components = class_path.split(".")
     module_path = ".".join(components[:-1])
@@ -117,17 +116,16 @@ def dynamic_import(class_path: str) -> type:
 
 
 def get_class_info(identifier: str) -> Tuple[type, List[str]]:
-    """
-    Retrieves the class object and its expected parameters based on a string identifier.
+    """Resolve an identifier to a class and its expected params.
 
     Args:
-        identifier: A string representing a class identifier defined in `class_path_mapping`.
+        identifier: Lookup key in ``class_path_mapping``.
 
     Returns:
-        A tuple containing the class object and a list of expected parameter names.
+        (class, params) where params are attribute names to fetch.
 
     Raises:
-        ValueError: If the identifier is not found in `class_path_mapping`.
+        ValueError: If the identifier is unknown.
     """
     if identifier not in class_path_mapping:
         raise ValueError(f"Unknown class identifier: {identifier}")
@@ -137,17 +135,15 @@ def get_class_info(identifier: str) -> Tuple[type, List[str]]:
 
 
 def extract_params(cls: type, instance: Any, params: List[str]) -> Dict[str, Any]:
-    """
-    Extracts and returns the initialization parameters required by the class,
-    based on the class signature and attributes of the provided instance.
+    """Collect constructor parameters from an owning instance.
 
     Args:
-        cls: The class object to be instantiated.
-        instance: The instance from which attribute values are extracted.
-        params: A list of parameter names expected by the class.
+        cls: Class to instantiate.
+        instance: Object carrying attributes matching ``params``.
+        params: Parameter names to extract.
 
     Returns:
-        A dictionary of parameters (name-value pairs) for instantiating the class.
+        Mapping of parameter names to values for ``cls``.
     """
     sig = inspect.signature(cls.__init__)
 

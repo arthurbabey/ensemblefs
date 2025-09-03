@@ -5,12 +5,16 @@ import pandas as pd
 
 
 class FeatureSelector:
-    """Base class for feature selection."""
+    """Base class for feature selection.
+
+    Subclasses must implement ``compute_scores`` returning a score per feature.
+    """
 
     def __init__(self, task: str, num_features_to_select: int) -> None:
-        """
+        """Initialize the selector.
+
         Args:
-            task: ML task ('classification' or 'regression').
+            task: Either "classification" or "regression".
             num_features_to_select: Number of top features to select.
         """
         self.task = task
@@ -21,15 +25,14 @@ class FeatureSelector:
         X: Union[np.ndarray, pd.DataFrame],
         y: Union[np.ndarray, pd.Series, pd.DataFrame],
     ) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Selects top features based on computed scores.
+        """Select top features using the computed scores.
 
         Args:
-            X: Training samples, shape [n_samples, n_features].
-            y: Target values, shape [n_samples] or [n_samples, n_outputs].
+            X: Training samples, shape (n_samples, n_features).
+            y: Targets, shape (n_samples,) or (n_samples, n_outputs).
 
         Returns:
-            A tuple containing feature scores and indices of the selected features.
+            Tuple (scores, indices) where indices are the top-k positions.
         """
         scores = self.compute_scores(X, y)
         indices = np.argsort(scores)[::-1][: self.num_features_to_select]
@@ -40,17 +43,5 @@ class FeatureSelector:
         X: Union[np.ndarray, pd.DataFrame],
         y: Union[np.ndarray, pd.Series, pd.DataFrame],
     ) -> np.ndarray:
-        """
-        Computes feature scores (to be implemented by subclasses).
-
-        Args:
-            X: Training samples.
-            y: Target values.
-
-        Returns:
-            An array of feature scores.
-
-        Raises:
-            NotImplementedError: If not implemented in a subclass.
-        """
+        """Compute per-feature scores (override in subclasses)."""
         raise NotImplementedError("Subclasses must implement compute_scores")

@@ -3,20 +3,23 @@ import numpy as np
 
 
 class ParetoAnalysis:
-    """
-    Standard dominance ranking **plus** a utopia-distance tie-break.
+    """Rank groups by dominance and break ties using utopia distance.
 
-    * First compute the usual scalar score
-        scalar = (# groups I dominate) − (# groups that dominate me)
-    * When two or more groups share the top scalar, scale their metric
-      vectors to [0, 1] **within the tied set** and pick the one whose
-      Euclidean distance to the utopia point (1, …, 1) is smallest.
+    For each group, computes a scalar dominance score: dominated−is_dominated.
+    If the top score ties, scales tied vectors to [0, 1] (within the tie) and
+    picks the one closest to the utopia point (1, ..., 1).
     """
 
-    # ------------------------------------------------------------------ #
-    # construction                                                       #
-    # ------------------------------------------------------------------ #
     def __init__(self, data: List[List[float]], group_names: List[str]) -> None:
+        """Initialize the analysis state.
+
+        Args:
+            data: Metric vectors per group.
+            group_names: Display names for groups.
+
+        Raises:
+            ValueError: If ``data`` is empty.
+        """
         if not data:
             raise ValueError("Data cannot be empty.")
         self.data = data
@@ -34,9 +37,6 @@ class ParetoAnalysis:
             for g, vec in zip(group_names, data)
         ]
 
-    # ------------------------------------------------------------------ #
-    # dominance helpers                                                  #
-    # ------------------------------------------------------------------ #
     def _dominate_count(self, i: int) -> int:
         g = self.data[i]
         return sum(
@@ -53,10 +53,12 @@ class ParetoAnalysis:
             for j, o in enumerate(self.data) if j != i
         )
 
-    # ------------------------------------------------------------------ #
-    # public API                                                         #
-    # ------------------------------------------------------------------ #
     def get_results(self) -> List[List[Union[str, int]]]:
+        """Compute dominance and return ranked rows.
+
+        Returns:
+            Rows [name, dominate_count, is_dominated_count, scalar] sorted by rank.
+        """
         # 1) scalar dominance
         for i in range(self.num_groups):
             dom = self._dominate_count(i)

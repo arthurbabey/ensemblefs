@@ -1,5 +1,3 @@
-# arithmetic_mean_merger.py  (or add below BordaMerger in the same module)
-
 from typing import List
 import numpy as np
 
@@ -8,7 +6,7 @@ from .base_merger import MergingStrategy
 
 
 class L2NormMerger(MergingStrategy):
-    """Rank-based merging strategy using the L2-norm (RMS) of scores."""
+    """Rank-based merging using the L2-norm (RMS) of scores."""
 
     name = "L2Norm"
 
@@ -22,7 +20,15 @@ class L2NormMerger(MergingStrategy):
         num_features_to_select: int,
         **kwargs,
     ) -> List[str]:
-        """Return the top‐k feature names after L2-norm aggregation."""
+        """Return the top‑k feature names after L2-norm aggregation.
+
+        Args:
+            subsets: Feature lists (one list per selector).
+            num_features_to_select: Number of names to return.
+
+        Returns:
+            Feature names sorted by aggregated L2 score.
+        """
         self._validate_input(subsets)
 
         if len(subsets) == 1:

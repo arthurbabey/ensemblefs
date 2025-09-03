@@ -23,13 +23,17 @@ from sklearn.metrics import (
 
 
 class BaseMetric:
-    """Base class for computing evaluation metrics."""
+    """Base class for computing evaluation metrics.
+
+    Trains a small battery of models and aggregates per-model metric values.
+    """
 
     def __init__(self, name: str, task: str) -> None:
-        """
+        """Initialize the metric with a task type.
+
         Args:
-            name: Metric name.
-            task: Task type ('classification' or 'regression').
+            name: Human-readable metric name.
+            task: Either "classification" or "regression".
         """
         if task not in {"classification", "regression"}:
             raise ValueError("Task must be 'classification' or 'regression'.")
@@ -51,7 +55,11 @@ class BaseMetric:
             ExtraTreesRegressor,
         ],
     ]:
-        """Initialize task-specific models."""
+        """Initialize task-specific models.
+
+        Returns:
+            Mapping from model label to estimator instance.
+        """
         return {
             "classification": {
                 "Random Forest": RandomForestClassifier(n_jobs=1),
@@ -72,17 +80,16 @@ class BaseMetric:
         X_test: np.ndarray,
         y_test: np.ndarray,
     ) -> Dict[str, Dict[str, Union[np.ndarray, None]]]:
-        """
-        Train all models and generate predictions.
+        """Train all models and generate predictions.
 
         Args:
-            X_train: Training data.
-            y_train: Training labels.
-            X_test: Test data.
-            y_test: Test labels.
+            X_train: Training features.
+            y_train: Training targets.
+            X_test: Test features.
+            y_test: Test targets.
 
         Returns:
-            Dictionary containing predictions and probabilities.
+            Dict keyed by model name with predictions and optional probabilities.
         """
         results = {}
 
@@ -106,21 +113,7 @@ class BaseMetric:
         X_test: np.ndarray,
         y_test: np.ndarray,
     ) -> float:
-        """
-        Compute the metric. Must be implemented in child classes.
-
-        Args:
-            X_train: Training data.
-            y_train: Training labels.
-            X_test: Test data.
-            y_test: Test labels.
-
-        Returns:
-            Computed metric value.
-
-        Raises:
-            NotImplementedError: If not implemented in subclasses.
-        """
+        """Compute the metric (implemented by subclasses)."""
         raise NotImplementedError("This method must be overridden in subclasses.")
 
 
@@ -137,6 +130,7 @@ class RegressionMetric(BaseMetric):
         X_test: np.ndarray,
         y_test: np.ndarray,
     ) -> float:
+        """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
         return np.mean(
             [self._metric_func(y_test, res["predictions"]) for res in results.values()]
@@ -184,6 +178,7 @@ class ClassificationMetric(BaseMetric):
         X_test: np.ndarray,
         y_test: np.ndarray,
     ) -> float:
+        """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
         return np.mean(
             [

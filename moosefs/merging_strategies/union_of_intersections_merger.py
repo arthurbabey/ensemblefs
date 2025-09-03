@@ -9,7 +9,7 @@ from .base_merger import MergingStrategy
 
 
 class UnionOfIntersectionsMerger(MergingStrategy):
-    """Set-based merging strategy computing the union of pairwise subset intersections."""
+    """Union of intersections across selector subsets."""
 
     name = "UnionOfIntersections"
 
@@ -23,20 +23,19 @@ class UnionOfIntersectionsMerger(MergingStrategy):
         fill: bool = False,
         **kwargs,
     ) -> Set[str]:
-        """
-        Merges input subsets by computing the union of pairwise subset intersections.
+        """Merge by union of pairwise intersections.
 
         Args:
-            subsets: List of subsets, where each subset is a list of Feature objects.
-            num_features_to_select: Number of selected features (only used if `fill=True`).
-            fill: If True, ensures exactly `num_features_to_select` features. Otherwise, returns raw core set.
-            **kwargs: Additional strategy-specific arguments.
+            subsets: Feature lists (one list per selector).
+            num_features_to_select: Required when ``fill=True``.
+            fill: If True, trim/pad output to requested size.
+            **kwargs: Unused.
 
         Returns:
-            A set of selected feature names.
+            Set of selected feature names.
 
         Raises:
-            ValueError: If input subsets are invalid or `num_features_to_select` is missing when `fill=True`.
+            ValueError: If inputs are invalid or size is missing when ``fill=True``.
         """
         self._validate_input(subsets)
 

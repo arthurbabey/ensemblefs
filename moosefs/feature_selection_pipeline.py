@@ -17,6 +17,11 @@ from .utils import extract_params, get_class_info
 agreement_flag = False
         
 class FeatureSelectionPipeline:
+    """End-to-end pipeline for ensemble feature selection.
+
+    Orchestrates feature scoring, merging, metric evaluation, and Pareto-based
+    selection across repeated runs and method subgroups.
+    """
     def __init__(
         self,
         data: pd.DataFrame,
@@ -31,25 +36,23 @@ class FeatureSelectionPipeline:
         random_state: Optional[int] = None,
         n_jobs: Optional[int] = None,
     ) -> None:
-        """
-        Initializes the feature selection pipeline.
+        """Initialize the pipeline.
 
         Args:
             data: DataFrame including a 'target' column.
-            fs_methods: List of feature selection methods (classes or strings).
-            merging_strategy: Merging strategy (class or string).
+            fs_methods: Feature selectors (identifiers or instances).
+            merging_strategy: Merging strategy (identifier or instance).
             num_repeats: Number of repeats for the pipeline.
             num_features_to_select: Desired number of features to select.
-                (For rank-based merging, this must be provided.)
-            metrics: List of performance metrics (classes or strings).
+            metrics: Metric functions (identifiers or instances).
             task: 'classification' or 'regression'.
             min_group_size: Minimum number of methods in each subgroup.
-            fill: If True, ensures exactly num_features_to_select features.
+            fill: If True, enforce exact size after merging.
             random_state: Seed for reproducibility.
-            n_jobs: Number of parallel jobs (-1 uses all processors).
+            n_jobs: Parallel jobs (use num_repeats when -1 or None).
 
         Raises:
-            ValueError: If the task is invalid or if num_features_to_select is missing for rank-based merging.
+            ValueError: If task is invalid or required parameters are missing.
         """
         
         # parameters validation
@@ -82,16 +85,30 @@ class FeatureSelectionPipeline:
 
     @staticmethod
     def _validate_task(task: str) -> None:
+        """Validate task string.
+
+        Args:
+            task: Expected 'classification' or 'regression'.
+        """
         if task not in ["classification", "regression"]:
             raise ValueError("Task must be either 'classification' or 'regression'.")
     @staticmethod    
     def _set_seed(seed: int, idx: Optional[int] = None) -> None:
+        """Seed numpy/python RNGs for reproducibility."""
         np.random.seed(seed)
         random.seed(seed)
         os.environ["PYTHONHASHSEED"] = str(seed)
 
 
     def _generate_subgroup_names(self, min_group_size: int) -> List[Tuple[str, ...]]:
+        """Generate all selector-name combinations with minimum size.
+
+        Args:
+            min_group_size: Minimum subgroup size.
+
+        Returns:
+            List of tuples of selector names.
+        """
         fs_method_names = [fs_method.name for fs_method in self.fs_methods]
         if min_group_size > len(fs_method_names):
             raise ValueError(
@@ -105,14 +122,10 @@ class FeatureSelectionPipeline:
 
     # Public method to run the feature selection pipeline
     def run(self, verbose: bool = True) -> Tuple[Any, int, Tuple[str, ...]]:
-        """
-        Runs the complete feature selection pipeline.
+        """Execute the pipeline and return best merged features.
 
         Returns:
-            A tuple containing:
-              - The merged features from the best group,
-              - The index of the best repeat,
-              - The best subgroup (tuple of method names).
+            (merged_features, best_repeat_idx, best_group_names).
         """
 
         self._set_seed(self.random_state)
@@ -187,9 +200,7 @@ class FeatureSelectionPipeline:
         )
 
     def _pipeline_run_for_repeat(self, i: int, verbose: bool):
-        """
-        Executes feature selection pipeline for a single repeat index i.
-        """
+        """Execute one repeat and return partial results tuple."""
         self._set_seed(self.random_state + i)
 
         train_data, test_data = self._split_data(test_size=0.20, random_state=self.random_state + i)
@@ -204,14 +215,13 @@ class FeatureSelectionPipeline:
         return i, fs_subsets_local, merged_features_local, local_result_dicts
 
     def _replace_none(self, metrics: List[List[Optional[float]]]) -> List[List[float]]:
-        """
-        Replaces groups containing None with lists of -inf.
+        """Replace any group with None with a list of -inf.
 
         Args:
-            metrics: List of metric lists per group.
+            metrics: Per-group metric lists.
 
         Returns:
-            Cleaned list with no None values.
+            Same shape with None replaced by -inf rows.
         """
         return [
             (
@@ -223,15 +233,14 @@ class FeatureSelectionPipeline:
         ]
 
     def _split_data(self, test_size: float, random_state: int):
+        """Split data into train/test using stratification when classification."""
         stratify = self.data["target"] if self.task == "classification" else None
         return train_test_split(
             self.data, test_size=test_size, random_state=random_state, stratify=stratify
         )
 
     def _compute_subset(self, train_data, idx):
-        """
-        Computes feature subsets and returns a dictionary.
-        """
+        """Compute selected Feature objects per method for this repeat."""
         self._set_seed(self.random_state + idx)
         X_train = train_data.drop("target", axis=1)
         y_train = train_data["target"]
@@ -254,9 +263,7 @@ class FeatureSelectionPipeline:
        
 
     def _compute_merging(self, fs_subsets_local, idx, verbose=True):
-        """
-        Merges feature subsets and returns a dictionary.
-        """
+        """Merge per-group features and return mapping for this repeat."""
         self._set_seed(self.random_state + idx)
         merged_features_local = {}
         for group in self.subgroup_names:
@@ -268,15 +275,14 @@ class FeatureSelectionPipeline:
         return merged_features_local
 
     def _merge_group_features(self, fs_subsets_local, idx, group):
-        """
-        Merges features for a specific group of methods.
+        """Merge features for a specific group of methods.
 
         Args:
-            idx: Current repeat index.
-            group: Tuple of method names.
+            idx: Repeat index.
+            group: Tuple of selector names.
 
         Returns:
-            Merged features as produced by the merging strategy.
+            Merged features (type depends on strategy).
         """
         group_features = []
         for method in group:
@@ -299,11 +305,10 @@ class FeatureSelectionPipeline:
         X_test: pd.DataFrame,
         y_test: pd.Series,
     ) -> List[float]:
-        """
-        Computes performance metrics using all metric methods.
+        """Compute performance metrics using configured metric methods.
 
         Returns:
-            List of averaged metric values.
+            Averaged metric values per configured metric.
         """
         self._set_seed(self.random_state)
         return [
@@ -313,17 +318,17 @@ class FeatureSelectionPipeline:
     def _compute_metrics(
         self, fs_subsets_local, merged_features_local, train_data, test_data, idx
     ):
-        """
-        Computes and stores performance and stability metrics for each subgroup.
+        """Compute and collect performance and stability metrics for subgroups.
 
         Args:
-            train_data: Training dataset.
-            test_data: Test dataset.
-            result_dicts: List of dictionaries to store metrics.
-            idx: Current repeat index.
+            fs_subsets_local: Local selected Feature lists per (repeat, method).
+            merged_features_local: Merged features per (repeat, group).
+            train_data: Training dataframe.
+            test_data: Test dataframe.
+            idx: Repeat index.
 
         Returns:
-            Updated result_dicts with computed metrics.
+            List of per-metric dicts keyed by (repeat, group).
         """
         self._set_seed(self.random_state + idx)
         if agreement_flag:
@@ -374,15 +379,14 @@ class FeatureSelectionPipeline:
         result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]],
         group_names: List[Tuple[str, ...]],
     ) -> List[List[Optional[float]]]:
-        """
-        Calculates the mean metrics for each subgroup.
+        """Calculate mean metrics per subgroup across repeats.
 
         Args:
-            result_dicts: List of dictionaries with metrics.
-            group_names: List of subgroup names.
+            result_dicts: Per-metric dicts keyed by (repeat, group).
+            group_names: Subgroup names to summarize.
 
         Returns:
-            List of lists containing mean metrics per group.
+            List of [means per metric] for each subgroup.
         """
         means_list = []
         for group in group_names:
@@ -405,16 +409,7 @@ class FeatureSelectionPipeline:
 
     @staticmethod
     def _compute_pareto(groups: List[List[float]], names: List[Any]) -> Any:
-        """
-        Performs Pareto analysis to identify the best-performing group or repeat.
-
-        Args:
-            groups: List of metric lists.
-            names: List of corresponding names.
-
-        Returns:
-            The name of the best-performing group or repeat.
-        """
+        """Return the name of the winner using Pareto analysis."""
         pareto = ParetoAnalysis(groups, names)
         pareto_results = pareto.get_results()
         return pareto_results[0][0]
@@ -424,9 +419,9 @@ class FeatureSelectionPipeline:
         group: Union[str, Tuple[str, ...]],
         *result_dicts: Dict[Tuple[int, Tuple[str, ...]], float],
     ) -> List[List[Optional[float]]]:
-        """
-        Return a row per repeat, even if the group had no metrics for that repeat.
-        Missing values stay as None and will be turned into -inf by _replace_none().
+        """Return a row per repeat for the given group.
+
+        Missing values remain as None and are later replaced by -inf.
         """
         result_array: List[List[Optional[float]]] = []
         for idx in range(self.num_repeats):              # <- full range
@@ -435,18 +430,17 @@ class FeatureSelectionPipeline:
         return result_array
 
     def _load_class(self, input: Union[str, object], instantiate: bool = False) -> Any:
-        """
-        Loads a class or returns an instance if already provided.
+        """Resolve identifiers to classes/instances and optionally instantiate.
 
         Args:
-            input: A string identifier or an instance of a feature selector/merging strategy.
-            instantiate: If True, instantiates the class with extracted parameters.
+            input: Identifier or instance of a selector/merger/metric.
+            instantiate: If True, instantiate using extracted parameters.
 
         Returns:
-            The class or its instance.
+            Class or instance.
 
         Raises:
-            ValueError: If input is not a valid identifier or instance.
+            ValueError: If ``input`` is invalid.
         """
         if isinstance(input, str):
             cls, params = get_class_info(input)

@@ -9,11 +9,11 @@ from .base_merger import MergingStrategy
 
 
 class ConsensusMerger(MergingStrategy):
-    """
-    Set-based merger that keeps features selected by at least `k`
-    base selectors (global consensus ≥ k). If `fill=True`, the output
-    is trimmed / padded to exactly `num_features_to_select` by using
-    the summed, min-max–normalised scores as a tie-breaker.
+    """Set-based consensus merger with optional fill.
+
+    Keeps features selected by at least ``k`` selectors. If ``fill=True``,
+    trims/pads to ``num_features_to_select`` using summed, per-selector
+    min–max–normalized scores as a tie-breaker.
     """
 
     def __init__(self, k: int = 2, *, fill: bool = False) -> None:
@@ -29,6 +29,16 @@ class ConsensusMerger(MergingStrategy):
         num_features_to_select: Optional[int] = None,
         **kwargs,
     ) -> Set[str]:
+        """Merge by consensus threshold.
+
+        Args:
+            subsets: Feature lists (one list per selector).
+            num_features_to_select: Required when ``fill=True``.
+            **kwargs: Unused.
+
+        Returns:
+            Set of selected feature names.
+        """
         self._validate_input(subsets)
 
         if self.fill and num_features_to_select is None:

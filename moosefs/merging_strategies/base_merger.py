@@ -4,23 +4,32 @@ from ..core.feature import Feature
 
 
 class MergingStrategy:
-    """Base class for merging strategies."""
+    """Abstract base for merging strategies.
+
+    Strategies can be "set-based" or "rank-based" depending on how they merge
+    the per-selector outputs.
+    """
 
     def __init__(self, strategy_type: str) -> None:
-        """
+        """Initialize the strategy.
+
         Args:
-            strategy_type: The type of merging strategy ('set-based' or 'rank-based').
+            strategy_type: Either "set-based" or "rank-based".
         """
         self.strategy_type = strategy_type
 
     def merge(self, data: List, num_features_to_select: int, **kwargs) -> List[Feature]:
-        """
-        Merges input data according to the strategy (to be implemented by subclasses).
+        """Merge input data according to the strategy.
+
+        Subclasses must implement this method.
 
         Args:
-            data: The data to merge.
-            num_features_to_select: Number of top features to select.
-            **kwargs: Additional strategy-specific arguments.
+            data: List of Feature lists (one list per selector) or a single list.
+            num_features_to_select: Number of top features to return.
+            **kwargs: Strategy-specific options.
+
+        Returns:
+            A list of merged features (or names depending on strategy).
 
         Raises:
             NotImplementedError: If not implemented in a subclass.
@@ -28,24 +37,23 @@ class MergingStrategy:
         raise NotImplementedError("Subclasses must implement this method")
 
     def is_set_based(self) -> bool:
-        """Returns True if the strategy is set-based."""
+        """Return True if the strategy is set-based."""
         return self.strategy_type == "set-based"
 
     def is_rank_based(self) -> bool:
-        """Returns True if the strategy is rank-based."""
+        """Return True if the strategy is rank-based."""
         return self.strategy_type == "rank-based"
 
     def _validate_input(
         self, subsets: Union[List[Feature], List[List[Feature]]]
     ) -> None:
-        """
-        Validates that subsets contain Feature objects.
+        """Validate that ``subsets`` contains Feature objects.
 
         Args:
-            subsets: A list or list of lists containing Feature objects.
+            subsets: A list of Feature or a list of Feature lists.
 
         Raises:
-            ValueError: If subsets are empty or contain invalid types.
+            ValueError: If empty or containing invalid types.
         """
         if not subsets:
             raise ValueError("Subsets cannot be empty.")
