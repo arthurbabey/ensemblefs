@@ -34,22 +34,22 @@ class ConsensusMerger(MergingStrategy):
         if self.fill and num_features_to_select is None:
             raise ValueError("`num_features_to_select` required when fill=True")
 
-        # ── collect names & scores ───────────────────────────────────
-        names_mat  = [[f.name  for f in s] for s in subsets]
-        scores_mat = np.array([[f.score for f in s] for s in subsets], dtype=np.float32).T
+        # ── collect names & scores (ragged‑safe) ─────────────────────
+        names_mat = [[f.name for f in s] for s in subsets]
 
-        # min-max normalisation per selector
-        min_v = scores_mat.min(axis=1, keepdims=True)
-        rng   = np.where((scores_mat.max(axis=1, keepdims=True) - min_v) == 0,
-                         1.0,
-                         scores_mat.max(axis=1, keepdims=True) - min_v)
-        norm_scores = (scores_mat - min_v) / rng
-
-        # ── consensus counts & summed scores ─────────────────────────
+        # Consensus counts across all selectors
         counts = Counter(chain.from_iterable(names_mat))
+
+        # Summed, per-selector min‑max–normalised scores per feature name
         sum_scores = defaultdict(float)
-        for col_idx, selector_names in enumerate(names_mat):
-            for name, s in zip(selector_names, norm_scores[:, col_idx]):
+        for subset in subsets:
+            if not subset:
+                continue
+            scores = np.array([f.score for f in subset], dtype=np.float32)
+            min_v = float(scores.min())
+            rng = float(scores.max() - min_v) or 1.0
+            norm = (scores - min_v) / rng
+            for name, s in zip([f.name for f in subset], norm):
                 sum_scores[name] += float(s)
 
         selected = {f for f, c in counts.items() if c >= self.k}
