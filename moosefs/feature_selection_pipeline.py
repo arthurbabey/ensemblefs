@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed, parallel_backend
 from sklearn.model_selection import train_test_split
-from tqdm import tqdm
+# tqdm is not used; keep imports minimal
 
 from .core import Feature, ParetoAnalysis
 from .metrics.stability_metrics import compute_stability_metrics, diversity_agreement
@@ -71,12 +71,6 @@ class FeatureSelectionPipeline:
         # set seed for reproducibility
         self._set_seed(self.random_state)
 
-<<<<<<< HEAD
-        # Store original specs; instantiate fresh objects inside run()
-        self._fs_method_specs: list = list(fs_methods)
-        self._metric_specs: list = list(metrics)
-        self._merging_spec: Any = merging_strategy
-=======
         # Keep original specs and also instantiate now for introspection
         self._fs_method_specs = list(fs_methods)
         self._metric_specs = list(metrics)
@@ -86,7 +80,6 @@ class FeatureSelectionPipeline:
         self.fs_methods = [self._load_class(m, instantiate=True) for m in self._fs_method_specs]
         self.metrics = [self._load_class(m, instantiate=True) for m in self._metric_specs]
         self.merging_strategy = self._load_class(self._merging_spec, instantiate=True)
->>>>>>> d32e752 (pytest fix)
 
         # validate and preparation
         if self.num_features_to_select is None:
@@ -113,6 +106,11 @@ class FeatureSelectionPipeline:
     def _per_repeat_seed(self, idx: int) -> int:
         """Derive a per-repeat seed from the top-level seed."""
         return int(self.random_state) + int(idx)
+
+    def _effective_n_jobs(self) -> int:
+        """Return parallel job count capped by number of repeats."""
+        n = self.n_jobs if self.n_jobs is not None and self.n_jobs != -1 else self.num_repeats
+        return min(int(n), int(self.num_repeats))
 
 
     def _generate_subgroup_names(self, min_group_size: int) -> list:
@@ -144,7 +142,6 @@ class FeatureSelectionPipeline:
         """
         self._set_seed(self.random_state)
 
-<<<<<<< HEAD
         # Fresh objects for each run to avoid hidden state
         self.fs_methods = [
             self._load_class(m, instantiate=True) for m in self._fs_method_specs
@@ -165,34 +162,9 @@ class FeatureSelectionPipeline:
         result_dicts: list = [
             {} for _ in range(num_metrics)
         ]
-=======
-        # Fresh objects each run to avoid hidden state across runs
-        self.fs_methods = [self._load_class(m, instantiate=True) for m in self._fs_method_specs]
-        self.metrics = [self._load_class(m, instantiate=True) for m in self._metric_specs]
-        self.merging_strategy = self._load_class(self._merging_spec, instantiate=True)
-
-        # Reset internal state so that run() always starts fresh
-        self.FS_subsets = {}
-        self.merged_features = {}
-        
-        if agreement_flag:
-            num_metrics = len(self.metrics) + 2  # +1 for stability and +1 for agreement
-        else:
-            num_metrics = len(self.metrics) + 1
-            
-        result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]] = [
-            {} for _ in range(num_metrics)
-        ]
-        # self.fs_methods already freshly instantiated above
->>>>>>> d32e752 (pytest fix)
 
         # Ensure we don't allocate more jobs than repeats
-        n_jobs = (
-            self.n_jobs
-            if self.n_jobs is not None and self.n_jobs != -1
-            else self.num_repeats
-        )
-        n_jobs = min(n_jobs, self.num_repeats)
+        n_jobs = self._effective_n_jobs()
 
         with parallel_backend(
             "loky", inner_max_num_threads=1
@@ -233,11 +205,7 @@ class FeatureSelectionPipeline:
             best_group_metrics, [str(i) for i in range(self.num_repeats)]
         )
         
-        return (
-            self.merged_features[(int(best_repeat), best_group)],
-            int(best_repeat),
-            best_group,
-        )
+        return (self.merged_features[(int(best_repeat), best_group)], int(best_repeat), best_group)
 
     def _pipeline_run_for_repeat(self, i: int, verbose: bool) -> Any:
         """Execute one repeat and return partial results tuple."""
@@ -334,12 +302,11 @@ class FeatureSelectionPipeline:
         Returns:
             Merged features (type depends on strategy).
         """
-        group_features = []
-        for method in group:
-            features = [f for f in fs_subsets_local[(idx, method)] if f.selected]
-            group_features.append(features)
+        group_features = [
+            [f for f in fs_subsets_local[(idx, method)] if f.selected]
+            for method in group
+        ]
 
-<<<<<<< HEAD
         # Determine set-based vs rank-based via method call when available
         is_set_based_attr = getattr(self.merging_strategy, "is_set_based", None)
         if callable(is_set_based_attr):
@@ -348,12 +315,6 @@ class FeatureSelectionPipeline:
             is_set_based = is_set_based_attr
         else:
             is_set_based = True  # default behavior as before
-
-=======
-        # Properly call is_set_based() when available
-        is_set_based_attr = getattr(self.merging_strategy, "is_set_based", None)
-        is_set_based = is_set_based_attr() if callable(is_set_based_attr) else bool(is_set_based_attr) if is_set_based_attr is not None else True
->>>>>>> d32e752 (pytest fix)
         if is_set_based:
             return self.merging_strategy.merge(
                 group_features, self.num_features_to_select, fill=self.fill
@@ -459,20 +420,11 @@ class FeatureSelectionPipeline:
         """
         means_list = []
         for group in group_names:
-            group_means = [
-                (
-                    None
-                    if np.isnan(
-                        np.mean(
-                            [value for (idx, name), value in d.items() if name == group]
-                        )
-                    )
-                    else np.mean(
-                        [value for (idx, name), value in d.items() if name == group]
-                    )
-                )
-                for d in result_dicts
-            ]
+            group_means = []
+            for d in result_dicts:
+                vals = [value for (idx, name), value in d.items() if name == group]
+                m = np.mean(vals) if len(vals) else np.nan
+                group_means.append(None if np.isnan(m) else float(m))
             means_list.append(group_means)
         return means_list
 

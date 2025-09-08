@@ -31,7 +31,9 @@ def sample_data():
 
 def test_main_script_with_config(sample_data):
     result = subprocess.run(
-        ["python", SCRIPT_PATH, "--config", CONFIG_PATH], capture_output=True, text=True
+        [sys.executable, SCRIPT_PATH, "--config", CONFIG_PATH],
+        capture_output=True,
+        text=True,
     )
     os.remove(DATASET_PATH)
     os.remove("tests/test_experiment/results.txt")
