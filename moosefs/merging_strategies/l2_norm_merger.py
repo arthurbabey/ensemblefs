@@ -1,4 +1,3 @@
-from typing import List
 import numpy as np
 
 from ..core.feature import Feature
@@ -16,10 +15,10 @@ class L2NormMerger(MergingStrategy):
 
     def merge(
         self,
-        subsets: List[List[Feature]],
+        subsets: list,
         num_features_to_select: int,
         **kwargs,
-    ) -> List[str]:
+    ) -> list:
         """Return the top‑k feature names after L2-norm aggregation.
 
         Args:

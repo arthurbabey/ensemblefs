@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Dict, Union
+from typing import Any
 import warnings
 
 import numpy as np
@@ -22,15 +22,11 @@ class ElasticNetSelector(FeatureSelector):
 
     name = "ElasticNet"
 
-    def __init__(self, task: str, num_features_to_select: int, **kwargs: Dict) -> None:
+    def __init__(self, task: str, num_features_to_select: int, **kwargs: Any) -> None:
         super().__init__(task, num_features_to_select)
         self.kwargs = kwargs
 
-    def compute_scores(
-        self,
-        X: Union[np.ndarray, pd.DataFrame],
-        y: Union[np.ndarray, pd.Series, pd.DataFrame],
-    ) -> np.ndarray:
+    def compute_scores(self, X: Any, y: Any) -> np.ndarray:
         # Ensure tabular objects for column-safe slicing later in the pipeline
         if isinstance(X, np.ndarray):
             X = pd.DataFrame(X, columns=[f"feature_{i}" for i in range(X.shape[1])])

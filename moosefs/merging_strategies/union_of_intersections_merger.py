@@ -1,6 +1,6 @@
 from collections import defaultdict
 from itertools import combinations
-from typing import List, Optional, Set
+from typing import Optional
 
 import numpy as np
 
@@ -18,11 +18,11 @@ class UnionOfIntersectionsMerger(MergingStrategy):
 
     def merge(
         self,
-        subsets: List[List[Feature]],
+        subsets: list,
         num_features_to_select: Optional[int] = None,
         fill: bool = False,
         **kwargs,
-    ) -> Set[str]:
+    ) -> set:
         """Merge by union of pairwise intersections.
 
         Args:

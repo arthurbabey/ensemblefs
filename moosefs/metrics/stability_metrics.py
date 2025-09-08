@@ -1,10 +1,9 @@
 from itertools import combinations
-from typing import List, Set
 
 from moosefs.core.novovicova import StabilityNovovicova
 
 
-def compute_stability_metrics(features_list: List[List[str]]) -> float:
+def compute_stability_metrics(features_list: list) -> float:
     """Compute stability SH(S) across selections.
 
     Args:
@@ -16,16 +15,12 @@ def compute_stability_metrics(features_list: List[List[str]]) -> float:
     return StabilityNovovicova(features_list).compute_stability()
 
 
-def _jaccard(a: Set[str], b: Set[str]) -> float:
+def _jaccard(a: set, b: set) -> float:
     """Return Jaccard similarity, handling empty sets as 1.0 if both empty."""
     return len(a & b) / len(a | b) if a | b else 1.0
 
 
-def diversity_agreement(
-    selectors: List[List[str]],
-    merged: List[str],
-    alpha: float = 0.5,
-) -> float:
+def diversity_agreement(selectors: list, merged: list, alpha: float = 0.5) -> float:
     """Blend diversity and agreement into a single score.
 
     Args:

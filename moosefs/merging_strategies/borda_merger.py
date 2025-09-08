@@ -1,5 +1,3 @@
-from typing import List
-
 import numpy as np
 from ranky import borda
 
@@ -22,8 +20,8 @@ class BordaMerger(MergingStrategy):
         self.kwargs = kwargs
 
     def merge(
-        self, subsets: List[List[Feature]], num_features_to_select: int, **kwargs
-    ) -> List[str]:
+        self, subsets: list, num_features_to_select: int, **kwargs
+    ) -> list:
         """Merge by Borda and return top-k names.
 
         Args:

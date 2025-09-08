@@ -1,4 +1,3 @@
-from typing import List
 import numpy as np
 
 from ..core.feature import Feature
@@ -17,10 +16,10 @@ class ArithmeticMeanMerger(MergingStrategy):
 
     def merge(
         self,
-        subsets: List[List[Feature]],
+        subsets: list,
         num_features_to_select: int,
         **kwargs,
-    ) -> List[str]:
+    ) -> list:
         """Return the top‑k feature names after arithmetic-mean aggregation.
 
         Args:

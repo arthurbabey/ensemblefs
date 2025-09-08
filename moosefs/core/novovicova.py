@@ -1,5 +1,3 @@
-from typing import List, Set, Union
-
 import numpy as np
 
 
@@ -12,13 +10,13 @@ class StabilityNovovicova:
         Algorithms' Stability." IEEE International Conference on Data Mining Workshops.
     """
 
-    def __init__(self, selected_features: List[Union[Set, List]]):
+    def __init__(self, selected_features: list):
         """
         Args:
             selected_features: A list of sets or lists, where each represents selected features in a dataset.
         """
         self._validate_inputs(selected_features)
-        self.selected_features: List[Set] = [
+        self.selected_features: list = [
             set(sel) for sel in selected_features
         ]  # Convert all to sets
         self.N: int = sum(
@@ -27,7 +25,7 @@ class StabilityNovovicova:
         self.n: int = len(self.selected_features)  # Number of datasets
 
     @staticmethod
-    def _validate_inputs(selected_features: List[Union[Set, List]]) -> None:
+    def _validate_inputs(selected_features: list) -> None:
         """Validates the input format, ensuring consistency and non-emptiness."""
         if not selected_features:
             raise ValueError("Feature selections cannot be empty.")
