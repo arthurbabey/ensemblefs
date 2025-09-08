@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Union
+from typing import Optional, Any
 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -8,8 +8,8 @@ from typing import Any
 class DataProcessor:
     def __init__(
         self,
-        categorical_columns: Optional[List[str]] = None,
-        columns_to_drop: Optional[List[str]] = None,
+        categorical_columns: Optional[list] = None,
+        columns_to_drop: Optional[list] = None,
         drop_missing_values: bool = False,
         merge_key: Optional[str] = None,
         normalize: bool = True,
@@ -26,19 +26,19 @@ class DataProcessor:
             normalize: Flag to determine if numerical features should be normalized.
             target_column: Name of the target column in the dataset.
         """
-        self.categorical_columns: Optional[List[str]] = categorical_columns
-        self.columns_to_drop: Optional[List[str]] = columns_to_drop
+        self.categorical_columns: Optional[list] = categorical_columns
+        self.columns_to_drop: Optional[list] = columns_to_drop
         self.drop_missing_values: bool = drop_missing_values
         self.merge_key: Optional[str] = merge_key
         self.normalize: bool = normalize
         self.target_column: str = target_column
-        self.label_encoders: Dict[str, LabelEncoder] = {}
+        self.label_encoders: dict = {}
 
     def preprocess_data(
         self,
-        data: Union[str, pd.DataFrame],
+        data: Any,
         index_col: Optional[str] = None,
-        metadata: Optional[Union[str, pd.DataFrame]] = None,
+        metadata: Optional[Any] = None,
     ) -> pd.DataFrame:
         """
         Load and preprocess data from a CSV file or DataFrame, with optional metadata merging.
@@ -68,9 +68,7 @@ class DataProcessor:
                 data_df = method(data_df)
         return data_df
 
-    def _load_data(
-        self, data: Union[str, pd.DataFrame], index_col: Optional[str] = None
-    ) -> pd.DataFrame:
+    def _load_data(self, data: Any, index_col: Optional[str] = None) -> pd.DataFrame:
         """
         Helper method to load data and set the index if specified.
 
@@ -171,7 +169,7 @@ class DataProcessor:
                 self.label_encoders[col] = label_encoder
         return data_df
 
-    def get_label_mapping(self, column_name: str) -> Dict[str, int]:
+    def get_label_mapping(self, column_name: str) -> dict:
         """
         Retrieve the label encoding mapping for a specific column.
 
@@ -282,7 +280,7 @@ class DataProcessor:
         data_df: pd.DataFrame,
         clone_column: str,
         time_column: str,
-        time_dependent_columns: List[str],
+        time_dependent_columns: list,
         min_num_timepoints: Optional[int] = None,
         fill_nan_method: str = "mean",
         **kwargs: Any,

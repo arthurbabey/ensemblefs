@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
 from itertools import chain
-from typing import List, Optional, Set
+from typing import Optional
 
 import numpy as np
 
@@ -25,10 +25,10 @@ class ConsensusMerger(MergingStrategy):
     # -----------------------------------------------------------------
     def merge(
         self,
-        subsets: List[List[Feature]],
+        subsets: list,
         num_features_to_select: Optional[int] = None,
         **kwargs,
-    ) -> Set[str]:
+    ) -> set:
         """Merge by consensus threshold.
 
         Args:

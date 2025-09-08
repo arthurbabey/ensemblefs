@@ -1,14 +1,15 @@
 import inspect
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 # Mapping of class identifiers to their import paths and expected initialization parameters.
 # Template: "identifier": ("module.path.ClassName", ["param1", "param2", ...])
-class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
-    "mae": (
+class_path_mapping: dict = {
+    # metrics
+    "mse": (
         "moosefs.metrics.performance_metrics.MeanSquaredError",
         [],
     ),
-    "mse": (
+    "mae": (
         "moosefs.metrics.performance_metrics.MeanAbsoluteError",
         [],
     ),
@@ -72,16 +73,13 @@ class_path_mapping: Dict[str, Tuple[str, List[str]]] = {
         "moosefs.feature_selectors.variance_selectors.VarianceSelector",
         ["task", "num_features_to_select"],
     ),
+    # mergers
     "borda_merger": (
         "moosefs.merging_strategies.borda_merger.BordaMerger",
         [],
     ),
     "union_of_intersections_merger": (
         "moosefs.merging_strategies.union_of_intersections_merger.UnionOfIntersectionsMerger",
-        [],
-    ),
-    "borda_merger": (
-        "moosefs.merging_strategies.borda_merger.BordaMerger",
         [],
     ),
     "l2_norm_merger": (
@@ -115,7 +113,7 @@ def dynamic_import(class_path: str) -> type:
     return getattr(module, class_name)
 
 
-def get_class_info(identifier: str) -> Tuple[type, List[str]]:
+def get_class_info(identifier: str) -> tuple:
     """Resolve an identifier to a class and its expected params.
 
     Args:
@@ -134,7 +132,7 @@ def get_class_info(identifier: str) -> Tuple[type, List[str]]:
     return cls, params
 
 
-def extract_params(cls: type, instance: Any, params: List[str]) -> Dict[str, Any]:
+def extract_params(cls: type, instance: Any, params: list) -> dict:
     """Collect constructor parameters from an owning instance.
 
     Args:
@@ -147,7 +145,7 @@ def extract_params(cls: type, instance: Any, params: List[str]) -> Dict[str, Any
     """
     sig = inspect.signature(cls.__init__)
 
-    extracted_params: Dict[str, Any] = {
+    extracted_params: dict = {
         param: getattr(instance, param)
         for param in params
         if param in sig.parameters and hasattr(instance, param)

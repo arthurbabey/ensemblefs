@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -12,7 +12,7 @@ class RandomForestSelector(FeatureSelector):
 
     name = "RandomForest"
 
-    def __init__(self, task: str, num_features_to_select: int, **kwargs: Dict) -> None:
+    def __init__(self, task: str, num_features_to_select: int, **kwargs: Any) -> None:
         """
         Args:
             task: ML task ('classification' or 'regression').
@@ -22,11 +22,7 @@ class RandomForestSelector(FeatureSelector):
         super().__init__(task, num_features_to_select)
         self.kwargs = kwargs
 
-    def compute_scores(
-        self,
-        X: Union[np.ndarray, pd.DataFrame],
-        y: Union[np.ndarray, pd.Series, pd.DataFrame],
-    ) -> np.ndarray:
+    def compute_scores(self, X: Any, y: Any) -> np.ndarray:
         """
         Computes feature importances using a RandomForest model.
 

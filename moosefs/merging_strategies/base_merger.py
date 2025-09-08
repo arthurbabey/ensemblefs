@@ -1,5 +1,3 @@
-from typing import List, Union
-
 from ..core.feature import Feature
 
 
@@ -18,7 +16,7 @@ class MergingStrategy:
         """
         self.strategy_type = strategy_type
 
-    def merge(self, data: List, num_features_to_select: int, **kwargs) -> List[Feature]:
+    def merge(self, data: list, num_features_to_select: int, **kwargs) -> list:
         """Merge input data according to the strategy.
 
         Subclasses must implement this method.
@@ -44,9 +42,7 @@ class MergingStrategy:
         """Return True if the strategy is rank-based."""
         return self.strategy_type == "rank-based"
 
-    def _validate_input(
-        self, subsets: Union[List[Feature], List[List[Feature]]]
-    ) -> None:
+    def _validate_input(self, subsets: list) -> None:
         """Validate that ``subsets`` contains Feature objects.
 
         Args:

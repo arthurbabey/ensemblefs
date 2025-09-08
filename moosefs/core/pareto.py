@@ -1,4 +1,4 @@
-from typing import List, Union, Any
+from typing import Any
 import numpy as np
 
 
@@ -10,7 +10,7 @@ class ParetoAnalysis:
     picks the one closest to the utopia point (1, ..., 1).
     """
 
-    def __init__(self, data: List[List[float]], group_names: List[str]) -> None:
+    def __init__(self, data: list, group_names: list) -> None:
         """Initialize the analysis state.
 
         Args:
@@ -32,7 +32,7 @@ class ParetoAnalysis:
         #   2  is_dominated_count
         #   3  scalar = 1 − 2
         #   4  metrics vector  ← NEW column used only for tie-break
-        self.results: List[List[Union[str, int, List[float]]]] = [
+        self.results: list = [
             [g, 0, 0, 0, vec]                  # vec = data[i]
             for g, vec in zip(group_names, data)
         ]
@@ -53,7 +53,7 @@ class ParetoAnalysis:
             for j, o in enumerate(self.data) if j != i
         )
 
-    def get_results(self) -> List[List[Union[str, int]]]:
+    def get_results(self) -> list:
         """Compute dominance and return ranked rows.
 
         Returns:

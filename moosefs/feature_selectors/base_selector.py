@@ -1,4 +1,4 @@
-from typing import Tuple, Union
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -20,11 +20,7 @@ class FeatureSelector:
         self.task = task
         self.num_features_to_select = num_features_to_select
 
-    def select_features(
-        self,
-        X: Union[np.ndarray, pd.DataFrame],
-        y: Union[np.ndarray, pd.Series, pd.DataFrame],
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def select_features(self, X: Any, y: Any) -> tuple:
         """Select top features using the computed scores.
 
         Args:
@@ -38,10 +34,6 @@ class FeatureSelector:
         indices = np.argsort(scores)[::-1][: self.num_features_to_select]
         return scores, indices
 
-    def compute_scores(
-        self,
-        X: Union[np.ndarray, pd.DataFrame],
-        y: Union[np.ndarray, pd.Series, pd.DataFrame],
-    ) -> np.ndarray:
+    def compute_scores(self, X: Any, y: Any) -> np.ndarray:
         """Compute per-feature scores (override in subclasses)."""
         raise NotImplementedError("Subclasses must implement compute_scores")

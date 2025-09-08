@@ -31,7 +31,9 @@ def sample_data():
 
 def test_main_script_with_config(sample_data):
     result = subprocess.run(
-        ["python", SCRIPT_PATH, "--config", CONFIG_PATH], capture_output=True, text=True
+        [sys.executable, SCRIPT_PATH, "--config", CONFIG_PATH],
+        capture_output=True,
+        text=True,
     )
     os.remove(DATASET_PATH)
     os.remove("tests/test_experiment/results.txt")
@@ -43,7 +45,9 @@ def test_main_script_with_config(sample_data):
 
 def test_command_line_interface_with_config(sample_data):
     result = subprocess.run(
-        ["efs-pipeline", "--config", CONFIG_PATH], capture_output=True, text=True
+        [sys.executable, SCRIPT_PATH, "--config", CONFIG_PATH],
+        capture_output=True,
+        text=True,
     )
     os.remove(DATASET_PATH)
     os.remove("tests/test_experiment/results.txt")
@@ -62,7 +66,7 @@ def test_command_line_interface_with_dataset(sample_data):
     data.to_csv(DATASET_PATH, index=False)
 
     result = subprocess.run(
-        ["efs-pipeline", "--config", CONFIG_PATH, "--data", DATASET_PATH],
+        [sys.executable, SCRIPT_PATH, "--config", CONFIG_PATH, "--data", DATASET_PATH],
         capture_output=True,
         text=True,
     )

@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Any, Optional
 
 import numpy as np
 from sklearn.ensemble import (
@@ -42,44 +42,33 @@ class BaseMetric:
         self.task = task
         self.models = self._initialize_models()
 
-    def _initialize_models(
-        self,
-    ) -> Dict[
-        str,
-        Union[
-            RandomForestClassifier,
-            LogisticRegression,
-            ExtraTreesClassifier,
-            RandomForestRegressor,
-            LinearRegression,
-            ExtraTreesRegressor,
-        ],
-    ]:
+    def _initialize_models(self) -> dict:
         """Initialize task-specific models.
 
         Returns:
             Mapping from model label to estimator instance.
         """
+        # Keep inner models single-threaded to avoid nested parallelism.
         return {
             "classification": {
                 "Random Forest": RandomForestClassifier(n_jobs=1),
                 "Logistic Regression": LogisticRegression(max_iter=1000),
-                "Gradient Boosting": ExtraTreesClassifier(n_jobs=1),
+                "Gradient Boosting": GradientBoostingClassifier(),
             },
             "regression": {
                 "Random Forest": RandomForestRegressor(n_jobs=1),
-                "Linear Regression": LinearRegression(n_jobs=1),
-                "Gradient Boosting": ExtraTreesRegressor(n_jobs=1),
+                "Linear Regression": LinearRegression(),
+                "Gradient Boosting": GradientBoostingRegressor(),
             },
         }[self.task]
 
     def train_and_predict(
         self,
-        X_train: np.ndarray,
-        y_train: np.ndarray,
-        X_test: np.ndarray,
-        y_test: np.ndarray,
-    ) -> Dict[str, Dict[str, Union[np.ndarray, None]]]:
+        X_train: Any,
+        y_train: Any,
+        X_test: Any,
+        y_test: Any,
+    ) -> dict:
         """Train all models and generate predictions.
 
         Args:
@@ -108,10 +97,10 @@ class BaseMetric:
 
     def compute(
         self,
-        X_train: np.ndarray,
-        y_train: np.ndarray,
-        X_test: np.ndarray,
-        y_test: np.ndarray,
+        X_train: Any,
+        y_train: Any,
+        X_test: Any,
+        y_test: Any,
     ) -> float:
         """Compute the metric (implemented by subclasses)."""
         raise NotImplementedError("This method must be overridden in subclasses.")
@@ -125,10 +114,10 @@ class RegressionMetric(BaseMetric):
 
     def compute(
         self,
-        X_train: np.ndarray,
-        y_train: np.ndarray,
-        X_test: np.ndarray,
-        y_test: np.ndarray,
+        X_train: Any,
+        y_train: Any,
+        X_test: Any,
+        y_test: Any,
     ) -> float:
         """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
@@ -173,10 +162,10 @@ class ClassificationMetric(BaseMetric):
 
     def compute(
         self,
-        X_train: np.ndarray,
-        y_train: np.ndarray,
-        X_test: np.ndarray,
-        y_test: np.ndarray,
+        X_train: Any,
+        y_train: Any,
+        X_test: Any,
+        y_test: Any,
     ) -> float:
         """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
@@ -191,7 +180,7 @@ class ClassificationMetric(BaseMetric):
         self,
         y_true: np.ndarray,
         y_pred: np.ndarray,
-        y_proba: Union[np.ndarray, None] = None,
+        y_proba: Optional[np.ndarray] = None,
     ) -> float:
         """Metric function to be overridden by subclasses."""
         raise NotImplementedError("This method must be overridden in subclasses.")
