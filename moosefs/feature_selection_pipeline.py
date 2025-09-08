@@ -71,10 +71,22 @@ class FeatureSelectionPipeline:
         # set seed for reproducibility
         self._set_seed(self.random_state)
 
+<<<<<<< HEAD
         # Store original specs; instantiate fresh objects inside run()
         self._fs_method_specs: list = list(fs_methods)
         self._metric_specs: list = list(metrics)
         self._merging_spec: Any = merging_strategy
+=======
+        # Keep original specs and also instantiate now for introspection
+        self._fs_method_specs = list(fs_methods)
+        self._metric_specs = list(metrics)
+        self._merging_spec = merging_strategy
+
+        # dynamically load classes or instantiate them (initial instances)
+        self.fs_methods = [self._load_class(m, instantiate=True) for m in self._fs_method_specs]
+        self.metrics = [self._load_class(m, instantiate=True) for m in self._metric_specs]
+        self.merging_strategy = self._load_class(self._merging_spec, instantiate=True)
+>>>>>>> d32e752 (pytest fix)
 
         # validate and preparation
         if self.num_features_to_select is None:
@@ -132,6 +144,7 @@ class FeatureSelectionPipeline:
         """
         self._set_seed(self.random_state)
 
+<<<<<<< HEAD
         # Fresh objects for each run to avoid hidden state
         self.fs_methods = [
             self._load_class(m, instantiate=True) for m in self._fs_method_specs
@@ -152,6 +165,26 @@ class FeatureSelectionPipeline:
         result_dicts: list = [
             {} for _ in range(num_metrics)
         ]
+=======
+        # Fresh objects each run to avoid hidden state across runs
+        self.fs_methods = [self._load_class(m, instantiate=True) for m in self._fs_method_specs]
+        self.metrics = [self._load_class(m, instantiate=True) for m in self._metric_specs]
+        self.merging_strategy = self._load_class(self._merging_spec, instantiate=True)
+
+        # Reset internal state so that run() always starts fresh
+        self.FS_subsets = {}
+        self.merged_features = {}
+        
+        if agreement_flag:
+            num_metrics = len(self.metrics) + 2  # +1 for stability and +1 for agreement
+        else:
+            num_metrics = len(self.metrics) + 1
+            
+        result_dicts: List[Dict[Tuple[int, Tuple[str, ...]], float]] = [
+            {} for _ in range(num_metrics)
+        ]
+        # self.fs_methods already freshly instantiated above
+>>>>>>> d32e752 (pytest fix)
 
         # Ensure we don't allocate more jobs than repeats
         n_jobs = (
@@ -306,6 +339,7 @@ class FeatureSelectionPipeline:
             features = [f for f in fs_subsets_local[(idx, method)] if f.selected]
             group_features.append(features)
 
+<<<<<<< HEAD
         # Determine set-based vs rank-based via method call when available
         is_set_based_attr = getattr(self.merging_strategy, "is_set_based", None)
         if callable(is_set_based_attr):
@@ -315,6 +349,11 @@ class FeatureSelectionPipeline:
         else:
             is_set_based = True  # default behavior as before
 
+=======
+        # Properly call is_set_based() when available
+        is_set_based_attr = getattr(self.merging_strategy, "is_set_based", None)
+        is_set_based = is_set_based_attr() if callable(is_set_based_attr) else bool(is_set_based_attr) if is_set_based_attr is not None else True
+>>>>>>> d32e752 (pytest fix)
         if is_set_based:
             return self.merging_strategy.merge(
                 group_features, self.num_features_to_select, fill=self.fill
