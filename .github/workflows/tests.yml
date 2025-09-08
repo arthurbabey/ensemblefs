@@ -37,7 +37,7 @@ jobs:
 
       - name: Verify imports
         run: |
-          python -c "import moosefs, ensemblefs; print('import ok')"
+          python -c "import moosefs; print('import ok')"
 
       - name: Run pytest
         run: |
@@ -53,4 +53,3 @@ jobs:
             ./coverage.xml
           if-no-files-found: ignore
           retention-days: 7
-

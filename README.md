@@ -142,13 +142,6 @@ The results are saved in a structured directory under `results/example_experimen
 ## Contributing
 
 Contributions are welcome! If you have ideas for improving MOOSE-FS, feel free to open an issue or submit a pull request.
-
-## Migration Note
-
-- The package has been renamed: use `import moosefs` instead of `import ensemblefs`.
-- Distribution name on PyPI is now `moose-fs`.
-- Backward-compat shim remains available for a transition period: `import ensemblefs` emits a DeprecationWarning and re-exports the public API from `moosefs`.
-
 ---
 
 ## License

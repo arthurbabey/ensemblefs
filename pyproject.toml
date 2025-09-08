@@ -48,7 +48,6 @@ efs-pipeline = "scripts.main:main"
 [tool.hatch.build.targets.wheel]
 include = [
     "moosefs/**",
-    "ensemblefs/**",
     "scripts/**",
     "README.md",
     "LICENSE",
