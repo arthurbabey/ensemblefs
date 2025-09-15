@@ -12,9 +12,7 @@ class Feature:
         selected: Whether the feature is selected.
     """
 
-    def __init__(
-        self, name: str, score: Optional[float] = None, selected: bool = False
-    ) -> None:
+    def __init__(self, name: str, score: Optional[float] = None, selected: bool = False) -> None:
         self.name: str = name
         self.score: Optional[float] = score
         self.selected: bool = selected
@@ -37,9 +35,7 @@ class Feature:
 
     def __str__(self) -> str:
         """Return a readable string representation."""
-        return (
-            f"Feature(name={self.name}, score={self.score}, selected={self.selected})"
-        )
+        return f"Feature(name={self.name}, score={self.score}, selected={self.selected})"
 
     def __repr__(self) -> str:
         """Return an unambiguous representation for debugging."""

@@ -1,12 +1,6 @@
-import os
-import sys
-
 import numpy as np
 import pandas as pd
 import pytest
-
-# Ensure the project root is in sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from moosefs.feature_selection_pipeline import FeatureSelectionPipeline
 
@@ -17,10 +11,8 @@ def pipeline_args():
     num_samples = 50
     num_features = 25
     np.random.seed(0)
-    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
-    data = pd.DataFrame(
-        np.random.randn(num_samples, num_features), columns=feature_names
-    )
+    feature_names = [f"Feature_{i + 1}" for i in range(num_features)]
+    data = pd.DataFrame(np.random.randn(num_samples, num_features), columns=feature_names)
     data["target"] = np.random.randint(0, 4, size=num_samples)  # Classification task
 
     fs_methods = [
@@ -61,9 +53,7 @@ def test_pipeline_reproducibility_different_runs(pipeline_args):
     result2 = pipeline.run()
     result3 = pipeline.run()
 
-    assert (
-        result1 == result2 == result3
-    ), "Multiple runs on the same instance yield different results"
+    assert result1 == result2 == result3, "Multiple runs on the same instance yield different results"
 
 
 def test_pipeline_reproducibility_different_instances(pipeline_args):

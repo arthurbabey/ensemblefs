@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from sklearn.svm import SVC, SVR
 
 from .base_selector import FeatureSelector
@@ -42,9 +41,7 @@ class SVMSelector(FeatureSelector):
 
         # Only remove `random_state` for SVR
         filtered_kwargs = (
-            {k: v for k, v in self.kwargs.items() if k != "random_state"}
-            if self.task == "regression"
-            else self.kwargs
+            {k: v for k, v in self.kwargs.items() if k != "random_state"} if self.task == "regression" else self.kwargs
         )
 
         model = model_cls(kernel="linear", **filtered_kwargs)

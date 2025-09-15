@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from sklearn.feature_selection import mutual_info_classif, mutual_info_regression
 
 from .base_selector import FeatureSelector

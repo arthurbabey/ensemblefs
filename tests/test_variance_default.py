@@ -8,7 +8,7 @@ def test_variance_selector_default_numpy_array():
     # Using threshold = alpha * median, with alpha=0.5 → ~1.333
     X = np.array(
         [
-            [0.0, 0.0, 0.0],   # col0 constant, col1/2 increase linearly
+            [0.0, 0.0, 0.0],  # col0 constant, col1/2 increase linearly
             [0.0, 2.0, 6.0],
             [0.0, 4.0, 12.0],
         ],

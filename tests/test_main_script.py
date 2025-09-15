@@ -5,8 +5,6 @@ import sys
 import pandas as pd
 import pytest
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 # Define the path to the script and config
 SCRIPT_PATH = os.path.join("scripts", "main.py")
 CONFIG_PATH = os.path.join("tests", "config_test.yml")
@@ -19,8 +17,8 @@ def sample_data():
         "column1": ["A", "B", "A", "B", "A", "B", "A", "B", "A", "B", "A", "B"],
         "column2": ["X", "Y", "X", "Y", "X", "Y", "X", "Y", "X", "Y", "X", "Y"],
         "column3": [1, 21, 3, 4, 5, 6, 7, 3, 81, 9, 112, 1],
-        "column6": [1, 2, 333, 4, 5, 61, 7, 3, 8, 9, 10, 121],
-        "column6": [11, 21, 31, 4, 5, 6, 7, 3, 8, 9, 10, 11],
+        "column4": [1, 2, 333, 4, 5, 61, 7, 3, 8, 9, 10, 121],
+        "column5": [11, 21, 31, 4, 5, 6, 7, 3, 8, 9, 10, 11],
         "column6": [1, 2, 3, 4, 51, 6, 7, 31, 8, 9, 55, 11],
         "target": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
     }
@@ -58,7 +56,6 @@ def test_command_line_interface_with_config(sample_data):
 
 
 def test_command_line_interface_with_dataset(sample_data):
-
     # read and process sample_data
     data = pd.read_csv(DATASET_PATH)
     data["column1"] = data["column1"].astype("category").cat.codes

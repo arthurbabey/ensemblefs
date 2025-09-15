@@ -1,9 +1,9 @@
-from typing import Optional, Any
+from typing import Any, Optional
 
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import KNNImputer
-from typing import Any
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
 
 class DataProcessor:
     def __init__(
@@ -84,17 +84,13 @@ class DataProcessor:
         elif isinstance(data, pd.DataFrame):
             df = data.copy()
         else:
-            raise ValueError(
-                "Input data must be a file path (str) or a pandas DataFrame"
-            )
+            raise ValueError("Input data must be a file path (str) or a pandas DataFrame")
 
         if index_col is not None:
             df.set_index(index_col, inplace=True)
         return df
 
-    def _merge_data_and_metadata(
-        self, data_df: pd.DataFrame, meta_df: pd.DataFrame
-    ) -> pd.DataFrame:
+    def _merge_data_and_metadata(self, data_df: pd.DataFrame, meta_df: pd.DataFrame) -> pd.DataFrame:
         """
         Merge the main data frame with metadata.
 
@@ -201,9 +197,7 @@ class DataProcessor:
         data_df[numerical_cols] = scaler.fit_transform(data_df[numerical_cols])
         return data_df
 
-    def _filtered_time_dataset(
-        self, data_df: pd.DataFrame, min_num_timepoints: int, clone_column: str
-    ) -> pd.DataFrame:
+    def _filtered_time_dataset(self, data_df: pd.DataFrame, min_num_timepoints: int, clone_column: str) -> pd.DataFrame:
         """
         Filter dataset to retain only clones with at least min_num_timepoints.
 
@@ -215,16 +209,14 @@ class DataProcessor:
         Returns:
             DataFrame with clones filtered based on time points.
         """
-        filtered_df = data_df.groupby(clone_column).filter(
-            lambda x: len(x) >= min_num_timepoints
-        )
+        filtered_df = data_df.groupby(clone_column).filter(lambda x: len(x) >= min_num_timepoints)
         return filtered_df.sort_values(clone_column)
 
     def _fill_nan(
         self,
         df: pd.DataFrame,
         method: str = "mean",
-        **knn_kwargs: Any,          # forwarded only if method == "knn"
+        **knn_kwargs: Any,  # forwarded only if method == "knn"
     ) -> pd.DataFrame:
         """
         Fill NaN values in *df* according to *method*.
@@ -300,9 +292,7 @@ class DataProcessor:
             DataFrame where time-dependent columns are pivoted and flattened by clone, with NaN values filled.
         """
         if min_num_timepoints is not None:
-            data_df = self._filtered_time_dataset(
-                data_df, min_num_timepoints, clone_column
-            )
+            data_df = self._filtered_time_dataset(data_df, min_num_timepoints, clone_column)
 
         flattened_data = []
         # Reverse mapping for TIMEPOINT
@@ -316,22 +306,14 @@ class DataProcessor:
                 var_name="VARIABLE",
                 value_name="VALUE",
             )
-            melted_df["time_var"] = (
-                melted_df[time_column].astype(str) + "_" + melted_df["VARIABLE"]
-            )
-            pivoted_df = melted_df.pivot(
-                index=clone_column, columns="time_var", values="VALUE"
-            )
+            melted_df["time_var"] = melted_df[time_column].astype(str) + "_" + melted_df["VARIABLE"]
+            pivoted_df = melted_df.pivot(index=clone_column, columns="time_var", values="VALUE")
             flattened_data.append(pivoted_df)
 
         flattened_df = pd.concat(flattened_data)
         target_df = data_df[[clone_column, self.target_column]].drop_duplicates()
         flattened_df = flattened_df.reset_index()
-        flattened_df = (
-            pd.merge(flattened_df, target_df, on=clone_column)
-            .set_index(clone_column)
-            .sort_index()
-        )
+        flattened_df = pd.merge(flattened_df, target_df, on=clone_column).set_index(clone_column).sort_index()
         flattened_df = flattened_df.dropna(subset=[self.target_column])
         flattened_df = self._fill_nan(flattened_df, fill_nan_method, **kwargs)
         return flattened_df

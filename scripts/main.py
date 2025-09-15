@@ -1,16 +1,9 @@
 import argparse
 import csv
 import os
-import shutil
-import sys
 from pathlib import Path
-from typing import Any, Dict, Optional
-
-# Ensure project root is on sys.path when running as `python scripts/main.py`
-_THIS_DIR = Path(__file__).parent
-_REPO_ROOT = _THIS_DIR.parent
-if str(_REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(_REPO_ROOT))
+import shutil
+from typing import Any, Dict
 
 import pandas as pd
 import yaml
@@ -83,12 +76,8 @@ def main() -> None:
         data_path = dataset_arg
 
     metadata_path = config_experience.get("metadata_path", {}).get("value", None)
-    result_path = config_experience.get("result_path", {}).get(
-        "value", "default_results"
-    )
-    experiment_name = config_experience.get("experiment_name", {}).get(
-        "value", "default_experiment"
-    )
+    result_path = config_experience.get("result_path", {}).get("value", "default_results")
+    experiment_name = config_experience.get("experiment_name", {}).get("value", "default_experiment")
     experiment_folder = os.path.join(result_path, experiment_name)
     os.makedirs(experiment_folder, exist_ok=True)
 

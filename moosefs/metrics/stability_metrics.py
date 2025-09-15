@@ -39,10 +39,7 @@ def diversity_agreement(selectors: list, merged: list, alpha: float = 0.5) -> fl
     core = set(merged)
 
     # 1) diversity  (average Jaccard *dissimilarity* across selector pairs)
-    pair_dis = [
-        1.0 - _jaccard(sets[i], sets[j])
-        for i, j in combinations(range(k), 2)
-    ]
+    pair_dis = [1.0 - _jaccard(sets[i], sets[j]) for i, j in combinations(range(k), 2)]
     diversity = sum(pair_dis) / len(pair_dis)
 
     # 2) agreement (mean similarity of each selector to the core)

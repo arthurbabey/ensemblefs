@@ -1,4 +1,3 @@
-from typing import Any
 import numpy as np
 
 
@@ -33,24 +32,24 @@ class ParetoAnalysis:
         #   3  scalar = 1 − 2
         #   4  metrics vector  ← NEW column used only for tie-break
         self.results: list = [
-            [g, 0, 0, 0, vec]                  # vec = data[i]
+            [g, 0, 0, 0, vec]  # vec = data[i]
             for g, vec in zip(group_names, data)
         ]
 
     def _dominate_count(self, i: int) -> int:
         g = self.data[i]
         return sum(
-            all(g[m] >= o[m] for m in range(self.num_metrics)) and
-            any(g[m] > o[m] for m in range(self.num_metrics))
-            for j, o in enumerate(self.data) if j != i
+            all(g[m] >= o[m] for m in range(self.num_metrics)) and any(g[m] > o[m] for m in range(self.num_metrics))
+            for j, o in enumerate(self.data)
+            if j != i
         )
 
     def _is_dominated_count(self, i: int) -> int:
         g = self.data[i]
         return sum(
-            all(g[m] <= o[m] for m in range(self.num_metrics)) and
-            any(g[m] < o[m] for m in range(self.num_metrics))
-            for j, o in enumerate(self.data) if j != i
+            all(g[m] <= o[m] for m in range(self.num_metrics)) and any(g[m] < o[m] for m in range(self.num_metrics))
+            for j, o in enumerate(self.data)
+            if j != i
         )
 
     def get_results(self) -> list:
@@ -77,10 +76,10 @@ class ParetoAnalysis:
 
             mins, maxs = tied_data.min(0), tied_data.max(0)
             span = np.where(maxs - mins == 0, 1, maxs - mins)
-            scaled = (tied_data - mins) / span                     # 0-1 per metric
-            dists = np.linalg.norm(1.0 - scaled, axis=1)           # to utopia (1,…,1)
+            scaled = (tied_data - mins) / span  # 0-1 per metric
+            dists = np.linalg.norm(1.0 - scaled, axis=1)  # to utopia (1,…,1)
 
-            best_local_idx = int(dists.argmin())                   # index inside tied_rows
+            best_local_idx = int(dists.argmin())  # index inside tied_rows
             best_row = tied_rows[best_local_idx]
 
             # place best_row at position 0, keep relative order of the rest

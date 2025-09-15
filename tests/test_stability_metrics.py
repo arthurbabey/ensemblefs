@@ -1,10 +1,8 @@
-import pytest
-
+from moosefs.core.novovicova import StabilityNovovicova
 from moosefs.metrics.stability_metrics import (
     compute_stability_metrics,
     diversity_agreement,
 )
-from moosefs.core.novovicova import StabilityNovovicova
 
 
 def test_compute_stability_metrics_matches_core():
@@ -28,4 +26,3 @@ def test_diversity_agreement_limits_and_edges():
     sels = [["a"], ["b"]]
     score = diversity_agreement(sels, [], alpha=0.0)  # pure diversity
     assert 0.0 <= score <= 1.0
-

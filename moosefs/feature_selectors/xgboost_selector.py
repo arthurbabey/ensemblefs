@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from xgboost import XGBClassifier, XGBRegressor
 
 from .base_selector import FeatureSelector
@@ -36,9 +35,7 @@ class XGBoostSelector(FeatureSelector):
         Raises:
             ValueError: If task is not 'classification' or 'regression'.
         """
-        model_cls = {"classification": XGBClassifier, "regression": XGBRegressor}.get(
-            self.task
-        )
+        model_cls = {"classification": XGBClassifier, "regression": XGBRegressor}.get(self.task)
         if model_cls is None:
             raise ValueError("Task must be 'classification' or 'regression'.")
         model = model_cls()

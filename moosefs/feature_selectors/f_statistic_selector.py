@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from sklearn.feature_selection import f_classif, f_regression
 
 from .base_selector import FeatureSelector
@@ -36,9 +35,7 @@ class FStatisticSelector(FeatureSelector):
         Raises:
             ValueError: If task is not 'classification' or 'regression'.
         """
-        score_func = {"classification": f_classif, "regression": f_regression}.get(
-            self.task
-        )
+        score_func = {"classification": f_classif, "regression": f_regression}.get(self.task)
         if score_func is None:
             raise ValueError("Task must be 'classification' or 'regression'.")
         scores, _ = score_func(X, y, **self.kwargs)

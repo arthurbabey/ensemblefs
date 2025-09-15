@@ -1,16 +1,11 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import pytest
 
 from moosefs.core.feature import Feature
 from moosefs.merging_strategies import (
-    BordaMerger,
-    UnionOfIntersectionsMerger,
-    L2NormMerger,
     ArithmeticMeanMerger,
+    BordaMerger,
+    L2NormMerger,
+    UnionOfIntersectionsMerger,
 )
 
 

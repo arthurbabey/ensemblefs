@@ -57,9 +57,7 @@ class MergingStrategy:
         if isinstance(subsets[0], list):  # List of lists case
             if not all(isinstance(sub, list) and sub for sub in subsets):
                 raise ValueError("Subsets cannot contain empty lists.")
-            if not all(
-                isinstance(feature, Feature) for sub in subsets for feature in sub
-            ):
+            if not all(isinstance(feature, Feature) for sub in subsets for feature in sub):
                 raise ValueError("Subsets must contain Feature objects.")
         else:  # Single list case
             if not all(isinstance(feature, Feature) for feature in subsets):

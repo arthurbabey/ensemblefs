@@ -1,12 +1,7 @@
 from typing import Any, Dict, List, Tuple
 
-import numpy as np
-import pandas as pd
 
-
-def read_config(
-    config: Dict[str, Any]
-) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
+def read_config(config: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
     """
     Read configuration sections from the provided config dictionary.
 
@@ -50,13 +45,10 @@ def validate_pipeline_config(config: Dict[str, Any]) -> None:
         "rfe_rf_selector",
     }
     if not isinstance(fs_methods, list) or len(fs_methods) < 2:
-        raise ValueError(
-            "`fs_methods` should be a list containing two or more feature selection methods."
-        )
+        raise ValueError("`fs_methods` should be a list containing two or more feature selection methods.")
     if any(method not in valid_fs_methods for method in fs_methods):
         raise ValueError(
-            f"Invalid feature selection method(s) in `fs_methods`: {fs_methods}. "
-            f"Valid options are: {valid_fs_methods}."
+            f"Invalid feature selection method(s) in `fs_methods`: {fs_methods}. Valid options are: {valid_fs_methods}."
         )
 
     # Validate merging_strategy
@@ -67,16 +59,13 @@ def validate_pipeline_config(config: Dict[str, Any]) -> None:
     }
     if merging_strategy not in valid_merging_strategies:
         raise ValueError(
-            f"Invalid `merging_strategy`: {merging_strategy}. "
-            f"Choose one from: {valid_merging_strategies}."
+            f"Invalid `merging_strategy`: {merging_strategy}. Choose one from: {valid_merging_strategies}."
         )
 
     # Validate num_repeats
     num_repeats = config.get("num_repeats", {}).get("value", None)
     if not isinstance(num_repeats, int) or not (2 <= num_repeats <= 10):
-        raise ValueError(
-            f"`num_repeats` must be an integer between 2 and 10, inclusive. Got: {num_repeats}."
-        )
+        raise ValueError(f"`num_repeats` must be an integer between 2 and 10, inclusive. Got: {num_repeats}.")
 
     # Validate random_state
     random_state = config.get("random_state", {}).get("value", None)
@@ -95,9 +84,7 @@ def validate_pipeline_config(config: Dict[str, Any]) -> None:
         "mae",
         "r2_score",
     }
-    if not isinstance(metrics, list) or not all(
-        metric in valid_metrics for metric in metrics
-    ):
+    if not isinstance(metrics, list) or not all(metric in valid_metrics for metric in metrics):
         raise ValueError(
             f"`metrics` should be a list containing metric names from the following options: {valid_metrics}."
         )
@@ -106,9 +93,7 @@ def validate_pipeline_config(config: Dict[str, Any]) -> None:
     task: str = config.get("task", {}).get("value", "")
     valid_tasks = {"regression", "classification"}
     if task not in valid_tasks:
-        raise ValueError(
-            f"Invalid `task`: {task}. Choose either 'regression' or 'classification'."
-        )
+        raise ValueError(f"Invalid `task`: {task}. Choose either 'regression' or 'classification'.")
 
     # Validate num_features_to_select
     num_features_to_select = config.get("num_features_to_select", {}).get("value", None)
@@ -135,21 +120,13 @@ def validate_preprocessing_config(config: Dict[str, Any]) -> None:
     """
     # Validate categorical_columns
     categorical_columns = config.get("categorical_columns", [])
-    if not isinstance(categorical_columns, list) or not all(
-        isinstance(col, str) for col in categorical_columns
-    ):
-        raise ValueError(
-            "`categorical_columns` should be a list of strings representing column names."
-        )
+    if not isinstance(categorical_columns, list) or not all(isinstance(col, str) for col in categorical_columns):
+        raise ValueError("`categorical_columns` should be a list of strings representing column names.")
 
     # Validate columns_to_drop
     columns_to_drop = config.get("columns_to_drop", [])
-    if not isinstance(columns_to_drop, list) or not all(
-        isinstance(col, str) for col in columns_to_drop
-    ):
-        raise ValueError(
-            "`columns_to_drop` should be a list of strings representing column names."
-        )
+    if not isinstance(columns_to_drop, list) or not all(isinstance(col, str) for col in columns_to_drop):
+        raise ValueError("`columns_to_drop` should be a list of strings representing column names.")
 
     # Validate drop_missing_values
     drop_missing_values = config.get("drop_missing_values", None)
@@ -169,9 +146,7 @@ def validate_preprocessing_config(config: Dict[str, Any]) -> None:
     # Validate target_column
     target_column = config.get("target_column", "")
     if not isinstance(target_column, str):
-        raise ValueError(
-            "`target_column` should be a string representing a column name."
-        )
+        raise ValueError("`target_column` should be a string representing a column name.")
 
     print("Preprocessing configuration is valid.")
 
@@ -189,9 +164,7 @@ def validate_experience_config(config: Dict[str, Any]) -> None:
     # Validate data_path
     data_path = config.get("data_path", {}).get("value", "")
     if not isinstance(data_path, str) or not data_path:
-        raise ValueError(
-            "`data_path` must be a non-empty string representing the path to the dataset."
-        )
+        raise ValueError("`data_path` must be a non-empty string representing the path to the dataset.")
 
     # Validate experiment_name
     experiment_name = config.get("experiment_name", {}).get("value", "")
@@ -203,15 +176,11 @@ def validate_experience_config(config: Dict[str, Any]) -> None:
     # Validate metadata_path
     metadata_path = config.get("metadata_path", {}).get("value", "")
     if not (isinstance(metadata_path, str) or metadata_path is None):
-        raise ValueError(
-            "`metadata_path` must be a string representing the path to the metadata file or None."
-        )
+        raise ValueError("`metadata_path` must be a string representing the path to the metadata file or None.")
 
     # Validate result_path
     result_path = config.get("result_path", {}).get("value", "")
     if not isinstance(result_path, str) or not result_path:
-        raise ValueError(
-            "`result_path` must be a non-empty string representing the directory path to save results."
-        )
+        raise ValueError("`result_path` must be a non-empty string representing the directory path to save results.")
 
     print("Experience configuration is valid.")

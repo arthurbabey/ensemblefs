@@ -2,8 +2,6 @@ from typing import Any, Optional
 
 import numpy as np
 from sklearn.ensemble import (
-    ExtraTreesClassifier,
-    ExtraTreesRegressor,
     GradientBoostingClassifier,
     GradientBoostingRegressor,
     RandomForestClassifier,
@@ -85,9 +83,7 @@ class BaseMetric:
         for model_name, model in self.models.items():
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
-            probabilities = (
-                model.predict_proba(X_test) if self.task == "classification" else None
-            )
+            probabilities = model.predict_proba(X_test) if self.task == "classification" else None
             results[model_name] = {
                 "predictions": predictions,
                 "probabilities": probabilities,
@@ -121,9 +117,7 @@ class RegressionMetric(BaseMetric):
     ) -> float:
         """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
-        return np.mean(
-            [self._metric_func(y_test, res["predictions"]) for res in results.values()]
-        )
+        return np.mean([self._metric_func(y_test, res["predictions"]) for res in results.values()])
 
     def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
         """Metric function to be overridden by subclasses."""
@@ -170,10 +164,7 @@ class ClassificationMetric(BaseMetric):
         """Average the metric over the internal model set."""
         results = self.train_and_predict(X_train, y_train, X_test, y_test)
         return np.mean(
-            [
-                self._metric_func(y_test, res["predictions"], res.get("probabilities"))
-                for res in results.values()
-            ]
+            [self._metric_func(y_test, res["predictions"], res.get("probabilities")) for res in results.values()]
         )
 
     def _metric_func(
@@ -190,9 +181,7 @@ class LogLoss(ClassificationMetric):
     def __init__(self) -> None:
         super().__init__("Log Loss")
 
-    def _metric_func(
-        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: np.ndarray
-    ) -> float:
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: np.ndarray) -> float:
         return -log_loss(y_true, y_proba)
 
 
@@ -200,9 +189,7 @@ class F1Score(ClassificationMetric):
     def __init__(self) -> None:
         super().__init__("F1 Score")
 
-    def _metric_func(
-        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
-    ) -> float:
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None) -> float:
         return f1_score(y_true, y_pred, average="macro")
 
 
@@ -210,9 +197,7 @@ class Accuracy(ClassificationMetric):
     def __init__(self) -> None:
         super().__init__("Accuracy")
 
-    def _metric_func(
-        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
-    ) -> float:
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None) -> float:
         return accuracy_score(y_true, y_pred)
 
 
@@ -220,9 +205,7 @@ class PrecisionScore(ClassificationMetric):
     def __init__(self) -> None:
         super().__init__("Precision Score")
 
-    def _metric_func(
-        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
-    ) -> float:
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None) -> float:
         return precision_score(y_true, y_pred, average="macro", zero_division=0)
 
 
@@ -230,7 +213,5 @@ class RecallScore(ClassificationMetric):
     def __init__(self) -> None:
         super().__init__("Recall Score")
 
-    def _metric_func(
-        self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None
-    ) -> float:
+    def _metric_func(self, y_true: np.ndarray, y_pred: np.ndarray, y_proba: None = None) -> float:
         return recall_score(y_true, y_pred, average="macro")
