@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 
 from .base_selector import FeatureSelector

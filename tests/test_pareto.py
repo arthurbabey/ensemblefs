@@ -1,9 +1,7 @@
 # tests/test_pareto.py
-import os, sys
 from typing import List, Tuple
-import pytest
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import pytest
 
 from moosefs.core.pareto import ParetoAnalysis
 
@@ -37,10 +35,18 @@ def same() -> Tuple[List[List[float]], List[str]]:
 @pytest.fixture
 def big() -> Tuple[List[List[float]], List[str]]:
     data = [
-        [0, 0, 0], [2, 4, 6], [2, 4, 6], [2, 4, 7], [5, 7, 9],
-        [2, 3, 4], [6, 8, 10], [3, 5, 7], [4, 5, 6], [13, 13, 13],
+        [0, 0, 0],
+        [2, 4, 6],
+        [2, 4, 6],
+        [2, 4, 7],
+        [5, 7, 9],
+        [2, 3, 4],
+        [6, 8, 10],
+        [3, 5, 7],
+        [4, 5, 6],
+        [13, 13, 13],
     ]
-    names = [f"Group {i+1}" for i in range(10)]
+    names = [f"Group {i + 1}" for i in range(10)]
     return data, names
 
 
@@ -48,7 +54,7 @@ def big() -> Tuple[List[List[float]], List[str]]:
 def test_compute_dominance(sample):
     data, names = sample
     p = ParetoAnalysis(data, names)
-    raw = _strip(p.get_results())[::-1]   # original order
+    raw = _strip(p.get_results())[::-1]  # original order
     assert raw == [
         ["Group 1", 0, 2, -2],
         ["Group 2", 1, 1, 0],

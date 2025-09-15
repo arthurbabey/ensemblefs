@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import numpy as np
 import pandas as pd
 import pytest
@@ -14,11 +9,9 @@ from moosefs.feature_selection_pipeline import FeatureSelectionPipeline
 def pipeline_instance(request):
     num_samples = 100
     num_features = 5000
-    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
+    feature_names = [f"Feature_{i + 1}" for i in range(num_features)]
     target_values = np.random.randint(0, 4, size=num_samples)
-    data = pd.DataFrame(
-        np.random.randn(num_samples, num_features), columns=feature_names
-    )
+    data = pd.DataFrame(np.random.randn(num_samples, num_features), columns=feature_names)
     data["target"] = target_values
 
     fs_methods = [
@@ -55,17 +48,13 @@ def test_feature_selection_pipeline(pipeline_instance):
     assert best_repeat is not None, "Best repeat should not be None"
     assert best_group_name is not None, "Best group name should not be None"
 
-    assert all(
-        feature in pipeline_instance.data.columns for feature in best_features
-    ), "All best features should exist in the original dataset."
+    assert all(feature in pipeline_instance.data.columns for feature in best_features), (
+        "All best features should exist in the original dataset."
+    )
 
-    assert (
-        0 <= int(best_repeat) <= pipeline_instance.num_repeats
-    ), "Best repeat index must be within the valid range."
+    assert 0 <= int(best_repeat) <= pipeline_instance.num_repeats, "Best repeat index must be within the valid range."
 
-    assert (
-        best_group_name in pipeline_instance.subgroup_names
-    ), "Best group name must be in the defined subgroup names."
+    assert best_group_name in pipeline_instance.subgroup_names, "Best group name must be in the defined subgroup names."
 
 
 @pytest.mark.parametrize(
@@ -75,17 +64,13 @@ def test_feature_selection_pipeline(pipeline_instance):
         ["f1_score", "accuracy", "logloss"],
     ],
 )
-@pytest.mark.parametrize(
-    "merging_strategy", ["union_of_intersections_merger", "borda_merger"]
-)
+@pytest.mark.parametrize("merging_strategy", ["union_of_intersections_merger", "borda_merger"])
 def test_pipeline_with_varied_metrics(merging_strategy, metrics):
     num_samples = 100
     num_features = 5000
-    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
+    feature_names = [f"Feature_{i + 1}" for i in range(num_features)]
     target_values = np.random.randint(0, 4, size=num_samples)
-    data = pd.DataFrame(
-        np.random.randn(num_samples, num_features), columns=feature_names
-    )
+    data = pd.DataFrame(np.random.randn(num_samples, num_features), columns=feature_names)
     data["target"] = target_values
 
     fs_methods = [
@@ -115,31 +100,23 @@ def test_pipeline_with_varied_metrics(merging_strategy, metrics):
     best_features, best_repeat, best_group_name = pipeline()
 
     assert best_features is not None, "Best features should not be None"
-    assert (
-        len(best_features) == num_features_to_select
-    ), "Fill is set to true, so the number of features should be equal to num_features_to_select."
-    assert (
-        0 <= int(best_repeat) <= num_repeats
-    ), "Best repeat index must be within valid range."
-    assert (
-        best_group_name in pipeline.subgroup_names
-    ), "Best group name must be a valid subgroup name."
+    assert len(best_features) == num_features_to_select, (
+        "Fill is set to true, so the number of features should be equal to num_features_to_select."
+    )
+    assert 0 <= int(best_repeat) <= num_repeats, "Best repeat index must be within valid range."
+    assert best_group_name in pipeline.subgroup_names, "Best group name must be a valid subgroup name."
 
 
-@pytest.mark.parametrize(
-    "merging_strategy", ["union_of_intersections_merger", "borda_merger"]
-)
+@pytest.mark.parametrize("merging_strategy", ["union_of_intersections_merger", "borda_merger"])
 def test_pipeline_requires_num_features(merging_strategy):
     """
     Verify that a ValueError is raised when num_features_to_select is missing.
     """
     num_samples = 100
     num_features = 5000
-    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
+    feature_names = [f"Feature_{i + 1}" for i in range(num_features)]
     target_values = np.random.randint(0, 4, size=num_samples)
-    data = pd.DataFrame(
-        np.random.randn(num_samples, num_features), columns=feature_names
-    )
+    data = pd.DataFrame(np.random.randn(num_samples, num_features), columns=feature_names)
     data["target"] = target_values
 
     fs_methods = [

@@ -1,12 +1,6 @@
-import os
-import sys
-
-import numpy as np
 import pytest
 from sklearn.datasets import make_classification, make_regression
 from sklearn.model_selection import train_test_split
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from moosefs.metrics import (
     Accuracy,
@@ -23,9 +17,7 @@ from moosefs.metrics import (
 # Test data for classification
 @pytest.fixture
 def classification_data():
-    X, y = make_classification(
-        n_samples=100, n_features=10, n_classes=2, random_state=42
-    )
+    X, y = make_classification(n_samples=100, n_features=10, n_classes=2, random_state=42)
     return train_test_split(X, y, test_size=0.2, random_state=42)
 
 
@@ -77,14 +69,14 @@ def test_mean_squared_error(regression_data):
     X_train, X_test, y_train, y_test = regression_data
     metric = MeanSquaredError()
     result = metric.compute(X_train, y_train, X_test, y_test)
-    assert result < 0, f"Result of compute by MSE should be negative"
+    assert result < 0, "Result of compute by MSE should be negative"
 
 
 def test_mean_absolute_error(regression_data):
     X_train, X_test, y_train, y_test = regression_data
     metric = MeanAbsoluteError()
     result = metric.compute(X_train, y_train, X_test, y_test)
-    assert result < 0, f"Result of compute by MAE should be negative"
+    assert result < 0, "Result of compute by MAE should be negative"
 
 
 def test_r2_score(regression_data):

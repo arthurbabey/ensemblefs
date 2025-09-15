@@ -16,12 +16,8 @@ class StabilityNovovicova:
             selected_features: A list of sets or lists, where each represents selected features in a dataset.
         """
         self._validate_inputs(selected_features)
-        self.selected_features: list = [
-            set(sel) for sel in selected_features
-        ]  # Convert all to sets
-        self.N: int = sum(
-            len(sel) for sel in self.selected_features
-        )  # Total feature occurrences
+        self.selected_features: list = [set(sel) for sel in selected_features]  # Convert all to sets
+        self.N: int = sum(len(sel) for sel in self.selected_features)  # Total feature occurrences
         self.n: int = len(self.selected_features)  # Number of datasets
 
     @staticmethod
@@ -38,10 +34,9 @@ class StabilityNovovicova:
             raise ValueError("Feature selections cannot contain empty sets or lists.")
 
         # Ensure feature types are consistent
-        element_type = type(next(iter(selected_features[0]), None))
-        if any(
-            any(type(item) != element_type for item in sel) for sel in selected_features
-        ):
+        first_item = next(iter(selected_features[0]))
+        element_type = type(first_item)
+        if any(any(type(item) is not element_type for item in sel) for sel in selected_features):
             raise ValueError("All features must be of the same type across selections.")
 
     def compute_stability(self) -> float:

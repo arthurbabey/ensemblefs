@@ -1,6 +1,5 @@
 import numpy as np
 
-from ..core.feature import Feature
 from .base_merger import MergingStrategy
 
 
@@ -39,7 +38,5 @@ class L2NormMerger(MergingStrategy):
         # Euclidean norm (root-mean-square) across selectors
         scores_merged = np.linalg.norm(scores, ord=2, axis=1)
 
-        sorted_names = [
-            feature_names[i] for i in np.argsort(-scores_merged, kind="stable")
-        ]
+        sorted_names = [feature_names[i] for i in np.argsort(-scores_merged, kind="stable")]
         return sorted_names[:num_features_to_select]

@@ -16,7 +16,7 @@ __all__ = [
     "MeanAbsoluteError",
     "MeanSquaredError",
     "LogLoss",
-    "F1_score",
+    "F1Score",
     "Accuracy",
     "PrecisionScore",
     "RecallScore",

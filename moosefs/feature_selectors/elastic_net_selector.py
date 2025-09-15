@@ -1,20 +1,22 @@
 from __future__ import annotations
+
 from typing import Any
 import warnings
 
 import numpy as np
 import pandas as pd
+from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import ElasticNet, LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.exceptions import ConvergenceWarning
+
 from .base_selector import FeatureSelector
 
 
 class ElasticNetSelector(FeatureSelector):
     """Elastic‑net based selector.
 
-    • regression  → sklearn.linear_model.ElasticNet (L1+L2 on y∈ℝ)  
+    • regression  → sklearn.linear_model.ElasticNet (L1+L2 on y∈ℝ)
     • classification → sklearn.linear_model.LogisticRegression with penalty='elasticnet' (solver='saga')
 
     Scores are |coef| (mean over classes if multiclass).
@@ -40,15 +42,12 @@ class ElasticNetSelector(FeatureSelector):
                 "max_iter": self.kwargs.pop("max_iter", 100_000),
                 **self.kwargs,
             }
-            model = make_pipeline(
-                StandardScaler(with_mean=True, with_std=True),
-                ElasticNet(**params)
-            )
+            model = make_pipeline(StandardScaler(with_mean=True, with_std=True), ElasticNet(**params))
             # Fit, silencing only ConvergenceWarning (optional but useful)
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=ConvergenceWarning)
                 model.fit(X, y)
-            #model = ElasticNet(**params)
+            # model = ElasticNet(**params)
             model.fit(X, y)
             coef = model[-1].coef_
 

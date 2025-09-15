@@ -23,25 +23,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v3
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
 
-      - name: Install project and test deps
-        run: |
-          python -m pip install -U pip
-          pip install -e .
-          pip install -e .[test]
+      - name: Create project venv
+        run: uv venv --python ${{ matrix.python-version }}
+
+      - name: Install dev dependencies (editable)
+        run: uv pip install -e . -e .[dev]
 
       - name: Verify imports
-        run: |
-          python -c "import moosefs; print('import ok')"
+        run: uv run python -c "import moosefs; print('import ok')"
+
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+      - name: Ruff lint
+        run: uv run ruff check --output-format=github .
 
       - name: Run pytest
-        run: |
-          pytest -q --maxfail=1 --disable-warnings
+        run: uv run pytest -q --maxfail=1 --disable-warnings
 
       - name: Upload junit/coverage (if any)
         if: always()
@@ -53,3 +56,9 @@ jobs:
             ./coverage.xml
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Build package
+        run: uv run python -m build
+
+      - name: Verify distribution
+        run: uv run twine check dist/*

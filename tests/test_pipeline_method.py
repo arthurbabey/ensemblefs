@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import numpy as np
 import pandas as pd
 import pytest
@@ -15,12 +10,10 @@ def pipeline_instance():
     # Define the data frame
     num_samples = 100
     num_features = 5000
-    feature_names = [f"Feature_{i+1}" for i in range(num_features)]
+    feature_names = [f"Feature_{i + 1}" for i in range(num_features)]
     target_values = np.random.randint(0, 4, size=num_samples)
 
-    data = pd.DataFrame(
-        np.random.randn(num_samples, num_features), columns=feature_names
-    )
+    data = pd.DataFrame(np.random.randn(num_samples, num_features), columns=feature_names)
     data["target"] = target_values
 
     # Define parameters
@@ -84,7 +77,4 @@ def test_generate_subgroups_names(pipeline_instance):
         pipeline_instance._generate_subgroup_names(min_group_size=6)
 
     for min_size, expected_combinations in zip([2, 4, 5], [26, 6, 1]):
-        assert (
-            len(pipeline_instance._generate_subgroup_names(min_group_size=min_size))
-            == expected_combinations
-        )
+        assert len(pipeline_instance._generate_subgroup_names(min_group_size=min_size)) == expected_combinations

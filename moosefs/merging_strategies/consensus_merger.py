@@ -4,7 +4,6 @@ from typing import Optional
 
 import numpy as np
 
-from ..core.feature import Feature
 from .base_merger import MergingStrategy
 
 

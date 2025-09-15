@@ -67,4 +67,3 @@ def test_invalid_task_raises():
         assert False, "Expected ValueError for invalid task"
     except ValueError as e:
         assert "Task must be either" in str(e)
-

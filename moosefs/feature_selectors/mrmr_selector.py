@@ -1,8 +1,8 @@
 from typing import Any
 
+from mrmr import mrmr_classif, mrmr_regression
 import numpy as np
 import pandas as pd
-from mrmr import mrmr_classif, mrmr_regression
 
 from .base_selector import FeatureSelector
 
@@ -48,9 +48,7 @@ class MRMRSelector(FeatureSelector):
         if score_func is None:
             raise ValueError("Task must be 'classification' or 'regression'.")
 
-        _, relevance, redundancy = score_func(
-            X, y, K=self.num_features_to_select, return_scores=True, **self.kwargs
-        )
+        _, relevance, redundancy = score_func(X, y, K=self.num_features_to_select, return_scores=True, **self.kwargs)
 
         # Compute MRMR scores (Relevance / Mean Redundancy), handling division by zero
         mrmr_scores = relevance / redundancy.mean(axis=1).replace(0, np.nan)

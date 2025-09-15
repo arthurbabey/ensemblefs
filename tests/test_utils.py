@@ -1,7 +1,8 @@
 import types
+
 import pytest
 
-from moosefs.utils import get_class_info, extract_params, dynamic_import
+from moosefs.utils import dynamic_import, extract_params, get_class_info
 
 
 def test_get_class_info_known_selector():
@@ -18,9 +19,7 @@ def test_get_class_info_unknown_identifier():
 
 def test_dynamic_import_roundtrip():
     # import a known class via fully qualified path
-    klass = dynamic_import(
-        "moosefs.merging_strategies.borda_merger.BordaMerger"
-    )
+    klass = dynamic_import("moosefs.merging_strategies.borda_merger.BordaMerger")
     assert klass.__name__ == "BordaMerger"
 
 
@@ -33,4 +32,3 @@ def test_extract_params_from_instance_like_object():
         "task": "classification",
         "num_features_to_select": 7,
     }
-

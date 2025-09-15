@@ -1,6 +1,5 @@
 import numpy as np
 
-from ..core.feature import Feature
 from .base_merger import MergingStrategy
 
 
@@ -43,7 +42,5 @@ class ArithmeticMeanMerger(MergingStrategy):
         scores_merged = scores.mean(axis=1)
 
         # Lower score ⇒ higher rank (same convention as Borda)
-        sorted_names = [
-            feature_names[i] for i in np.argsort(-scores_merged, kind="stable")
-        ]
+        sorted_names = [feature_names[i] for i in np.argsort(-scores_merged, kind="stable")]
         return sorted_names[:num_features_to_select]

@@ -146,9 +146,7 @@ def extract_params(cls: type, instance: Any, params: list) -> dict:
     sig = inspect.signature(cls.__init__)
 
     extracted_params: dict = {
-        param: getattr(instance, param)
-        for param in params
-        if param in sig.parameters and hasattr(instance, param)
+        param: getattr(instance, param) for param in params if param in sig.parameters and hasattr(instance, param)
     }
 
     # If **kwargs exists in the class signature, include additional parameters.
