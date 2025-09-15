@@ -3,10 +3,17 @@ import csv
 import os
 from pathlib import Path
 import shutil
+import sys
 from typing import Any, Dict
 
 import pandas as pd
 import yaml
+
+# Ensure project root is on sys.path when running as `python scripts/main.py`
+_THIS_DIR = Path(__file__).parent
+_REPO_ROOT = _THIS_DIR.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 from moosefs import FeatureSelectionPipeline
 from moosefs.core import DataProcessor
