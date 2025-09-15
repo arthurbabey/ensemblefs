@@ -93,12 +93,8 @@
 <span class="sd">            selected_features: A list of sets or lists, where each represents selected features in a dataset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_inputs</span><span class="p">(</span><span class="n">selected_features</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selected_features</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="nb">set</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selected_features</span>
-        <span class="p">]</span>  <span class="c1"># Convert all to sets</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-            <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_features</span>
-        <span class="p">)</span>  <span class="c1"># Total feature occurrences</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selected_features</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selected_features</span><span class="p">]</span>  <span class="c1"># Convert all to sets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_features</span><span class="p">)</span>  <span class="c1"># Total feature occurrences</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_features</span><span class="p">)</span>  <span class="c1"># Number of datasets</span></div>
 
 
@@ -118,10 +114,9 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Feature selections cannot contain empty sets or lists.&quot;</span><span class="p">)</span>
 
         <span class="c1"># Ensure feature types are consistent</span>
-        <span class="n">element_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">selected_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="kc">None</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
-            <span class="nb">any</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">!=</span> <span class="n">element_type</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selected_features</span>
-        <span class="p">):</span>
+        <span class="n">first_item</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">selected_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">element_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">first_item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">element_type</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sel</span><span class="p">)</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selected_features</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All features must be of the same type across selections.&quot;</span><span class="p">)</span></div>
 
 

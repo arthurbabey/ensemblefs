@@ -71,12 +71,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for moosefs.core.data_processor</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+
 
 <div class="viewcode-block" id="DataProcessor">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor">[docs]</a>
@@ -167,9 +167,7 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Input data must be a file path (str) or a pandas DataFrame&quot;</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input data must be a file path (str) or a pandas DataFrame&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">index_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">index_col</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -178,9 +176,7 @@
 
 <div class="viewcode-block" id="DataProcessor._merge_data_and_metadata">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._merge_data_and_metadata">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_data_and_metadata</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_data_and_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">meta_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merge the main data frame with metadata.</span>
 
@@ -308,9 +304,7 @@
 
 <div class="viewcode-block" id="DataProcessor._filtered_time_dataset">
 <a class="viewcode-back" href="../../../core.html#moosefs.core.data_processor.DataProcessor._filtered_time_dataset">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_filtered_time_dataset</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_filtered_time_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filter dataset to retain only clones with at least min_num_timepoints.</span>
 
@@ -322,9 +316,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            DataFrame with clones filtered based on time points.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">clone_column</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_num_timepoints</span>
-        <span class="p">)</span>
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">clone_column</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_num_timepoints</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">clone_column</span><span class="p">)</span></div>
 
 
@@ -334,7 +326,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
         <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">knn_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>          <span class="c1"># forwarded only if method == &quot;knn&quot;</span>
+        <span class="o">**</span><span class="n">knn_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>  <span class="c1"># forwarded only if method == &quot;knn&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fill NaN values in *df* according to *method*.</span>
@@ -413,9 +405,7 @@
 <span class="sd">            DataFrame where time-dependent columns are pivoted and flattened by clone, with NaN values filled.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">min_num_timepoints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">data_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtered_time_dataset</span><span class="p">(</span>
-                <span class="n">data_df</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">,</span> <span class="n">clone_column</span>
-            <span class="p">)</span>
+            <span class="n">data_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtered_time_dataset</span><span class="p">(</span><span class="n">data_df</span><span class="p">,</span> <span class="n">min_num_timepoints</span><span class="p">,</span> <span class="n">clone_column</span><span class="p">)</span>
 
         <span class="n">flattened_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Reverse mapping for TIMEPOINT</span>
@@ -429,22 +419,14 @@
                 <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;VARIABLE&quot;</span><span class="p">,</span>
                 <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">melted_df</span><span class="p">[</span><span class="s2">&quot;time_var&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">melted_df</span><span class="p">[</span><span class="n">time_column</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">melted_df</span><span class="p">[</span><span class="s2">&quot;VARIABLE&quot;</span><span class="p">]</span>
-            <span class="p">)</span>
-            <span class="n">pivoted_df</span> <span class="o">=</span> <span class="n">melted_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
-                <span class="n">index</span><span class="o">=</span><span class="n">clone_column</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;time_var&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;VALUE&quot;</span>
-            <span class="p">)</span>
+            <span class="n">melted_df</span><span class="p">[</span><span class="s2">&quot;time_var&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">melted_df</span><span class="p">[</span><span class="n">time_column</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">melted_df</span><span class="p">[</span><span class="s2">&quot;VARIABLE&quot;</span><span class="p">]</span>
+            <span class="n">pivoted_df</span> <span class="o">=</span> <span class="n">melted_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">clone_column</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;time_var&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;VALUE&quot;</span><span class="p">)</span>
             <span class="n">flattened_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pivoted_df</span><span class="p">)</span>
 
         <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">flattened_data</span><span class="p">)</span>
         <span class="n">target_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[[</span><span class="n">clone_column</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_column</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
         <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">flattened_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-        <span class="n">flattened_df</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">flattened_df</span><span class="p">,</span> <span class="n">target_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">clone_column</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">clone_column</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
-        <span class="p">)</span>
+        <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">flattened_df</span><span class="p">,</span> <span class="n">target_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">clone_column</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">clone_column</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
         <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">flattened_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">target_column</span><span class="p">])</span>
         <span class="n">flattened_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_nan</span><span class="p">(</span><span class="n">flattened_df</span><span class="p">,</span> <span class="n">fill_nan_method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">flattened_df</span></div>
