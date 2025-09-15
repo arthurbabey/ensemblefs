@@ -20,24 +20,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python 🐍
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python 🐍
+        uses: astral-sh/setup-uv@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
+
+      - name: Create project venv
+        run: uv venv --python ${{ env.PYTHON_VERSION }}
 
       - name: Install build tools
-        run: |
-          python -m pip install -U pip
-          pip install build twine
+        run: uv pip install -e . -e .[dev]
 
       - name: Build binary wheel and source tarball 🔨
-        run: |
-          python -m build
+        run: uv run python -m build
+
+      - name: Verify distribution
+        run: uv run twine check dist/*
 
       - name: Show built artifacts
-        run: |
-          ls -l dist
+        run: ls -l dist
 
       - name: Upload built artifacts
         uses: actions/upload-artifact@v4
@@ -58,4 +59,3 @@ jobs:
       #   uses: pypa/gh-action-pypi-publish@release/v1
       #   with:
       #     password: ${{ secrets.PYPI_API_TOKEN }}
-

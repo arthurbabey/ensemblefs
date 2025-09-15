@@ -1,6 +1,6 @@
 # MOOSE-FS
 
-[![tests](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml)  
+[![tests](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml/badge.svg)](https://github.com/arthurbabey/ensemblefs/actions/workflows/tests.yml)
 [Documentation](https://arthurbabey.github.io/ensemblefs/)
 
 ## Overview
@@ -142,6 +142,42 @@ The results are saved in a structured directory under `results/example_experimen
 ## Contributing
 
 Contributions are welcome! If you have ideas for improving MOOSE-FS, feel free to open an issue or submit a pull request.
+
+### Development (uv)
+
+This project uses uv for local environments and dependency management. The library builds via the existing PEP 517 backend (hatchling); uv only manages the environment, installs, and command execution.
+
+- Install/select Python 3.9+ and ensure `uv` is installed.
+- Create a local virtual environment in `.venv`:
+
+```bash
+uv venv --python 3.9
+```
+
+- Install dev dependencies (editable):
+
+```bash
+uv pip install -e ".[dev]"
+```
+
+- Install pre-commit hooks:
+
+```bash
+uv run pre-commit install
+```
+
+- Run formatting and linting:
+
+```bash
+uv run ruff format .
+uv run ruff check --fix .
+```
+
+- Run tests:
+
+```bash
+uv run pytest -q
+```
 ---
 
 ## License

@@ -21,16 +21,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v3
         with:
           python-version: '3.11'
-          cache: 'pip'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install ".[docs,build]"
+      - name: Create project venv
+        run: uv venv --python 3.11
+
+      - name: Install docs dependencies
+        run: uv pip install -e . -e .[docs]
 
       - name: Ensure root directory is included in PYTHONPATH
         run: |
@@ -38,8 +38,7 @@ jobs:
           echo $PYTHONPATH
 
       - name: Build package
-        run: |
-          python -m build
+        run: uv run python -m build
 
       - name: Clean build directory
         run: |
@@ -50,7 +49,7 @@ jobs:
         run: |
           export PYTHONPATH=$(pwd)
           echo "Building docs with PYTHONPATH: $PYTHONPATH"
-          sphinx-build -b html docs/source docs/build/html -v
+          uv run sphinx-build -b html docs/source docs/build/html -v
 
       - name: Deploy to GitHub Pages
         if: ${{ hashFiles('docs/source/conf.py') != '' && github.event_name == 'push' }}
@@ -61,6 +60,5 @@ jobs:
 
       - name: Verify Imports
         run: |
-          python -c "import moosefs.core.pareto; print('moosefs.core.pareto imported successfully')"
-          python -c "import moosefs.feature_selection_pipeline; print('moosefs.feature_selection_pipeline imported successfully')"
-
+          uv run python -c "import moosefs.core.pareto; print('moosefs.core.pareto imported successfully')"
+          uv run python -c "import moosefs.feature_selection_pipeline; print('moosefs.feature_selection_pipeline imported successfully')"

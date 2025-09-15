@@ -43,3 +43,5 @@ coverage.xml
 # Project-specific
 results/
 tests/test_experiment/
+docs/build/
+uv.lock
