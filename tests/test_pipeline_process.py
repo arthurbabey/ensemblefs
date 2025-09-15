@@ -48,9 +48,9 @@ def test_feature_selection_pipeline(pipeline_instance):
     assert best_repeat is not None, "Best repeat should not be None"
     assert best_group_name is not None, "Best group name should not be None"
 
-    assert all(
-        feature in pipeline_instance.data.columns for feature in best_features
-    ), "All best features should exist in the original dataset."
+    assert all(feature in pipeline_instance.data.columns for feature in best_features), (
+        "All best features should exist in the original dataset."
+    )
 
     assert 0 <= int(best_repeat) <= pipeline_instance.num_repeats, "Best repeat index must be within the valid range."
 
@@ -100,9 +100,9 @@ def test_pipeline_with_varied_metrics(merging_strategy, metrics):
     best_features, best_repeat, best_group_name = pipeline()
 
     assert best_features is not None, "Best features should not be None"
-    assert (
-        len(best_features) == num_features_to_select
-    ), "Fill is set to true, so the number of features should be equal to num_features_to_select."
+    assert len(best_features) == num_features_to_select, (
+        "Fill is set to true, so the number of features should be equal to num_features_to_select."
+    )
     assert 0 <= int(best_repeat) <= num_repeats, "Best repeat index must be within valid range."
     assert best_group_name in pipeline.subgroup_names, "Best group name must be a valid subgroup name."
 

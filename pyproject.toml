@@ -81,6 +81,7 @@ include = [
 
 # Ruff configuration for linting, formatting, and import sorting
 [tool.ruff]
+required-version = "0.13.0"
 line-length = 120
 target-version = "py39"
 exclude = [
